@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class GameWindow extends JFrame implements ActionListener {
+public class StartGameWindow extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +29,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	
 	// Construtor default para carregar a tela inicial, para inserção dos nomes dos jogadores.
 	
-	public GameWindow() {
+	public StartGameWindow() {
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension size = kit.getScreenSize();
