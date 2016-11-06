@@ -72,6 +72,11 @@ public class StartGameWindow extends JFrame implements ActionListener {
 		return name2;
 	}
 	
+	public void close(){
+		setVisible(false);
+		removeAll();
+	}
+	
 	public void actionPerformed(ActionEvent e){
 		name1 = player1.getText();
 		name2 = player2.getText();

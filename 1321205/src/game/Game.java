@@ -3,7 +3,7 @@ package game;
 import display.*;
 
 public class Game {
-	public static void main(String[] args){
+	public Game(){
 		StartGameWindow teste = new StartGameWindow();
 		Player jogador1 = new Player();
 		Player jogador2 = new Player();
@@ -13,7 +13,8 @@ public class Game {
 			jogador2.setName(teste.getName2());
 		}
 		
-		System.out.println(jogador1.getName());
-		System.out.println(jogador2.getName());
+		teste.close();
+		
+		SetShipsWindow inicio = new SetShipsWindow(jogador1.getMyMap(),jogador2.getMyMap(),jogador1.getName(),jogador2.getName());
 	}
 }
