@@ -1,4 +1,4 @@
-package display;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-public class SetShipsWindow extends JFrame {
+public class ShipsChooserWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,9 +24,9 @@ public class SetShipsWindow extends JFrame {
 	private String name1;
 	private String name2;
 	
-	// Construtor para inicializar a tela para a colocação dos navios do Jogador 1.
+	// Construtor para inicializar a tela para a colocaï¿½ï¿½o dos navios do Jogador 1.
 	
-	public SetShipsWindow(char [][] map1, char [][] map2, String name1, String name2){
+	public ShipsChooserWindow(char [][] map1, char [][] map2, String name1, String name2){
 		this.map1 = map1;
 		this.map2 = map2;
 		this.name1 = name1;
@@ -37,7 +37,7 @@ public class SetShipsWindow extends JFrame {
 		screenX = size.width;
 		screenY = size.height;
 		
-		DrawMap mapa = new DrawMap();
+		Map mapa = new Map();
 		mapa.draw(map1,screenX/2 + 30,screenY/10);
 		getContentPane().add(mapa);
 		

@@ -1,4 +1,4 @@
-package display;
+package View;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class StartGameWindow extends JFrame implements ActionListener {
+public class NameWindow extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -27,9 +27,9 @@ public class StartGameWindow extends JFrame implements ActionListener {
 	private int screenX;
 	private int screenY;
 	
-	// Construtor default para carregar a tela inicial, para inserção dos nomes dos jogadores.
+	// Construtor default para carregar a tela inicial, para inserï¿½ï¿½o dos nomes dos jogadores.
 	
-	public StartGameWindow() {
+	public NameWindow() {
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension size = kit.getScreenSize();
@@ -38,7 +38,7 @@ public class StartGameWindow extends JFrame implements ActionListener {
 		
 		panel.setLayout(null);
 		
-		JButton startButton = new JButton("Começar");
+		JButton startButton = new JButton("ComeÃ§ar");
 		JLabel player1Label = new JLabel("Jogador 1:");
 		JLabel player2Label = new JLabel("Jogador 2:");
 		startButton.addActionListener(this);
@@ -78,7 +78,12 @@ public class StartGameWindow extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e){
+		System.out.println("Action Perfomed");
 		name1 = player1.getText();
 		name2 = player2.getText();
+		
+		this.setVisible(false);
+        // new SetShipsWindow().setVisible(true);
+		
 	}
 }

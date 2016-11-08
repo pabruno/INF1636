@@ -1,4 +1,4 @@
-package display;
+package View;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,17 +6,17 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-public class DrawMap extends JPanel {
+public class Map extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private char[][] map;
 	
-	// Vari·ves para desenhar mapa na posiÁ„o correta do mapa.
+	/* Vari√°ves para desenhar mapa na posi√ß√£o correta do mapa */
 	
 	private int marginX;
 	private int marginY;
 	
-	// FunÁ„o para pegar dados necess·rios para o desenho do mapa.
+	/* Fun√ß√£o para pegar dados necess√°rios para o desenho do mapa. */
 	
 	public void draw(char map[][], int marginX, int marginY){
 		this.map = new char[map.length][map[0].length];

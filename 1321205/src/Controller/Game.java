@@ -1,10 +1,13 @@
-package game;
+package Controller;
 
-import display.*;
+import Model.Player;
+import View.ShipsChooserWindow;
+import View.NameWindow;
 
 public class Game {
 	public Game(){
-		StartGameWindow teste = new StartGameWindow();
+		
+		NameWindow teste = new NameWindow();
 		Player jogador1 = new Player();
 		Player jogador2 = new Player();
 		
@@ -15,6 +18,10 @@ public class Game {
 		
 		teste.close();
 		
-		SetShipsWindow inicio = new SetShipsWindow(jogador1.getMyMap(),jogador2.getMyMap(),jogador1.getName(),jogador2.getName());
+		ShipsChooserWindow inicio = new ShipsChooserWindow(jogador1.getMyMap(),jogador2.getMyMap(),jogador1.getName(),jogador2.getName());
+	}
+	
+	public static void main(String[] args){
+		new Game();
 	}
 }
