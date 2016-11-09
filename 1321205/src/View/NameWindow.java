@@ -27,7 +27,7 @@ public class NameWindow extends JFrame implements ActionListener {
 	private int screenX;
 	private int screenY;
 	
-	// Construtor default para carregar a tela inicial, para inserï¿½ï¿½o dos nomes dos jogadores.
+	// Construtor default para carregar a tela inicial, para insercao dos nomes dos jogadores.
 	
 	public NameWindow() {
 		
@@ -38,7 +38,7 @@ public class NameWindow extends JFrame implements ActionListener {
 		
 		panel.setLayout(null);
 		
-		JButton startButton = new JButton("ComeÃ§ar");
+		JButton startButton = new JButton("Começar");
 		JLabel player1Label = new JLabel("Jogador 1:");
 		JLabel player2Label = new JLabel("Jogador 2:");
 		startButton.addActionListener(this);
@@ -78,12 +78,11 @@ public class NameWindow extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		System.out.println("Action Perfomed");
 		name1 = player1.getText();
 		name2 = player2.getText();
 		
-		this.setVisible(false);
-        // new SetShipsWindow().setVisible(true);
-		
+		if(name1 != null && name2 != null && name1.trim().isEmpty() == false && name2.trim().isEmpty() == false){
+			close();
+		}
 	}
 }
