@@ -16,7 +16,8 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 	
 	// Variavel para a classe Map que extende JPanel e vai imprimir o mapa no frame.
 	
-	Map mapa = new Map();
+	Map map1Panel = new Map();
+	Map map2Panel = new Map();
 
 	// Mapa de cada jogador.
 
@@ -67,46 +68,45 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 	}
 
 	private void player1Screen() {
-		mapa.draw(map1, screenX / 2 + 30, screenY / 10);
-		getContentPane().add(mapa);
+		map1Panel.draw(map1, screenX / 2 + 30, screenY / 10);
+		getContentPane().add(map1Panel);
 
-		mapa.setLayout(null);
+		map1Panel.setLayout(null);
 
 		JLabel text = new JLabel(name1 + ", posicione os navios no tabuleiro.");
-		mapa.add(text);
+		map1Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
-		mapa.add(button);
+		map1Panel.add(button);
 		button.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
 		button.addActionListener(this);
 	}
 	
 	private void player2Screen(){
-		mapa.removeAll();
+		getContentPane().removeAll();
 		
-		mapa.draw(map2, screenX / 2 + 30, screenY / 10);
-		getContentPane().add(mapa);
+		map2Panel.draw(map2, screenX / 2 + 30, screenY / 10);
+		getContentPane().add(map2Panel);
 
-		mapa.setLayout(null);
+		map2Panel.setLayout(null);
 		
 		button = new JButton("Proximo");
 
 		JLabel text = new JLabel(name2 + ", posicione os navios no tabuleiro.");
-		mapa.add(text);
+		map2Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
-		mapa.add(button);
+		map2Panel.add(button);
 		button.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
 		button.addActionListener(this);
 		
-		mapa.revalidate();
-		mapa.repaint();
+		validate();
+		repaint();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if(cont == 0){
 			cont++;
-			System.out.println("aaaaa");
 			player2Screen();
 		}
 	}
