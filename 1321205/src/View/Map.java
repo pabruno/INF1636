@@ -44,6 +44,151 @@ public class Map extends JPanel implements MouseListener {
 		Graphics2D g = (Graphics2D) graphics;
 		char letra = 64;
 		Rectangle2D rect = new Rectangle2D.Float();
+		
+		/* PEÇAS - Primeira Seção */
+		
+		g.setColor(Color.RED);
+		rect.setRect(60, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(90, 90, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(120, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		rect.setRect(180, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(210, 90, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(240, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		rect.setRect(300, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(330, 90, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(360, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		rect.setRect(420, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(450, 90, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(480, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		rect.setRect(540, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(570, 90, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(600, 120, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		/* PEÇAS - Segunda Seção */
+		
+		g.setColor(Color.GREEN);
+		
+		rect.setRect(60, 210, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(120, 210, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(180, 210, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(240, 210, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		/* PEÇAS - Terceira Seção */
+		
+		g.setColor(Color.YELLOW);
+		
+		rect.setRect(60, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(90, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(150, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(180, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(240, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(270, 300, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		/* PEÇAS - Quarta Seção */
+		
+		g.setColor(Color.ORANGE);
+		
+		rect.setRect(60, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(90, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(120, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(150, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		rect.setRect(210, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(240, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(270, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(300, 390, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		
+		/* PEÇAS - Quinta Seção */
+		
+		g.setColor(Color.GRAY);
+		
+		rect.setRect(60, 480, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(90, 480, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(120, 480, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(150, 480, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+		rect.setRect(180, 480, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		g.setColor(Color.BLACK);
 
 		for (int linha = 0; linha < map.length; linha++) {
 			letra++;

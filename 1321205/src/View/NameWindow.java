@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import Model.Player;
+
 public class NameWindow extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
@@ -38,7 +40,7 @@ public class NameWindow extends JFrame implements ActionListener {
 		
 		panel.setLayout(null);
 		
-		JButton startButton = new JButton("Começar");
+		JButton startButton = new JButton("ComeÃ§ar");
 		JLabel player1Label = new JLabel("Jogador 1:");
 		JLabel player2Label = new JLabel("Jogador 2:");
 		startButton.addActionListener(this);
@@ -82,6 +84,16 @@ public class NameWindow extends JFrame implements ActionListener {
 		name2 = player2.getText();
 		
 		if(name1 != null && name2 != null && name1.trim().isEmpty() == false && name2.trim().isEmpty() == false){
+			Player jogador1 = new Player();
+			Player jogador2 = new Player();
+			
+			while(jogador1.getName() == null || jogador2.getName() == null || jogador1.getName().trim().isEmpty() == true || jogador2.getName().trim().isEmpty() == true) {
+				jogador1.setName(this.getName1());
+				jogador2.setName(this.getName2());
+			}
+			
+			ShipsChooserWindow inicio = new ShipsChooserWindow(jogador1.getMyMap(),jogador2.getMyMap(),jogador1.getName(),jogador2.getName());
+			inicio.setVisible(true);
 			close();
 		}
 	}
