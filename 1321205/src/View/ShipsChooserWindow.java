@@ -16,8 +16,8 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 	
 	// Variavel para a classe Map que extende JPanel e vai imprimir o mapa no frame.
 	
-	Map map1Panel = new Map();
-	Map map2Panel = new Map();
+	ShipMap map1Panel = new ShipMap();
+	ShipMap map2Panel = new ShipMap();
 
 	// Mapa de cada jogador.
 
