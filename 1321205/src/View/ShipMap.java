@@ -1,24 +1,17 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.List;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ShipMap extends JPanel implements MouseListener, MouseMotionListener {
@@ -287,15 +280,19 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		int x = e.getX();
 		int y = e.getY();
 
-		System.out.println("posicao: " + x + " --- " + y);
-		System.out.println(type);
-
 		if (type != null) {
+			System.out.println("posicao: " + x + " --- " + y);
+			System.out.println(type);
 			for (int i = 0; i < atual.size(); i++) {
 				System.out.println("atual: " + atual.get(i).getX()+ " --- " + atual.get(i).getY());
 				g.setColor(getBackground());
-				g.draw(atual.get(i));
-				g.fill(atual.get(i));
+				//g.drawRect((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
+				//g.fillRect((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
+				repaint((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
+			}
+			
+			for (int j = 0; j < inicial.size(); j++){
+				System.out.println("inicial: " + inicial.get(j).getX()+ " --- " + inicial.get(j).getY());
 			}
 
 			switch (type) {
@@ -319,6 +316,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				atual = Battleship(g, x, y);
 				break;
 			}
+			System.out.println("################");
 		}
 	}
 
