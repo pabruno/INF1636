@@ -166,7 +166,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	}
 
 	public void paintComponent(Graphics graphics) {
-
+		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		super.paintComponent(graphics);
 		
 		System.out.println("Repaint");
