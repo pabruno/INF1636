@@ -3,6 +3,8 @@ package View;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,7 +17,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 
-public class ShipMap extends JPanel implements MouseListener, MouseMotionListener {
+public class ShipMap extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private char[][] map;
@@ -40,12 +42,18 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private int i;
 	private int j;
 	private Boolean firstDraw = true;
+	private int currentWeapon;
+	private int degrees[];
 
 	/* Funcao para pegar dados necessarios para o desenho do mapa. */
 	
 	public void draw(char map[][], int marginX, int marginY) {
 		addMouseMotionListener(this);
 		addMouseListener(this);
+		addKeyListener(this);
+		
+		this.setFocusable(true);
+        this.requestFocusInWindow();
 
 		this.map = new char[map.length][map[0].length];
 		this.marginX = marginX;
@@ -111,6 +119,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		
 		xy[9][0] = 480;
 		
+		degrees = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		
 		firstDraw = false;
 		
 	}
@@ -159,8 +169,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		System.out.println("Repaint");
 		g = (Graphics2D) graphics;
-		
-		paintWeapons(graphics);
 
 		/* MAPA */
 
@@ -181,10 +189,11 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				g.drawRect(marginX + (30 * linha), marginY + (30 * coluna), 30, 30);
 			}
 		}
+		
+		paintWeapons(graphics);
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -194,18 +203,15 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		int x = e.getX();
 		int y = e.getY();
+		
+		System.out.println(type);
 
 		if (type != null) {
 			System.out.println("posicao: " + x + " --- " + y);
 			System.out.println(type);
 			
-			
 			for (int i = 0; i < finalPosition.size(); i++) {
 				System.out.println("finalPosition: " + finalPosition.get(i).getX()+ " --- " + finalPosition.get(i).getY());
-//				g.setColor(getBackground());
-//				g.drawRect((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
-//				g.fillRect((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
-//				repaint((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
 			}
 			
 			for (int j = 0; j < initialPosition.size(); j++){
@@ -255,8 +261,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	public void mouseDragged(MouseEvent e) {}
 
 	public void mouseClicked(MouseEvent e) {
+		
 		x = e.getX();
 		y = e.getY();
+		
+		if (e.getButton() == 3){
+			degrees[currentWeapon] =+ 90;
+			repaint();
+		} else {
 
 		char letra = 64;
 
@@ -276,6 +288,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					if (r.getKey().get(i).getBounds2D().contains(x, y)) {
 						
 						System.out.println(index);
+						currentWeapon = index;
 						
 						/* TODO: Refactor */
 						
@@ -334,6 +347,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				}
 				index++;
 			}
+		  }
 		}
 	}
 
@@ -350,6 +364,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.RED);
 		rect.setRect(x, y + 30, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -357,6 +372,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -364,6 +380,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y + 30, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -379,6 +396,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.GREEN);
 		rect.setRect(x, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -396,6 +414,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.YELLOW);
 
 		rect.setRect(x, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -403,6 +422,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -419,6 +439,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.ORANGE);
 
 		rect.setRect(x, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -426,6 +447,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -433,6 +455,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -440,6 +463,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -457,6 +481,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.GRAY);
 
 		rect.setRect(x, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -464,6 +489,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -471,6 +497,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -478,6 +505,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
+		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -485,6 +513,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 120, y, 30, 30);
+		
 		g.draw(rect);
 		g.fill(rect);
 
@@ -492,6 +521,27 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		return rects;
 
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		if(e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE)
+	    {
+			System.out.println("ESC");
+	        type = null;
+	    }
 	}
 
 }

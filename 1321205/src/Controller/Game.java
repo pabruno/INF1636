@@ -21,7 +21,6 @@ public class Game {
 		
 		System.out.println("1: " + player1.getName());
 		System.out.println("2: " + player2.getName());
-		nameWindow.close();
 		
 	}
 	
