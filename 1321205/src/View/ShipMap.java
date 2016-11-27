@@ -364,7 +364,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.RED);
 		rect.setRect(x, y + 30, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -372,7 +372,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -380,7 +380,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y + 30, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -396,7 +396,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.GREEN);
 		rect.setRect(x, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -414,7 +414,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.YELLOW);
 
 		rect.setRect(x, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -422,7 +422,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -439,7 +439,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.ORANGE);
 
 		rect.setRect(x, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -447,7 +447,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -455,7 +455,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -463,7 +463,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -481,7 +481,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.GRAY);
 
 		rect.setRect(x, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -489,7 +489,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -497,7 +497,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -505,7 +505,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
-		g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -514,6 +514,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		rect.setRect(x + 120, y, 30, 30);
 		
+    //	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
