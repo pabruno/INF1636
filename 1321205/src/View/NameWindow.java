@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import Model.Player;
+
 public class NameWindow extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
@@ -14,8 +16,11 @@ public class NameWindow extends JFrame implements ActionListener {
 	
 	// Campos de texto para armazenar o nome dos jogadores na tela inicial.
 	
-	private JTextField player1 = new JTextField("Jogador 1");
-	private JTextField player2 = new JTextField("Jogador 2");
+	private Player player1;
+	private Player player2;
+	
+	private JTextField player1TextField = new JTextField("Jogador 1");
+	private JTextField player2TextField = new JTextField("Jogador 2");
 	
 	// Nomes dos jogadores.
 	
@@ -45,13 +50,13 @@ public class NameWindow extends JFrame implements ActionListener {
 		getContentPane().add(panel);
 		
 		panel.add(startButton);
-		panel.add(player1);
-		panel.add(player2);
+		panel.add(player1TextField);
+		panel.add(player2TextField);
 		panel.add(player1Label);
 		panel.add(player2Label);
 		startButton.setBounds(150, 225, 100, 25);
-		player1.setBounds(150, 80, 200, 20);
-		player2.setBounds(150, 110, 200, 20);
+		player1TextField.setBounds(150, 80, 200, 20);
+		player2TextField.setBounds(150, 110, 200, 20);
 		player1Label.setBounds(70, 80, 100, 20);
 		player2Label.setBounds(70, 110, 100, 20);
 		
@@ -62,6 +67,14 @@ public class NameWindow extends JFrame implements ActionListener {
 		setLocation(screenX/2 - 200,screenY/2 - 150);
 		setVisible(true);
 		setResizable(false);
+	}
+	
+	public void setPlayer1(Player player){
+		player1 = player;
+	}
+	
+	public void setPlayer2(Player player){
+		player2 = player;
 	}
 	
 	public String getName1(){
@@ -78,7 +91,11 @@ public class NameWindow extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		name1 = player1.getText();
-		name2 = player2.getText();
+		name1 = player1TextField.getText();
+		name2 = player2TextField.getText();
+		
+		ShipsChooserWindow inicio = new ShipsChooserWindow(player1.getMyMap(),player2.getMyMap(),player1.getName(),player2.getName());
+		inicio.setVisible(true);
+		close();
 	}
 }

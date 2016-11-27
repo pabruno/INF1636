@@ -7,21 +7,21 @@ import View.NameWindow;
 public class Game {
 	public Game(){
 		
-		NameWindow teste = new NameWindow();
-		Player jogador1 = new Player();
-		Player jogador2 = new Player();
+		NameWindow nameWindow = new NameWindow();
+		Player player1 = new Player();
+		Player player2 = new Player();
 		
-		while(jogador1.getName() == null || jogador2.getName() == null || jogador1.getName().trim().isEmpty() == true || jogador2.getName().trim().isEmpty() == true) {
-			jogador1.setName(teste.getName1());
-			jogador2.setName(teste.getName2());
+		nameWindow.setPlayer1(player1);
+		nameWindow.setPlayer2(player2);
+		
+		while(player1.getName() == null || player2.getName() == null || player1.getName().trim().isEmpty() == true || player2.getName().trim().isEmpty() == true) {
+			player1.setName(nameWindow.getName1());
+			player2.setName(nameWindow.getName2());
 		}
 		
-		System.out.println("1: " + jogador1.getName());
-		System.out.println("2: " + jogador2.getName());
-		teste.close();
-		
-		ShipsChooserWindow inicio = new ShipsChooserWindow(jogador1.getMyMap(),jogador2.getMyMap(),jogador1.getName(),jogador2.getName());
-		inicio.setVisible(true);
+		System.out.println("1: " + player1.getName());
+		System.out.println("2: " + player2.getName());
+		nameWindow.close();
 		
 	}
 	

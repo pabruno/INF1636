@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,25 +19,30 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	private static final long serialVersionUID = 1L;
 	private char[][] map;
-	private Map<LinkedList<Rectangle2D>, String> weapons;
+	private LinkedHashMap<LinkedList<Rectangle2D>, String> weapons;
 	private Graphics2D g;
 
-	/* Variáveis para movimento de peca */
+	/* Variï¿½veis para movimento de peca */
 
 	private String type = null;
-	private LinkedList<Rectangle2D> inicial;
-	private LinkedList<Rectangle2D> atual;
+	private LinkedList<Rectangle2D> initialPosition;
+	private LinkedList<Rectangle2D> finalPosition;
 
 	/* Variaveis para desenhar mapa na posicao correta do mapa */
 
 	private int marginX;
 	private int marginY;
 
-	//private int x;
-	//private int y;
+	private int x;
+	private int y;
+	
+	private int xy[][];
+	private int i;
+	private int j;
+	private Boolean firstDraw = true;
 
 	/* Funcao para pegar dados necessarios para o desenho do mapa. */
-
+	
 	public void draw(char map[][], int marginX, int marginY) {
 		addMouseMotionListener(this);
 		addMouseListener(this);
@@ -51,200 +57,110 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 	}
-
-	private LinkedList<Rectangle2D> Hydroplane(Graphics2D g, int x, int y) {
-
-		Rectangle2D rect = new Rectangle2D.Float();
-		LinkedList<Rectangle2D> iniciais = new LinkedList<Rectangle2D>();
-
-		// /* Container */
-		// g.setColor(Color.WHITE);
-		// rect.setRect(x, y, 90, 60);
-		// g.draw(rect);
-		// g.fill(rect);
+	
+	private void initWeapons(){
 		
-		System.out.println("novo: " + x + " -- " + y);
-
-		g.setColor(Color.RED);
-		rect.setRect(x, y + 30, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 60, y + 30, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-
-		return iniciais;
+		/* POSICAO - Primeira Secao - X e Y */
+		
+		xy = new int[10][5];
+		xy[0][0] = 60;
+		xy[0][1] = 180;
+		xy[0][2] = 300;
+		xy[0][3] = 420;
+		xy[0][4] = 540;
+		
+		xy[1][0] = 90;
+		xy[1][1] = 90;
+		xy[1][2] = 90;
+		xy[1][3] = 90;
+		xy[1][4] = 90;
+		
+		/* POSICAO - Segunda Secao - X e Y */
+		
+		xy[2][0] = 60;
+		xy[2][1] = 120;
+		xy[2][2] = 180;
+		xy[2][3] = 240;
+		
+		xy[3][0] = 210;
+		xy[3][1] = 210;
+		xy[3][2] = 210;
+		xy[3][3] = 210;
+		
+		/* POSICAO - Terceira Secao - X e Y */
+		
+		xy[4][0] = 60;
+		xy[4][1] = 150;
+		xy[4][2] = 240;
+		
+		xy[5][0] = 300;
+		xy[5][1] = 300;
+		xy[5][2] = 300;
+		
+		/* POSICAO - Quarta Secao - X e Y */
+		
+		xy[6][0] = 60;
+		xy[6][1] = 210;
+		
+		xy[7][0] = 390;
+		xy[7][1] = 390;
+		
+		/* POSICAO - Quinta Secao - X e Y */
+		
+		xy[8][0] = 60;
+		
+		xy[9][0] = 480;
+		
+		firstDraw = false;
+		
 	}
+	
+	private void paintWeapons (Graphics graphics){
+		
+		weapons = new LinkedHashMap<LinkedList<Rectangle2D>, String>();
+		g = (Graphics2D) graphics;
+		
+		if (firstDraw){
+			initWeapons();
+		}
+		
+		/* PECAS - Primeira Secao */
 
-	private LinkedList<Rectangle2D> Submarine(Graphics2D g, int x, int y) {
+		weapons.put(Hydroplane(g, xy[0][0], xy[1][0]), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][1], xy[1][1]), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][2], xy[1][2]), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][3], xy[1][3]), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][4], xy[1][4]), "Hydroplane");
 
-		Rectangle2D rect = new Rectangle2D.Float();
-		LinkedList<Rectangle2D> inicial = new LinkedList<Rectangle2D>();
+		/* PECAS - Segunda Secao */
 
-		g.setColor(Color.GREEN);
-		rect.setRect(x, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
+		weapons.put(Submarine(g, xy[2][0], xy[3][0]), "Submarine");
+		weapons.put(Submarine(g, xy[2][1], xy[3][1]), "Submarine");
+		weapons.put(Submarine(g, xy[2][2], xy[3][2]), "Submarine");
+		weapons.put(Submarine(g, xy[2][3], xy[3][3]), "Submarine");
 
-		inicial.add(rect);
+		/* PECAS - Terceira Secao */
 
-		return inicial;
+		weapons.put(Destroyer(g, xy[4][0], xy[5][0]), "Destroyer");
+		weapons.put(Destroyer(g, xy[4][1], xy[5][1]), "Destroyer");
+		weapons.put(Destroyer(g, xy[4][2], xy[5][2]), "Destroyer");
 
-	}
+		/* PECAS - Quarta Secao */
 
-	private LinkedList<Rectangle2D> Destroyer(Graphics2D g, int x, int y) {
+		weapons.put(Cruiser(g, xy[6][0], xy[7][0]), "Cruiser");
+		weapons.put(Cruiser(g, xy[6][1], xy[7][1]), "Cruiser");
 
-		Rectangle2D rect = new Rectangle2D.Float();
-		LinkedList<Rectangle2D> iniciais = new LinkedList<Rectangle2D>();
+		/* PECAS - Quinta Secao */
 
-		g.setColor(Color.YELLOW);
-
-		rect.setRect(x, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-
-		return iniciais;
-	}
-
-	private LinkedList<Rectangle2D> Cruiser(Graphics2D g, int x, int y) {
-
-		Rectangle2D rect = new Rectangle2D.Float();
-		LinkedList<Rectangle2D> iniciais = new LinkedList<Rectangle2D>();
-
-		g.setColor(Color.ORANGE);
-
-		rect.setRect(x, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 60, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 90, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-
-		return iniciais;
-
-	}
-
-	private LinkedList<Rectangle2D> Battleship(Graphics2D g, int x, int y) {
-
-		Rectangle2D rect = new Rectangle2D.Float();
-		LinkedList<Rectangle2D> iniciais = new LinkedList<Rectangle2D>();
-
-		g.setColor(Color.GRAY);
-
-		rect.setRect(x, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 60, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 90, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 120, y, 30, 30);
-		g.draw(rect);
-		g.fill(rect);
-
-		iniciais.add(rect);
-
-		return iniciais;
-
+		weapons.put(Battleship(g, xy[8][0], xy[9][0]), "Battleship");
 	}
 
 	public void paintComponent(Graphics graphics) {
 
-		weapons = new HashMap<LinkedList<Rectangle2D>, String>();
+		System.out.println("Repaint");
 		g = (Graphics2D) graphics;
-
-		/* PECAS - Primeira Secao */
-
-		weapons.put(Hydroplane(g, 60, 90), "Hydroplane");
-		weapons.put(Hydroplane(g, 180, 90), "Hydroplane");
-		weapons.put(Hydroplane(g, 300, 90), "Hydroplane");
-		weapons.put(Hydroplane(g, 420, 90), "Hydroplane");
-		weapons.put(Hydroplane(g, 540, 90), "Hydroplane");
-
-		/* PECAS - Segunda Secao */
-
-		weapons.put(Submarine(g, 60, 210), "Submarine");
-		weapons.put(Submarine(g, 120, 210), "Submarine");
-		weapons.put(Submarine(g, 180, 210), "Submarine");
-		weapons.put(Submarine(g, 240, 210), "Submarine");
-
-		/* PECAS - Terceira Secao */
-
-		weapons.put(Destroyer(g, 60, 300), "Destroyer");
-		weapons.put(Destroyer(g, 150, 300), "Destroyer");
-		weapons.put(Destroyer(g, 240, 300), "Destroyer");
-
-		/* PECAS - Quarta Secao */
-
-		weapons.put(Cruiser(g, 60, 390), "Cruiser");
-		weapons.put(Cruiser(g, 210, 390), "Cruiser");
-
-		/* PECAS - Quinta Secao */
-
-		weapons.put(Battleship(g, 60, 480), "Battleship");
+		
+		paintWeapons(graphics);
 
 		/* MAPA */
 
@@ -268,101 +184,79 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	}
 
 	public void mousePressed(MouseEvent e) {
-		/*
-		 * System.out.println("Mouse Pressed"); x = e.getX(); y = e.getY();
-		 */
+		
 	}
 
 	public void mouseReleased(MouseEvent e) {
 	}
 
 	public void mouseMoved(MouseEvent e) {
+
 		int x = e.getX();
 		int y = e.getY();
 
 		if (type != null) {
 			System.out.println("posicao: " + x + " --- " + y);
 			System.out.println(type);
-			for (int i = 0; i < atual.size(); i++) {
-				System.out.println("atual: " + atual.get(i).getX()+ " --- " + atual.get(i).getY());
-				g.setColor(getBackground());
-				//g.drawRect((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
-				//g.fillRect((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
-				repaint((int)atual.get(i).getX(),(int)atual.get(i).getY(),(int)atual.get(i).getWidth(),(int)atual.get(i).getHeight());
+			
+			
+			for (int i = 0; i < finalPosition.size(); i++) {
+				System.out.println("finalPosition: " + finalPosition.get(i).getX()+ " --- " + finalPosition.get(i).getY());
+//				g.setColor(getBackground());
+//				g.drawRect((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
+//				g.fillRect((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
+//				repaint((int)finalPosition.get(i).getX(),(int)finalPosition.get(i).getY(),(int)finalPosition.get(i).getWidth(),(int)finalPosition.get(i).getHeight());
 			}
 			
-			for (int j = 0; j < inicial.size(); j++){
-				System.out.println("inicial: " + inicial.get(j).getX()+ " --- " + inicial.get(j).getY());
+			for (int j = 0; j < initialPosition.size(); j++){
+				System.out.println("initialPosition: " + initialPosition.get(j).getX()+ " --- " + initialPosition.get(j).getY());
 			}
 
 			switch (type) {
 			case "Hydroplane":
-				atual = Hydroplane(g, x, y);
+				finalPosition = Hydroplane(g, x, y);
+				xy[0][i] = x;
+				xy[1][j] = y;
 				break;
 
 			case "Submarine":
-				atual = Submarine(g, x, y);
+				finalPosition = Submarine(g, x, y);
+				
+				xy[2][i] = x;
+				xy[3][j] = y;
 				break;
 
 			case "Destroyer":
-				atual = Destroyer(g, x, y);
+				finalPosition = Destroyer(g, x, y);
+				xy[4][i] = x;
+				xy[5][j] = y;
 				break;
 
 			case "Cruiser":
-				atual = Cruiser(g, x, y);
+				finalPosition = Cruiser(g, x, y);
+				xy[6][i] = x;
+				xy[7][j] = y;
 				break;
 
 			case "Battleship":
-				atual = Battleship(g, x, y);
+				finalPosition = Battleship(g, x, y);
+				xy[8][i] = x;
+				xy[9][j] = y;
 				break;
 			}
+			
+			repaint();
 			System.out.println("################");
 		}
 	}
 
-	public void mouseExited(MouseEvent e) {
-	}
+	public void mouseExited(MouseEvent e) {}
 
-	public void mouseDragged(MouseEvent e) {
-		// System.out.println("Mouse Dragged");
-		//
-		// int dx = e.getX() - x;
-		// int dy = e.getY() - y;
-		//
-		// for (Entry<Rectangle2D, String> r : weapons.entrySet()){
-		// //System.out.println("Mouse Dragged" + r.getBounds2D().toString() +
-		// "x:" + x + "y:" + y);
-		//
-		// if (r.getKey().getBounds2D().contains(x, y)){
-		// System.out.println("Mouse Dragged - Move & Repaint" + r.getValue());
-		//
-		// switch (r.getValue()){
-		//
-		// case "Hydroplane":
-		// Hydroplane(g, dx, dy);
-		//
-		// case "Submarine":
-		// Submarine(g, dx, dy);
-		//
-		// case "Destroyer":
-		// Destroyer(g, dx, dy);
-		//
-		// case "Cruiser":
-		// Cruiser(g, dx, dy);
-		//
-		// case "Battleship":
-		// Battleship(g, dx, dy);
-		// }
-		// }
-		// }
-		//
-		// x += dx;
-		// y += dy;
-	}
+	public void mouseDragged(MouseEvent e) {}
 
 	public void mouseClicked(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
+		x = e.getX();
+		y = e.getY();
 
 		char letra = 64;
 
@@ -375,9 +269,39 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			letra += (y + 1);
 			System.out.println(letra + " ---- " + Integer.toString(x));
 		} else {
+			int index = 0;
 			for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
+
 				for (int i = 0; i < r.getKey().size(); i++) {
 					if (r.getKey().get(i).getBounds2D().contains(x, y)) {
+						
+						System.out.println(index);
+						
+						/* TODO: Refactor */
+						
+						switch (index){
+							case 0: case 1: case 2: case 3: case 4:
+								i = index;
+								j = index;
+								break;
+							case 5: case 6: case 7: case 8:
+								i = index - 5;
+								j = index - 5;
+								break;
+							case 9: case 10: case 11:
+								i = index - 9;
+								j = index - 9;
+								break;
+							case 12: case 13:
+								i = index - 12;
+								j = index - 12;
+								break;
+							case 14:
+								i = index - 14;
+								j = index - 14;
+								break;
+						}
+						
 						switch (r.getValue()) {
 						case "Hydroplane":
 							type = "Hydroplane";
@@ -400,13 +324,15 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 							break;
 						}
 						
-						inicial = r.getKey();
-						atual = r.getKey();
+						initialPosition = r.getKey();
+						finalPosition = r.getKey();
+						
 						
 						if (type != null)
 							break;
 					}
 				}
+				index++;
 			}
 		}
 	}
@@ -414,4 +340,158 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	public void mouseEntered(MouseEvent e) {
 
 	}
+	
+	private LinkedList<Rectangle2D> Hydroplane(Graphics2D g, int x, int y) {
+
+		Rectangle2D rect = new Rectangle2D.Float();
+		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
+
+		System.out.println("novo: " + x + " -- " + y);
+
+		g.setColor(Color.RED);
+		rect.setRect(x, y + 30, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 30, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 60, y + 30, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+
+		return rects;
+	}
+
+	private LinkedList<Rectangle2D> Submarine(Graphics2D g, int x, int y) {
+
+		Rectangle2D rect = new Rectangle2D.Float();
+		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
+
+		g.setColor(Color.GREEN);
+		rect.setRect(x, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+
+		return rects;
+
+	}
+
+	private LinkedList<Rectangle2D> Destroyer(Graphics2D g, int x, int y) {
+
+		Rectangle2D rect = new Rectangle2D.Float();
+		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
+
+		g.setColor(Color.YELLOW);
+
+		rect.setRect(x, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 30, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+
+		return rects;
+	}
+
+	private LinkedList<Rectangle2D> Cruiser(Graphics2D g, int x, int y) {
+
+		Rectangle2D rect = new Rectangle2D.Float();
+		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
+
+		g.setColor(Color.ORANGE);
+
+		rect.setRect(x, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 30, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 60, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 90, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+
+		return rects;
+
+	}
+
+	private LinkedList<Rectangle2D> Battleship(Graphics2D g, int x, int y) {
+
+		Rectangle2D rect = new Rectangle2D.Float();
+		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
+
+		g.setColor(Color.GRAY);
+
+		rect.setRect(x, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 30, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 60, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 90, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+		rect = new Rectangle2D.Float();
+
+		rect.setRect(x + 120, y, 30, 30);
+		g.draw(rect);
+		g.fill(rect);
+
+		rects.add(rect);
+
+		return rects;
+
+	}
+
 }
