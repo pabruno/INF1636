@@ -224,34 +224,34 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			switch (type) {
 			case "Hydroplane":
-				finalPosition = Hydroplane(g, x, y);
-				xy[0][i] = x;
-				xy[1][j] = y;
+				finalPosition = Hydroplane(g, x-15, y-45);
+				xy[0][i] = x-15;
+				xy[1][j] = y-45;
 				break;
 
 			case "Submarine":
-				finalPosition = Submarine(g, x, y);
+				finalPosition = Submarine(g, x-15, y-15);
 
-				xy[2][i] = x;
-				xy[3][j] = y;
+				xy[2][i] = x-15;
+				xy[3][j] = y-15;
 				break;
 
 			case "Destroyer":
-				finalPosition = Destroyer(g, x, y);
-				xy[4][i] = x;
-				xy[5][j] = y;
+				finalPosition = Destroyer(g, x-15, y-15);
+				xy[4][i] = x-15;
+				xy[5][j] = y-15;
 				break;
 
 			case "Cruiser":
-				finalPosition = Cruiser(g, x, y);
-				xy[6][i] = x;
-				xy[7][j] = y;
+				finalPosition = Cruiser(g, x-15, y-15);
+				xy[6][i] = x-15;
+				xy[7][j] = y-15;
 				break;
 
 			case "Battleship":
-				finalPosition = Battleship(g, x, y);
-				xy[8][i] = x;
-				xy[9][j] = y;
+				finalPosition = Battleship(g, x-15, y-15);
+				xy[8][i] = x-15;
+				xy[9][j] = y-15;
 				break;
 			}
 
@@ -277,8 +277,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				int index = 0;
 				for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
 
-					for (int i = 0; i < r.getKey().size(); i++) {
-						if (r.getKey().get(i).getBounds2D().contains(x, y)) {
+					for (int cont = 0; cont < r.getKey().size(); cont++) {
+						if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
 
 							System.out.println(index);
 							currentWeapon = index;
@@ -387,6 +387,35 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.fill(rect);
 
 		rects.add(rect);
+		
+//		for(int i = 0; i < 5; i++){
+//			rect = new Rectangle2D.Float();
+//			
+//			g.setColor(Color.BLUE);
+//			
+//			rect.setRect(xy[0][i], xy[1][i] + 30, 30, 30);
+//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
+//			g.draw(rect);
+//			g.fill(rect);
+//
+//			rects.add(rect);
+//			rect = new Rectangle2D.Float();
+//
+//			rect.setRect(x + 30, y, 30, 30);
+//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
+//			g.draw(rect);
+//			g.fill(rect);
+//
+//			rects.add(rect);
+//			rect = new Rectangle2D.Float();
+//
+//			rect.setRect(x + 60, y + 30, 30, 30);
+//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
+//			g.draw(rect);
+//			g.fill(rect);
+//
+//			rects.add(rect);
+//		}
 
 		return rects;
 	}
