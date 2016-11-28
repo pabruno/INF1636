@@ -37,7 +37,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	private int x;
 	private int y;
-	
+
 	private int xy[][];
 	private int i;
 	private int j;
@@ -46,14 +46,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private int degrees[];
 
 	/* Funcao para pegar dados necessarios para o desenho do mapa. */
-	
+
 	public void draw(char map[][], int marginX, int marginY) {
 		addMouseMotionListener(this);
 		addMouseListener(this);
 		addKeyListener(this);
-		
+
 		this.setFocusable(true);
-        this.requestFocusInWindow();
+		this.requestFocusInWindow();
 
 		this.map = new char[map.length][map[0].length];
 		this.marginX = marginX;
@@ -65,75 +65,75 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 	}
-	
-	private void initWeapons(){
-		
+
+	private void initWeapons() {
+
 		/* POSICAO - Primeira Secao - X e Y */
-		
+
 		xy = new int[10][5];
 		xy[0][0] = 60;
 		xy[0][1] = 180;
 		xy[0][2] = 300;
 		xy[0][3] = 420;
 		xy[0][4] = 540;
-		
+
 		xy[1][0] = 90;
 		xy[1][1] = 90;
 		xy[1][2] = 90;
 		xy[1][3] = 90;
 		xy[1][4] = 90;
-		
+
 		/* POSICAO - Segunda Secao - X e Y */
-		
+
 		xy[2][0] = 60;
 		xy[2][1] = 120;
 		xy[2][2] = 180;
 		xy[2][3] = 240;
-		
+
 		xy[3][0] = 210;
 		xy[3][1] = 210;
 		xy[3][2] = 210;
 		xy[3][3] = 210;
-		
+
 		/* POSICAO - Terceira Secao - X e Y */
-		
+
 		xy[4][0] = 60;
 		xy[4][1] = 150;
 		xy[4][2] = 240;
-		
+
 		xy[5][0] = 300;
 		xy[5][1] = 300;
 		xy[5][2] = 300;
-		
+
 		/* POSICAO - Quarta Secao - X e Y */
-		
+
 		xy[6][0] = 60;
 		xy[6][1] = 210;
-		
+
 		xy[7][0] = 390;
 		xy[7][1] = 390;
-		
+
 		/* POSICAO - Quinta Secao - X e Y */
-		
+
 		xy[8][0] = 60;
-		
+
 		xy[9][0] = 480;
-		
-		degrees = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		
+
+		degrees = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 		firstDraw = false;
-		
+
 	}
-	
-	private void paintWeapons (Graphics graphics){
-		
+
+	private void paintWeapons(Graphics graphics) {
+
 		weapons = new LinkedHashMap<LinkedList<Rectangle2D>, String>();
 		g = (Graphics2D) graphics;
-		
-		if (firstDraw){
+
+		if (firstDraw) {
 			initWeapons();
 		}
-		
+
 		/* PECAS - Primeira Secao */
 
 		weapons.put(Hydroplane(g, xy[0][0], xy[1][0]), "Hydroplane");
@@ -168,7 +168,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	public void paintComponent(Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		super.paintComponent(graphics);
-		
+
 		System.out.println("Repaint");
 		g = (Graphics2D) graphics;
 
@@ -191,7 +191,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				g.drawRect(marginX + (30 * linha), marginY + (30 * coluna), 30, 30);
 			}
 		}
-		
+
 		paintWeapons(graphics);
 	}
 
@@ -203,21 +203,23 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	public void mouseMoved(MouseEvent e) {
 
-		int x = e.getX();
-		int y = e.getY();
-		
+		x = e.getX();
+		y = e.getY();
+
 		System.out.println(type);
 
 		if (type != null) {
 			System.out.println("posicao: " + x + " --- " + y);
 			System.out.println(type);
-			
+
 			for (int i = 0; i < finalPosition.size(); i++) {
-				System.out.println("finalPosition: " + finalPosition.get(i).getX()+ " --- " + finalPosition.get(i).getY());
+				System.out.println(
+						"finalPosition: " + finalPosition.get(i).getX() + " --- " + finalPosition.get(i).getY());
 			}
-			
-			for (int j = 0; j < initialPosition.size(); j++){
-				System.out.println("initialPosition: " + initialPosition.get(j).getX()+ " --- " + initialPosition.get(j).getY());
+
+			for (int j = 0; j < initialPosition.size(); j++) {
+				System.out.println(
+						"initialPosition: " + initialPosition.get(j).getX() + " --- " + initialPosition.get(j).getY());
 			}
 
 			switch (type) {
@@ -229,7 +231,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			case "Submarine":
 				finalPosition = Submarine(g, x, y);
-				
+
 				xy[2][i] = x;
 				xy[3][j] = y;
 				break;
@@ -252,62 +254,61 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				xy[9][j] = y;
 				break;
 			}
-			
+
 			repaint();
 			System.out.println("################");
 		}
 	}
 
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+	}
 
-	public void mouseDragged(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e) {
+	}
 
 	public void mouseClicked(MouseEvent e) {
-		
-		x = e.getX();
-		y = e.getY();
-		
-		if (e.getButton() == 3){
-			degrees[currentWeapon] =+ 90;
+
+		if (e.getButton() == 3) {
+			degrees[currentWeapon] = +90;
 			repaint();
 		} else {
 
-		char letra = 64;
+			if (x < marginX || x > marginX + 450 || y < marginY || y > marginY + 450) {
+				int index = 0;
+				for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
 
-		if (x > marginX && x < marginX + 450 && y > marginY && y < marginY + 450) {
-			x -= marginX;
-			y -= marginY;
-			x /= 30;
-			y /= 30;
-			x += 1;
-			letra += (y + 1);
-			System.out.println(letra + " ---- " + Integer.toString(x));
-		} else {
-			int index = 0;
-			for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
+					for (int i = 0; i < r.getKey().size(); i++) {
+						if (r.getKey().get(i).getBounds2D().contains(x, y)) {
 
-				for (int i = 0; i < r.getKey().size(); i++) {
-					if (r.getKey().get(i).getBounds2D().contains(x, y)) {
-						
-						System.out.println(index);
-						currentWeapon = index;
-						
-						/* TODO: Refactor */
-						
-						switch (index){
-							case 0: case 1: case 2: case 3: case 4:
+							System.out.println(index);
+							currentWeapon = index;
+
+							/* TODO: Refactor */
+
+							switch (index) {
+							case 0:
+							case 1:
+							case 2:
+							case 3:
+							case 4:
 								i = index;
 								j = index;
 								break;
-							case 5: case 6: case 7: case 8:
+							case 5:
+							case 6:
+							case 7:
+							case 8:
 								i = index - 5;
 								j = index - 5;
 								break;
-							case 9: case 10: case 11:
+							case 9:
+							case 10:
+							case 11:
 								i = index - 9;
 								j = index - 9;
 								break;
-							case 12: case 13:
+							case 12:
+							case 13:
 								i = index - 12;
 								j = index - 12;
 								break;
@@ -315,48 +316,47 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 								i = index - 14;
 								j = index - 14;
 								break;
+							}
+
+							switch (r.getValue()) {
+							case "Hydroplane":
+								type = "Hydroplane";
+								break;
+
+							case "Submarine":
+								type = "Submarine";
+								break;
+
+							case "Destroyer":
+								type = "Destroyer";
+								break;
+
+							case "Cruiser":
+								type = "Cruiser";
+								break;
+
+							case "Battleship":
+								type = "Battleship";
+								break;
+							}
+
+							initialPosition = r.getKey();
+							finalPosition = r.getKey();
+
+							if (type != null)
+								break;
 						}
-						
-						switch (r.getValue()) {
-						case "Hydroplane":
-							type = "Hydroplane";
-							break;
-
-						case "Submarine":
-							type = "Submarine";
-							break;
-
-						case "Destroyer":
-							type = "Destroyer";
-							break;
-
-						case "Cruiser":
-							type = "Cruiser";
-							break;
-
-						case "Battleship":
-							type = "Battleship";
-							break;
-						}
-						
-						initialPosition = r.getKey();
-						finalPosition = r.getKey();
-						
-						
-						if (type != null)
-							break;
 					}
+					index++;
 				}
-				index++;
 			}
-		  }
 		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
 
 	}
-	
+
 	private LinkedList<Rectangle2D> Hydroplane(Graphics2D g, int x, int y) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
@@ -364,9 +364,9 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		System.out.println("novo: " + x + " -- " + y);
 
-		g.setColor(Color.RED);
+		g.setColor(Color.BLUE);
 		rect.setRect(x, y + 30, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -374,7 +374,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -382,7 +382,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y + 30, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -398,7 +398,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.GREEN);
 		rect.setRect(x, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -416,7 +416,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.YELLOW);
 
 		rect.setRect(x, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -424,7 +424,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -441,7 +441,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.ORANGE);
 
 		rect.setRect(x, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -449,7 +449,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -457,7 +457,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -465,7 +465,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
-		//g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -483,7 +483,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.GRAY);
 
 		rect.setRect(x, y, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -491,7 +491,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 30, y, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -499,7 +499,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 60, y, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -507,7 +507,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 90, y, 30, 30);
-	//	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -515,8 +515,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		rect = new Rectangle2D.Float();
 
 		rect.setRect(x + 120, y, 30, 30);
-		
-    //	g.rotate(Math.toRadians(degrees[weapons.size()-1]));
+
+		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -529,22 +529,76 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
-		if(e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE)
-	    {
+
+		if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
 			System.out.println("ESC");
-	        type = null;
-	    }
+			if (type != null) {
+				putShipInMap();
+			}
+			type = null;
+		}
+	}
+
+	private void putShipInMap() {
+		int x = this.x;
+		int y = this.y;
+
+		if (this.x > marginX && this.x < marginX + 450 && this.y > marginY && this.y < marginY + 450) {
+			x -= marginX;
+			y -= marginY;
+			x /= 30;
+			y /= 30;
+
+			switch (type) {
+			case "Hydroplane":
+				if (y - 1 >= 1 && x + 2 <= 14) {
+					this.map[y][x] = 'H';
+					this.map[y - 1][x + 1] = 'H';
+					this.map[y - 1][x + 2] = 'H';
+				}
+				break;
+
+			case "Submarine":
+				this.map[y][x] = 'S';
+				break;
+
+			case "Destroyer":
+				if (x + 1 <= 14) {
+					this.map[y][x] = 'D';
+					this.map[y][x + 1] = 'D';
+				}
+				break;
+
+			case "Cruiser":
+				if (x + 3 <= 14) {
+					this.map[y][x] = 'C';
+					this.map[y][x + 1] = 'C';
+					this.map[y][x + 2] = 'C';
+					this.map[y][x + 3] = 'C';
+				}
+				break;
+
+			case "Battleship":
+				if (x + 4 <= 14) {
+					this.map[y][x] = 'B';
+					this.map[y][x + 1] = 'B';
+					this.map[y][x + 2] = 'B';
+					this.map[y][x + 3] = 'B';
+					this.map[y][x + 4] = 'B';
+				}
+				break;
+			}
+		}
 	}
 
 }
