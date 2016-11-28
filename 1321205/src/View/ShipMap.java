@@ -183,6 +183,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			g.drawString("" + letra + "", marginX - 15, marginY + 20 + (30 * linha));
 			for (int coluna = 0; coluna < map[0].length; coluna++) {
 				g.drawString(Integer.toString(coluna + 1), marginX + 10 + (30 * coluna), marginY - 10);
+				
 				g.setColor(Color.WHITE);
 				rect.setRect(marginX + (30 * linha), marginY + (30 * coluna), 30, 30);
 				g.draw(rect);
@@ -272,8 +273,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			degrees[currentWeapon] = +90;
 			repaint();
 		} else {
-
-			if (x < marginX || x > marginX + 450 || y < marginY || y > marginY + 450) {
 				int index = 0;
 				for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
 
@@ -349,7 +348,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					}
 					index++;
 				}
-			}
 		}
 	}
 
@@ -573,6 +571,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			System.out.println("ESC");
 			if (type != null) {
 				putShipInMap();
+				repaint();
 			}
 			type = null;
 		}
@@ -590,40 +589,35 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			switch (type) {
 			case "Hydroplane":
-				if (y - 1 >= 1 && x + 2 <= 14) {
-					this.map[y][x] = 'H';
-					this.map[y - 1][x + 1] = 'H';
-					this.map[y - 1][x + 2] = 'H';
+				if (y - 1 >= 0 && x + 2 <= 14) {
+					xy[0][i] = marginX + (30*x);
+					xy[1][j] = marginY + (30*(y-1));
 				}
 				break;
 
 			case "Submarine":
-				this.map[y][x] = 'S';
+				xy[2][i] = marginX + (30*x);
+				xy[3][j] = marginY + (30*y);
 				break;
 
 			case "Destroyer":
 				if (x + 1 <= 14) {
-					this.map[y][x] = 'D';
-					this.map[y][x + 1] = 'D';
+					xy[4][i] = marginX + (30*x);
+					xy[5][j] = marginY + (30*y);
 				}
 				break;
 
 			case "Cruiser":
 				if (x + 3 <= 14) {
-					this.map[y][x] = 'C';
-					this.map[y][x + 1] = 'C';
-					this.map[y][x + 2] = 'C';
-					this.map[y][x + 3] = 'C';
+					xy[6][i] = marginX + (30*x);
+					xy[7][j] = marginY + (30*y);
 				}
 				break;
 
 			case "Battleship":
 				if (x + 4 <= 14) {
-					this.map[y][x] = 'B';
-					this.map[y][x + 1] = 'B';
-					this.map[y][x + 2] = 'B';
-					this.map[y][x + 3] = 'B';
-					this.map[y][x + 4] = 'B';
+					xy[8][i] = marginX + (30*x);
+					xy[9][j] = marginY + (30*y);
 				}
 				break;
 			}
