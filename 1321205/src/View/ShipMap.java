@@ -24,11 +24,15 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private LinkedHashMap<LinkedList<Rectangle2D>, String> weapons;
 	private Graphics2D g;
 
-	/* Vari�veis para movimento de peca */
+	/* Variaveis para movimento de peca */
 
 	private String type = null;
 	private LinkedList<Rectangle2D> initialPosition;
 	private LinkedList<Rectangle2D> finalPosition;
+	
+	/* Posicao dos navios que foram colocados no mapa */
+	
+	private LinkedHashMap<int[],String> position = new LinkedHashMap<int[], String>();
 
 	/* Variaveis para desenhar mapa na posicao correta do mapa */
 
@@ -183,7 +187,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			g.drawString("" + letra + "", marginX - 15, marginY + 20 + (30 * linha));
 			for (int coluna = 0; coluna < map[0].length; coluna++) {
 				g.drawString(Integer.toString(coluna + 1), marginX + 10 + (30 * coluna), marginY - 10);
-				
+
 				g.setColor(Color.WHITE);
 				rect.setRect(marginX + (30 * linha), marginY + (30 * coluna), 30, 30);
 				g.draw(rect);
@@ -225,34 +229,34 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			switch (type) {
 			case "Hydroplane":
-				finalPosition = Hydroplane(g, x-15, y-45);
-				xy[0][i] = x-15;
-				xy[1][j] = y-45;
+				finalPosition = Hydroplane(g, x - 15, y - 45);
+				xy[0][i] = x - 15;
+				xy[1][j] = y - 45;
 				break;
 
 			case "Submarine":
-				finalPosition = Submarine(g, x-15, y-15);
+				finalPosition = Submarine(g, x - 15, y - 15);
 
-				xy[2][i] = x-15;
-				xy[3][j] = y-15;
+				xy[2][i] = x - 15;
+				xy[3][j] = y - 15;
 				break;
 
 			case "Destroyer":
-				finalPosition = Destroyer(g, x-15, y-15);
-				xy[4][i] = x-15;
-				xy[5][j] = y-15;
+				finalPosition = Destroyer(g, x - 15, y - 15);
+				xy[4][i] = x - 15;
+				xy[5][j] = y - 15;
 				break;
 
 			case "Cruiser":
-				finalPosition = Cruiser(g, x-15, y-15);
-				xy[6][i] = x-15;
-				xy[7][j] = y-15;
+				finalPosition = Cruiser(g, x - 15, y - 15);
+				xy[6][i] = x - 15;
+				xy[7][j] = y - 15;
 				break;
 
 			case "Battleship":
-				finalPosition = Battleship(g, x-15, y-15);
-				xy[8][i] = x-15;
-				xy[9][j] = y-15;
+				finalPosition = Battleship(g, x - 15, y - 15);
+				xy[8][i] = x - 15;
+				xy[9][j] = y - 15;
 				break;
 			}
 
@@ -273,81 +277,81 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			degrees[currentWeapon] = +90;
 			repaint();
 		} else {
-				int index = 0;
-				for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
+			int index = 0;
+			for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
 
-					for (int cont = 0; cont < r.getKey().size(); cont++) {
-						if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
+				for (int cont = 0; cont < r.getKey().size(); cont++) {
+					if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
 
-							System.out.println(index);
-							currentWeapon = index;
+						System.out.println(index);
+						currentWeapon = index;
 
-							/* TODO: Refactor */
+						/* TODO: Refactor */
 
-							switch (index) {
-							case 0:
-							case 1:
-							case 2:
-							case 3:
-							case 4:
-								i = index;
-								j = index;
-								break;
-							case 5:
-							case 6:
-							case 7:
-							case 8:
-								i = index - 5;
-								j = index - 5;
-								break;
-							case 9:
-							case 10:
-							case 11:
-								i = index - 9;
-								j = index - 9;
-								break;
-							case 12:
-							case 13:
-								i = index - 12;
-								j = index - 12;
-								break;
-							case 14:
-								i = index - 14;
-								j = index - 14;
-								break;
-							}
-
-							switch (r.getValue()) {
-							case "Hydroplane":
-								type = "Hydroplane";
-								break;
-
-							case "Submarine":
-								type = "Submarine";
-								break;
-
-							case "Destroyer":
-								type = "Destroyer";
-								break;
-
-							case "Cruiser":
-								type = "Cruiser";
-								break;
-
-							case "Battleship":
-								type = "Battleship";
-								break;
-							}
-
-							initialPosition = r.getKey();
-							finalPosition = r.getKey();
-
-							if (type != null)
-								break;
+						switch (index) {
+						case 0:
+						case 1:
+						case 2:
+						case 3:
+						case 4:
+							i = index;
+							j = index;
+							break;
+						case 5:
+						case 6:
+						case 7:
+						case 8:
+							i = index - 5;
+							j = index - 5;
+							break;
+						case 9:
+						case 10:
+						case 11:
+							i = index - 9;
+							j = index - 9;
+							break;
+						case 12:
+						case 13:
+							i = index - 12;
+							j = index - 12;
+							break;
+						case 14:
+							i = index - 14;
+							j = index - 14;
+							break;
 						}
+
+						switch (r.getValue()) {
+						case "Hydroplane":
+							type = "Hydroplane";
+							break;
+
+						case "Submarine":
+							type = "Submarine";
+							break;
+
+						case "Destroyer":
+							type = "Destroyer";
+							break;
+
+						case "Cruiser":
+							type = "Cruiser";
+							break;
+
+						case "Battleship":
+							type = "Battleship";
+							break;
+						}
+
+						initialPosition = r.getKey();
+						finalPosition = r.getKey();
+
+						if (type != null)
+							break;
 					}
-					index++;
 				}
+				index++;
+			}
 		}
 	}
 
@@ -385,35 +389,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.fill(rect);
 
 		rects.add(rect);
-		
-//		for(int i = 0; i < 5; i++){
-//			rect = new Rectangle2D.Float();
-//			
-//			g.setColor(Color.BLUE);
-//			
-//			rect.setRect(xy[0][i], xy[1][i] + 30, 30, 30);
-//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
-//			g.draw(rect);
-//			g.fill(rect);
-//
-//			rects.add(rect);
-//			rect = new Rectangle2D.Float();
-//
-//			rect.setRect(x + 30, y, 30, 30);
-//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
-//			g.draw(rect);
-//			g.fill(rect);
-//
-//			rects.add(rect);
-//			rect = new Rectangle2D.Float();
-//
-//			rect.setRect(x + 60, y + 30, 30, 30);
-//			// g.rotate(Math.toRadians(degrees[weapons.size()]));
-//			g.draw(rect);
-//			g.fill(rect);
-//
-//			rects.add(rect);
-//		}
 
 		return rects;
 	}
@@ -566,18 +541,33 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		int[] shipPosition;
+		boolean shipSet;
 
 		if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
 			System.out.println("ESC");
 			if (type != null) {
-				putShipInMap();
+				shipSet = putShipInMap();
 				repaint();
+				
+				if (shipSet == true) {
+					shipPosition = new int[2];
+					for (int i = 0; i < finalPosition.size(); i++) {
+						shipPosition[0] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
+						shipPosition[1] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
+
+						position.put(shipPosition, type);
+					}
+				}
+				for (Entry<int[], String> r : position.entrySet()){
+					System.out.println("AAAAAAAAAAAAAAAAAAAAAA:" + r.getValue());
+				}
+				type = null;
 			}
-			type = null;
 		}
 	}
 
-	private void putShipInMap() {
+	private boolean putShipInMap() {
 		int x = this.x;
 		int y = this.y;
 
@@ -590,38 +580,41 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			switch (type) {
 			case "Hydroplane":
 				if (y - 1 >= 0 && x + 2 <= 14) {
-					xy[0][i] = marginX + (30*x);
-					xy[1][j] = marginY + (30*(y-1));
+					xy[0][i] = marginX + (30 * x);
+					xy[1][j] = marginY + (30 * (y - 1));
 				}
 				break;
 
 			case "Submarine":
-				xy[2][i] = marginX + (30*x);
-				xy[3][j] = marginY + (30*y);
+				xy[2][i] = marginX + (30 * x);
+				xy[3][j] = marginY + (30 * y);
 				break;
 
 			case "Destroyer":
 				if (x + 1 <= 14) {
-					xy[4][i] = marginX + (30*x);
-					xy[5][j] = marginY + (30*y);
+					xy[4][i] = marginX + (30 * x);
+					xy[5][j] = marginY + (30 * y);
 				}
 				break;
 
 			case "Cruiser":
 				if (x + 3 <= 14) {
-					xy[6][i] = marginX + (30*x);
-					xy[7][j] = marginY + (30*y);
+					xy[6][i] = marginX + (30 * x);
+					xy[7][j] = marginY + (30 * y);
 				}
 				break;
 
 			case "Battleship":
 				if (x + 4 <= 14) {
-					xy[8][i] = marginX + (30*x);
-					xy[9][j] = marginY + (30*y);
+					xy[8][i] = marginX + (30 * x);
+					xy[9][j] = marginY + (30 * y);
 				}
 				break;
 			}
+
+			return true;
 		}
+		return false;
 	}
 
 }
