@@ -45,6 +45,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private int xy[][];
 	private int i;
 	private int j;
+	private Boolean isFirst = true;
 	private Boolean firstDraw = true;
 	private int currentWeapon;
 	private int degrees[];
@@ -133,6 +134,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		weapons = new LinkedHashMap<LinkedList<Rectangle2D>, String>();
 		g = (Graphics2D) graphics;
+		isFirst = true;
+		
 
 		if (firstDraw) {
 			initWeapons();
@@ -141,6 +144,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		/* PECAS - Primeira Secao */
 
 		weapons.put(Hydroplane(g, xy[0][0], xy[1][0]), "Hydroplane");
+		isFirst = false;
 		weapons.put(Hydroplane(g, xy[0][1], xy[1][1]), "Hydroplane");
 		weapons.put(Hydroplane(g, xy[0][2], xy[1][2]), "Hydroplane");
 		weapons.put(Hydroplane(g, xy[0][3], xy[1][3]), "Hydroplane");
@@ -274,7 +278,31 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	public void mouseClicked(MouseEvent e) {
 
 		if (e.getButton() == 3) {
-			degrees[currentWeapon] = +90;
+			if (type == "Hydroplane"){
+				if (degrees[currentWeapon] == 0){
+					degrees[currentWeapon] = 1;
+				} else if (degrees[currentWeapon] == 1){
+					degrees[currentWeapon] = 2;
+				} else if (degrees[currentWeapon] == 2){
+					degrees[currentWeapon] = 3;
+				} else {
+					degrees[currentWeapon] = 0;
+				}
+			} else if (degrees[currentWeapon] == 1){
+				degrees[currentWeapon] = 0;
+			} else if (type == "Hydroplane"){
+				if (degrees[currentWeapon] == 0){
+					degrees[currentWeapon] = 1;
+				} else if (degrees[currentWeapon] == 1){
+					degrees[currentWeapon] = 2;
+				} else if (degrees[currentWeapon] == 2){
+					degrees[currentWeapon] = 3;
+				} else {
+					degrees[currentWeapon] = 0;
+				}
+			} else {
+				degrees[currentWeapon] = 1;
+			}
 			repaint();
 		} else {
 			int index = 0;
@@ -284,7 +312,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
 
 						System.out.println(index);
-						currentWeapon = index;
+						currentWeapon = index-1;
 
 						/* TODO: Refactor */
 
@@ -367,28 +395,183 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		System.out.println("novo: " + x + " -- " + y);
 
 		g.setColor(Color.BLUE);
-		rect.setRect(x, y + 30, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 60, y + 30, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
+		
+		if (isFirst){
+			if (degrees[0] == 0){
+			
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 60, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else if (degrees[0] == 1){
+				System.out.println("1");
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x, y+30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else if (degrees[0] == 2){
+				System.out.println("2");
+				
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y+60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 60, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else {
+				System.out.println("3");
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x+60, y+30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			}
+		} else {
+			if (degrees[weapons.size()-1] == 0){
+				System.out.println("0");
+				
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 60, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else if (degrees[weapons.size()-1] == 1){
+				System.out.println("1");
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x, y+30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else if (degrees[weapons.size()-1] == 2){
+				System.out.println("2");
+				
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y+60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 60, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			} else {
+				System.out.println("3");
+				rect.setRect(x + 30, y, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x+60, y+30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+		
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+		
+				rects.add(rect);
+			}
+		}
 
 		return rects;
 	}
@@ -400,7 +583,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.GREEN);
 		rect.setRect(x, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
 		g.draw(rect);
 		g.fill(rect);
 
@@ -417,20 +599,33 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.YELLOW);
 
-		rect.setRect(x, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+		if (degrees[weapons.size()-1] == 0){
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
 
-		rect.setRect(x + 30, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+			rect.setRect(x + 30, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
+			rects.add(rect);
+		} else {
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+
+			rect.setRect(x, y + 30, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+
+			rects.add(rect);
+		}
 
 		return rects;
 	}
@@ -441,37 +636,64 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
 
 		g.setColor(Color.ORANGE);
+		
+		if (degrees[weapons.size()-1] == 0){
 
-		rect.setRect(x, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 30, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 60, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 90, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+		
+		} else {
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
 
-		rect.setRect(x + 30, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+			rect.setRect(x, y + 30, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
 
-		rect.setRect(x + 60, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+			rect.setRect(x, y + 60, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
 
-		rect.setRect(x + 90, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+			rect.setRect(x, y + 90, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
 
-		rects.add(rect);
+			rects.add(rect);
+		}
 
 		return rects;
 
@@ -484,45 +706,78 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.GRAY);
 
-		rect.setRect(x, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
+		if (degrees[weapons.size()-1] == 0){
 
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 30, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 60, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 90, y, 30, 30);
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
-		rect = new Rectangle2D.Float();
-
-		rect.setRect(x + 120, y, 30, 30);
-
-		// g.rotate(Math.toRadians(degrees[weapons.size()-1]));
-		g.draw(rect);
-		g.fill(rect);
-
-		rects.add(rect);
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 30, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 60, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 90, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x + 120, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+		
+		} else {
+			
+			rect.setRect(x, y, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x, y + 30, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x, y + 60, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x, y + 90, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+			rect = new Rectangle2D.Float();
+	
+			rect.setRect(x, y + 120, 30, 30);
+			g.draw(rect);
+			g.fill(rect);
+	
+			rects.add(rect);
+		}
 
 		return rects;
 
