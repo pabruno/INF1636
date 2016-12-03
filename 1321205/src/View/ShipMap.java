@@ -32,7 +32,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	
 	/* Posicao dos navios que foram colocados no mapa */
 	
-	private LinkedHashMap<int[],String> position = new LinkedHashMap<int[], String>();
+	private LinkedHashMap<LinkedList<int[]>, String> position = new LinkedHashMap<LinkedList<int[]>, String>();
 
 	/* Variaveis para desenhar mapa na posicao correta do mapa */
 
@@ -798,6 +798,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	public void keyReleased(KeyEvent e) {
 		int[] shipPosition;
 		boolean shipSet;
+		LinkedList<int[]> weaponPosition;
 
 		if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
 			System.out.println("ESC");
@@ -806,16 +807,21 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				repaint();
 				
 				if (shipSet == true) {
-					shipPosition = new int[2];
+					weaponPosition = new LinkedList<int[]>();
 					for (int i = 0; i < finalPosition.size(); i++) {
-						shipPosition[0] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
-						shipPosition[1] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
-
-						position.put(shipPosition, type);
+						shipPosition = new int[2];
+						shipPosition[1] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
+						shipPosition[0] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
+						System.out.println("BBBBBB: "+shipPosition[0]+" --- "+ shipPosition[1]);
+						weaponPosition.add(shipPosition);
 					}
+					position.put(weaponPosition, type);
 				}
-				for (Entry<int[], String> r : position.entrySet()){
+				for (Entry<LinkedList<int[]>, String> r : position.entrySet()){
 					System.out.println("AAAAAAAAAAAAAAAAAAAAAA:" + r.getValue());
+					for(int i=0; i<r.getKey().size(); i++){
+						System.out.println(r.getKey().get(i)[0] + " --- " + r.getKey().get(i)[1]);
+					}
 				}
 				type = null;
 			}
@@ -846,21 +852,21 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				break;
 
 			case "Destroyer":
-				if (x + 1 <= 14) {
+				if ((degrees[currentWeapon] == 0 && x + 1 <= 14) || (degrees[currentWeapon] == 1 && y + 1 <= 14)) {
 					xy[4][i] = marginX + (30 * x);
 					xy[5][j] = marginY + (30 * y);
 				}
 				break;
 
 			case "Cruiser":
-				if (x + 3 <= 14) {
+				if ((degrees[currentWeapon] == 0 && x + 3 <= 14) || (degrees[currentWeapon] == 1 && y + 3 <= 14)) {
 					xy[6][i] = marginX + (30 * x);
 					xy[7][j] = marginY + (30 * y);
 				}
 				break;
 
 			case "Battleship":
-				if (x + 4 <= 14) {
+				if ((degrees[currentWeapon] == 0 && x + 4 <= 14) || (degrees[currentWeapon] == 1 && y + 4 <= 14)) {
 					xy[8][i] = marginX + (30 * x);
 					xy[9][j] = marginY + (30 * y);
 				}
