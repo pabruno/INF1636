@@ -94,7 +94,7 @@ public class NameWindow extends JFrame implements ActionListener {
 		name1 = player1TextField.getText();
 		name2 = player2TextField.getText();
 		
-		ShipsChooserWindow inicio = new ShipsChooserWindow(player1.getMyMap(),player2.getMyMap(),name1,name2);
+		ShipsChooserWindow inicio = new ShipsChooserWindow(player1,player2);
 		close();
 	}
 }

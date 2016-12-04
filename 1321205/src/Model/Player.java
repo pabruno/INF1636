@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+
 public class Player {
 	
 	/* ------------ Player Class ------------
@@ -23,23 +26,40 @@ public class Player {
 	
 	private String name;
 	private char[][] myMap;
+	private char[][] attackMap;
+	private LinkedHashMap<LinkedList<int[]>, String> position = null;
 	
 	public Player(){
 		setMap (new char[15][15]);
-	}
-	
-	public void setMap(char[][] map){
-		myMap = map;
+		setAttackMap (new char[15][15]);
 		
 		for(int i=0; i < myMap.length; i++){
 			for(int j=0; j < myMap[0].length; j++){
 				myMap[i][j] = 'V';
 			}
 		}
+		
+		for(int i=0; i < attackMap.length; i++){
+			for(int j=0; j < attackMap[0].length; j++){
+				attackMap[i][j] = 'V';
+			}
+		}
+	}
+	
+	public void setMap(char[][] map){
+		myMap = map;
+	}
+	
+	public void setAttackMap(char[][] map){
+		attackMap = map;
 	}
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setPosition(LinkedHashMap<LinkedList<int[]>, String> position){
+		this.position = position;
 	}
 	
 	public String getName(){
@@ -48,5 +68,13 @@ public class Player {
 	
 	public char[][] getMyMap(){
 		return myMap;
+	}
+	
+	public char[][] getAttackMap(){
+		return attackMap;
+	}
+	
+	public LinkedHashMap<LinkedList<int[]>, String> getPosition(){
+		return this.position;
 	}
 }

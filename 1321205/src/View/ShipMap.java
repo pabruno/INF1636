@@ -70,6 +70,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 	}
+	
+	public char[][] getMap() {
+		return map;
+	}
+	
+	public LinkedHashMap<LinkedList<int[]>, String> getPosition(){
+		return position;
+	}
 
 	private void initWeapons() {
 
@@ -817,11 +825,32 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 						shipPosition[1] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
 						shipPosition[0] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
 						weaponPosition.add(shipPosition);
+						switch(type){
+							case "Hydroplane":
+								this.map[shipPosition[0]][shipPosition[1]] = 'H';
+								break;
+								
+							case "Submarine":
+								this.map[shipPosition[0]][shipPosition[1]] = 'S';
+								break;
+								
+							case "Destroyer":
+								this.map[shipPosition[0]][shipPosition[1]] = 'D';
+								break;
+								
+							case "Cruiser":
+								this.map[shipPosition[0]][shipPosition[1]] = 'C';
+								break;
+								
+							case "Battleship":
+								this.map[shipPosition[0]][shipPosition[1]] = 'B';
+								break;
+						}
 					}
 					position.put(weaponPosition, type);
 				}
 				for (Entry<LinkedList<int[]>, String> r : position.entrySet()){
-					System.out.println("AAAAAAAAAAAAAAAAAAAAAA:" + r.getValue());
+					System.out.println("POSITION:" + r.getValue());
 					for(int i=0; i<r.getKey().size(); i++){
 						System.out.println(r.getKey().get(i)[0] + " --- " + r.getKey().get(i)[1]);
 					}

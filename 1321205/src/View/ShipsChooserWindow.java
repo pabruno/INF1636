@@ -4,32 +4,31 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.Map.Entry;
 
 import javax.swing.*;
+
+import Model.Player;
 
 public class ShipsChooserWindow implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	
-	JFrame window = new JFrame();
+	private JFrame window = new JFrame();
 
 	private int screenX;
 	private int screenY;
 	
 	// Variavel para a classe Map que extende JPanel e vai imprimir o mapa no frame.
 	
-	ShipMap map1Panel = new ShipMap();
-	ShipMap map2Panel = new ShipMap();
+	private ShipMap map1Panel = new ShipMap();
+	private ShipMap map2Panel = new ShipMap();
 
-	// Mapa de cada jogador.
-
-	private char[][] map1;
-	private char[][] map2;
-
-	// Nome de cada jogador.
-
-	private String name1;
-	private String name2;
+	// Jogadores
+	
+	private Player p1;
+	private Player p2;
 
 	// Botao para troca de tela
 
@@ -48,11 +47,9 @@ public class ShipsChooserWindow implements ActionListener {
 
 	// Construtor para inicializar a tela para a colocacao dos navios do Jogador 1.
 
-	public ShipsChooserWindow(char[][] map1, char[][] map2, String name1, String name2) {
-		this.map1 = map1;
-		this.map2 = map2;
-		this.name1 = name1;
-		this.name2 = name2;
+	public ShipsChooserWindow(Player p1, Player p2) {
+		this.p1 = p1;
+		this.p2 = p2;
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension size = kit.getScreenSize();
@@ -69,12 +66,12 @@ public class ShipsChooserWindow implements ActionListener {
 	}
 
 	private void player1Screen() {
-		map1Panel.draw(map1, screenX / 2 + 30, screenY / 10);
+		map1Panel.draw(p1.getMyMap(), screenX / 2 + 30, screenY / 10);
 		window.add(map1Panel);
 
 		map1Panel.setLayout(null);
 
-		JLabel text = new JLabel(name1 + ", posicione os navios no tabuleiro.");
+		JLabel text = new JLabel(p1.getName() + ", posicione os navios no tabuleiro.");
 		map1Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
@@ -85,7 +82,7 @@ public class ShipsChooserWindow implements ActionListener {
 	
 	private void player2Screen(){
 		window.setVisible(false);
-		window.getContentPane().removeAll();
+		window.removeAll();
 		
 		window = new JFrame();
 		
@@ -95,14 +92,14 @@ public class ShipsChooserWindow implements ActionListener {
 		window.setVisible(true);
 		window.setResizable(false);
 		
-		map2Panel.draw(map2, screenX / 2 + 30, screenY / 10);
+		map2Panel.draw(p2.getMyMap(), screenX / 2 + 30, screenY / 10);
 		window.add(map2Panel);
 
 		map2Panel.setLayout(null);
 		
 		button = new JButton("Proximo");
 
-		JLabel text = new JLabel(name2 + ", posicione os navios no tabuleiro.");
+		JLabel text = new JLabel(p2.getName() + ", posicione os navios no tabuleiro.");
 		map2Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
@@ -114,7 +111,17 @@ public class ShipsChooserWindow implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(cont == 0){
 			cont++;
+			p1.setMap(map1Panel.getMap());
+			p1.setPosition(map1Panel.getPosition());
 			player2Screen();
+		}
+		else {
+			p2.setMap(map2Panel.getMap());
+			p2.setPosition(map2Panel.getPosition());
+			window.setVisible(false);
+			window.removeAll();
+			
+			AttackWindow attack = new AttackWindow(p1,p2);
 		}
 	}
 }
