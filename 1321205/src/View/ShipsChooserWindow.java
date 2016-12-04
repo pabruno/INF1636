@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class ShipsChooserWindow extends JFrame implements ActionListener {
+public class ShipsChooserWindow implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	
+	JFrame window = new JFrame();
 
 	private int screenX;
 	private int screenY;
@@ -57,19 +59,18 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 		screenX = size.width;
 		screenY = size.height;
 		
-		setTitle("Batalha Naval");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(screenX - 100, screenY - 100);
-		setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
-		setVisible(true);
-		setResizable(false);
+		window.setTitle("Batalha Naval");
+		window.setSize(screenX - 100, screenY - 100);
+		window.setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
+		window.setVisible(true);
+		window.setResizable(false);
 
 		player1Screen();
 	}
 
 	private void player1Screen() {
 		map1Panel.draw(map1, screenX / 2 + 30, screenY / 10);
-		getContentPane().add(map1Panel);
+		window.add(map1Panel);
 
 		map1Panel.setLayout(null);
 
@@ -83,10 +84,19 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 	}
 	
 	private void player2Screen(){
-		getContentPane().removeAll();
+		window.setVisible(false);
+		window.getContentPane().removeAll();
+		
+		window = new JFrame();
+		
+		window.setTitle("Batalha Naval");
+		window.setSize(screenX - 100, screenY - 100);
+		window.setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
+		window.setVisible(true);
+		window.setResizable(false);
 		
 		map2Panel.draw(map2, screenX / 2 + 30, screenY / 10);
-		getContentPane().add(map2Panel);
+		window.add(map2Panel);
 
 		map2Panel.setLayout(null);
 		
@@ -99,9 +109,6 @@ public class ShipsChooserWindow extends JFrame implements ActionListener {
 		map2Panel.add(button);
 		button.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
 		button.addActionListener(this);
-		
-		validate();
-		repaint();
 	}
 
 	public void actionPerformed(ActionEvent e) {

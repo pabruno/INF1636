@@ -253,6 +253,10 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			case "Cruiser":
 				finalPosition = Cruiser(g, x - 15, y - 15);
+				for (int i = 0; i < finalPosition.size(); i++) {
+					System.out.println(
+							"FINAL 2222222: " + finalPosition.get(i).getX() + " --- " + finalPosition.get(i).getY());
+				}
 				xy[6][i] = x - 15;
 				xy[7][j] = y - 15;
 				break;
@@ -670,28 +674,28 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-
+			System.out.println("FINAL: " + rect.getX() + " --- " + rect.getY());
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
 
 			rect.setRect(x, y + 30, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-
+			System.out.println("FINAL: " + rect.getX() + " --- " + rect.getY());
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
 
 			rect.setRect(x, y + 60, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-
+			System.out.println("FINAL: " + rect.getX() + " --- " + rect.getY());
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
 
 			rect.setRect(x, y + 90, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-
+			System.out.println("FINAL: " + rect.getX() + " --- " + rect.getY());
 			rects.add(rect);
 		}
 
@@ -812,7 +816,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 						shipPosition = new int[2];
 						shipPosition[1] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
 						shipPosition[0] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
-						System.out.println("BBBBBB: "+shipPosition[0]+" --- "+ shipPosition[1]);
 						weaponPosition.add(shipPosition);
 					}
 					position.put(weaponPosition, type);
