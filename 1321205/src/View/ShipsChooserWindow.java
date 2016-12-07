@@ -121,7 +121,7 @@ public class ShipsChooserWindow implements ActionListener {
 			window.setVisible(false);
 			window.removeAll();
 			
-			AttackWindow attack = new AttackWindow(p1,p2);
+			//AttackWindow attack = new AttackWindow(p1,p2);
 		}
 	}
 }
