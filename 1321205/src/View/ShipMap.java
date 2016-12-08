@@ -947,23 +947,20 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		switch (type) {
 		case "Hydroplane":
-			if(degrees[currentWeapon] == 0) {
-				if(!checkPosition(x,y) || !checkPosition(x-1,y+1) || !checkPosition(x,y+2)){
+			if (degrees[currentWeapon] == 0) {
+				if (!checkPosition(x, y) || !checkPosition(x - 1, y + 1) || !checkPosition(x, y + 2)) {
 					position = false;
 				}
-			}
-			else if(degrees[currentWeapon] == 1) {
-				if(!checkPosition(x,y) || !checkPosition(x-1,y+1) || !checkPosition(x+1,y+1)){
+			} else if (degrees[currentWeapon] == 1) {
+				if (!checkPosition(x, y) || !checkPosition(x - 1, y + 1) || !checkPosition(x + 1, y + 1)) {
 					position = false;
 				}
-			}
-			else if(degrees[currentWeapon] == 2) {
-				if(!checkPosition(x,y) || !checkPosition(x,y+2) || !checkPosition(x+1,y+1)){
+			} else if (degrees[currentWeapon] == 2) {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 2) || !checkPosition(x + 1, y + 1)) {
 					position = false;
 				}
-			}
-			else {
-				if(!checkPosition(x,y+2) || !checkPosition(x-1,y+1) || !checkPosition(x+1,y+1)){
+			} else {
+				if (!checkPosition(x, y + 2) || !checkPosition(x - 1, y + 1) || !checkPosition(x + 1, y + 1)) {
 					position = false;
 				}
 			}
@@ -974,7 +971,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			break;
 
 		case "Destroyer":
-			if (degrees[currentWeapon] == 0) {
+			if (degrees[currentWeapon] == 1) {
 				if (!checkPosition(x, y) || !checkPosition(x + 1, y)) {
 					position = false;
 				}
@@ -986,12 +983,16 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			break;
 
 		case "Cruiser":
-			if (degrees[currentWeapon] == 0) {
+			if (degrees[currentWeapon] == 1) {
 				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
 						|| !checkPosition(x + 3, y)) {
 					position = false;
 				}
 			} else {
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 1));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 2));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 3));
 				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
 						|| !checkPosition(x, y + 3)) {
 					position = false;
@@ -1001,7 +1002,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		case "Battleship":
 			position = checkPosition(x, y);
-			if (degrees[currentWeapon] == 0) {
+			if (degrees[currentWeapon] == 1) {
 				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
 						|| !checkPosition(x + 3, y) || !checkPosition(x + 4, y)) {
 					position = false;
@@ -1021,8 +1022,9 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private boolean checkPosition(int x, int y) {
 		boolean position = true;
 
-		if (this.map[x][y] != 'V' || this.map[x - 1][y] != 'V' || this.map[x + 1][y] != 'V' || this.map[x][y - 1] != 'V'
-				|| this.map[x][y + 1] != 'V') {
+		if (this.map[x][y] != 'V' || (x - 1 >= 0 && this.map[x - 1][y] != 'V')
+				|| (x + 1 <= 14 && this.map[x + 1][y] != 'V') || (y - 1 >= 0 && this.map[x][y - 1] != 'V')
+				|| (y + 1 <= 14 && this.map[x][y + 1] != 'V')) {
 			position = false;
 		}
 
