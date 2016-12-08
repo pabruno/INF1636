@@ -890,12 +890,15 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			y -= marginY;
 			x /= 30;
 			y /= 30;
-			
+
 			put = checkShip(y, x);
 			if (put) {
 				switch (type) {
 				case "Hydroplane":
-					if (y - 1 >= 0 && x + 2 <= 14) {
+					if ((degrees[currentWeapon] == 0 && y - 1 >= 0 && x + 2 <= 14)
+							|| (degrees[currentWeapon] == 1 && y - 1 >= 0 && y + 1 <= 14)
+							|| (degrees[currentWeapon] == 2 && y + 1 <= 14 && x + 2 <= 14)
+							|| (degrees[currentWeapon] == 3 && y + 1 <= 14 && y - 1 >= 0 && x + 2 <= 14)) {
 						xy[0][i] = marginX + (30 * x);
 						xy[1][j] = marginY + (30 * (y - 1));
 						put = true;
@@ -944,6 +947,26 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		switch (type) {
 		case "Hydroplane":
+			if(degrees[currentWeapon] == 0) {
+				if(!checkPosition(x,y) || !checkPosition(x-1,y+1) || !checkPosition(x,y+2)){
+					position = false;
+				}
+			}
+			else if(degrees[currentWeapon] == 1) {
+				if(!checkPosition(x,y) || !checkPosition(x-1,y+1) || !checkPosition(x+1,y+1)){
+					position = false;
+				}
+			}
+			else if(degrees[currentWeapon] == 2) {
+				if(!checkPosition(x,y) || !checkPosition(x,y+2) || !checkPosition(x+1,y+1)){
+					position = false;
+				}
+			}
+			else {
+				if(!checkPosition(x,y+2) || !checkPosition(x-1,y+1) || !checkPosition(x+1,y+1)){
+					position = false;
+				}
+			}
 			break;
 
 		case "Submarine":
@@ -952,11 +975,11 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		case "Destroyer":
 			if (degrees[currentWeapon] == 0) {
-				if(!checkPosition(x, y) || !checkPosition(x + 1, y)) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y)) {
 					position = false;
 				}
 			} else {
-				if(!checkPosition(x, y) || !checkPosition(x, y + 1)) {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1)) {
 					position = false;
 				}
 			}
@@ -964,11 +987,13 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		case "Cruiser":
 			if (degrees[currentWeapon] == 0) {
-				if(!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y) || !checkPosition(x + 3, y)) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
+						|| !checkPosition(x + 3, y)) {
 					position = false;
 				}
 			} else {
-				if(!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2) || !checkPosition(x, y + 3)) {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
+						|| !checkPosition(x, y + 3)) {
 					position = false;
 				}
 			}
@@ -977,11 +1002,13 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		case "Battleship":
 			position = checkPosition(x, y);
 			if (degrees[currentWeapon] == 0) {
-				if(!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y) || !checkPosition(x + 3, y) || !checkPosition(x + 4, y)) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
+						|| !checkPosition(x + 3, y) || !checkPosition(x + 4, y)) {
 					position = false;
 				}
 			} else {
-				if(!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2) || !checkPosition(x, y + 3) || !checkPosition(x, y + 4)) {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
+						|| !checkPosition(x, y + 3) || !checkPosition(x, y + 4)) {
 					position = false;
 				}
 			}
@@ -994,7 +1021,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private boolean checkPosition(int x, int y) {
 		boolean position = true;
 
-		if (this.map[x][y] != 'V' ||this.map[x - 1][y] != 'V' || this.map[x + 1][y] != 'V' || this.map[x][y - 1] != 'V' || this.map[x][y + 1] != 'V') {
+		if (this.map[x][y] != 'V' || this.map[x - 1][y] != 'V' || this.map[x + 1][y] != 'V' || this.map[x][y - 1] != 'V'
+				|| this.map[x][y + 1] != 'V') {
 			position = false;
 		}
 
