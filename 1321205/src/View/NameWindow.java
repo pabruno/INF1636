@@ -9,46 +9,44 @@ import javax.swing.*;
 import Model.Player;
 
 public class NameWindow extends JFrame implements ActionListener {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	JPanel panel = new JPanel();
-	
-	// Campos de texto para armazenar o nome dos jogadores na tela inicial.
-	
+
 	private Player player1;
 	private Player player2;
-	
+
 	private JTextField player1TextField = new JTextField("Jogador 1");
 	private JTextField player2TextField = new JTextField("Jogador 2");
-	
-	// Nomes dos jogadores.
-	
-	private String name1;
-	private String name2;
-	
+
 	// Tamanho da tela do computador.
-	
+
 	private int screenX;
 	private int screenY;
-	
-	// Construtor default para carregar a tela inicial, para insercao dos nomes dos jogadores.
-	
+
+	// Construtor default para carregar a tela inicial, para insercao dos nomes
+	// dos jogadores.
+
 	public NameWindow() {
-		
+
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension size = kit.getScreenSize();
 		screenX = size.width;
 		screenY = size.height;
-		
+
+		createWindow();
+	}
+
+	private void createWindow() {
 		panel.setLayout(null);
-		
+
 		JButton startButton = new JButton("Comecar");
 		JLabel player1Label = new JLabel("Jogador 1:");
 		JLabel player2Label = new JLabel("Jogador 2:");
 		startButton.addActionListener(this);
 		getContentPane().add(panel);
-		
+
 		panel.add(startButton);
 		panel.add(player1TextField);
 		panel.add(player2TextField);
@@ -59,42 +57,33 @@ public class NameWindow extends JFrame implements ActionListener {
 		player2TextField.setBounds(150, 110, 200, 20);
 		player1Label.setBounds(70, 80, 100, 20);
 		player2Label.setBounds(70, 110, 100, 20);
-		
-		
+
 		setTitle("Batalha Naval");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400,300);
-		setLocation(screenX/2 - 200,screenY/2 - 150);
+		setSize(400, 300);
+		setLocation(screenX / 2 - 200, screenY / 2 - 150);
 		setVisible(true);
 		setResizable(false);
 	}
-	
-	public void setPlayer1(Player player){
+
+	public void setPlayer1(Player player) {
 		player1 = player;
 	}
-	
-	public void setPlayer2(Player player){
+
+	public void setPlayer2(Player player) {
 		player2 = player;
 	}
-	
-	public String getName1(){
-		return name1;
-	}
-	
-	public String getName2(){
-		return name2;
-	}
-	
-	public void close(){
+
+	public void close() {
 		setVisible(false);
 		removeAll();
 	}
-	
-	public void actionPerformed(ActionEvent e){
-		name1 = player1TextField.getText();
-		name2 = player2TextField.getText();
-		
-		ShipsChooserWindow inicio = new ShipsChooserWindow(player1,player2);
+
+	public void actionPerformed(ActionEvent e) {
+		player1.setName(player1TextField.getText());
+		player2.setName(player2TextField.getText());
+
+		ShipsChooserWindow inicio = new ShipsChooserWindow(player1, player2);
 		close();
 	}
 }

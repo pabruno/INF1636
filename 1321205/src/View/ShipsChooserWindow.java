@@ -56,13 +56,17 @@ public class ShipsChooserWindow implements ActionListener {
 		screenX = size.width;
 		screenY = size.height;
 		
+		createWindow();
+	}
+	
+	private void createWindow(){
 		window.setTitle("Batalha Naval");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(screenX - 100, screenY - 100);
 		window.setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
 		window.setVisible(true);
 		window.setResizable(false);
-
+		
 		player1Screen();
 	}
 
