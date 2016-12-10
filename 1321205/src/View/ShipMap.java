@@ -151,34 +151,33 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		/* PECAS - Primeira Secao */
 
-		weapons.put(Hydroplane(g, xy[0][0], xy[1][0]), "Hydroplane");
-		isFirst = false;
-		weapons.put(Hydroplane(g, xy[0][1], xy[1][1]), "Hydroplane");
-		weapons.put(Hydroplane(g, xy[0][2], xy[1][2]), "Hydroplane");
-		weapons.put(Hydroplane(g, xy[0][3], xy[1][3]), "Hydroplane");
-		weapons.put(Hydroplane(g, xy[0][4], xy[1][4]), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][0], xy[1][0], 0), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][1], xy[1][1], 1), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][2], xy[1][2], 2), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][3], xy[1][3], 3), "Hydroplane");
+		weapons.put(Hydroplane(g, xy[0][4], xy[1][4], 4), "Hydroplane");
 
 		/* PECAS - Segunda Secao */
 
-		weapons.put(Submarine(g, xy[2][0], xy[3][0]), "Submarine");
-		weapons.put(Submarine(g, xy[2][1], xy[3][1]), "Submarine");
-		weapons.put(Submarine(g, xy[2][2], xy[3][2]), "Submarine");
-		weapons.put(Submarine(g, xy[2][3], xy[3][3]), "Submarine");
+		weapons.put(Submarine(g, xy[2][0], xy[3][0], 5), "Submarine");
+		weapons.put(Submarine(g, xy[2][1], xy[3][1], 6), "Submarine");
+		weapons.put(Submarine(g, xy[2][2], xy[3][2], 7), "Submarine");
+		weapons.put(Submarine(g, xy[2][3], xy[3][3], 8), "Submarine");
 
 		/* PECAS - Terceira Secao */
 
-		weapons.put(Destroyer(g, xy[4][0], xy[5][0]), "Destroyer");
-		weapons.put(Destroyer(g, xy[4][1], xy[5][1]), "Destroyer");
-		weapons.put(Destroyer(g, xy[4][2], xy[5][2]), "Destroyer");
+		weapons.put(Destroyer(g, xy[4][0], xy[5][0], 9), "Destroyer");
+		weapons.put(Destroyer(g, xy[4][1], xy[5][1], 10), "Destroyer");
+		weapons.put(Destroyer(g, xy[4][2], xy[5][2], 11), "Destroyer");
 
 		/* PECAS - Quarta Secao */
 
-		weapons.put(Cruiser(g, xy[6][0], xy[7][0]), "Cruiser");
-		weapons.put(Cruiser(g, xy[6][1], xy[7][1]), "Cruiser");
+		weapons.put(Cruiser(g, xy[6][0], xy[7][0], 12), "Cruiser");
+		weapons.put(Cruiser(g, xy[6][1], xy[7][1], 13), "Cruiser");
 
 		/* PECAS - Quinta Secao */
 
-		weapons.put(Battleship(g, xy[8][0], xy[9][0]), "Battleship");
+		weapons.put(Battleship(g, xy[8][0], xy[9][0], 14), "Battleship");
 		
 	}
 
@@ -228,31 +227,31 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			switch (type) {
 			case "Hydroplane":
-				finalPosition = Hydroplane(g, x+15, y+45);
+				finalPosition = Hydroplane(g, x+15, y+45, currentWeapon);
 				xy[0][i] = x - 15;
 				xy[1][j] = y - 45;
 				break;
 
 			case "Submarine":
-				finalPosition = Submarine(g, x+15, y+15);
+				finalPosition = Submarine(g, x+15, y+15, currentWeapon);
 				xy[2][i] = x - 15;
 				xy[3][j] = y - 15;
 				break;
 
 			case "Destroyer":
-				finalPosition = Destroyer(g, x+15, y+15);
+				finalPosition = Destroyer(g, x+15, y+15, currentWeapon);
 				xy[4][i] = x - 15;
 				xy[5][j] = y - 15;
 				break;
 
 			case "Cruiser":
-				finalPosition = Cruiser(g, x+15, y+15);
+				finalPosition = Cruiser(g, x+15, y+15, currentWeapon);
 				xy[6][i] = x - 15;
 				xy[7][j] = y - 15;
 				break;
 
 			case "Battleship":
-				finalPosition = Battleship(g, x+15, y+15);
+				finalPosition = Battleship(g, x+15, y+15, currentWeapon);
 				xy[8][i] = x - 15;
 				xy[9][j] = y - 15;
 				break;
@@ -275,6 +274,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		if (e.getButton() == 3) {
 			
 			if (type != null){
+				
+				System.out.println(degrees);
 
 			if (type == "Hydroplane"){
 				if (degrees[currentWeapon] == 0){
@@ -295,23 +296,23 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			
 			switch (type) {
 			case "Hydroplane":
-				finalPosition = Hydroplane(g, x+15, y+45);
+				finalPosition = Hydroplane(g, x+15, y+45, currentWeapon);
 				break;
 
 			case "Submarine":
-				finalPosition = Submarine(g, x+15, y+15);
+				finalPosition = Submarine(g, x+15, y+15, currentWeapon);
 				break;
 
 			case "Destroyer":
-				finalPosition = Destroyer(g, x+15, y+15);
+				finalPosition = Destroyer(g, x+15, y+15, currentWeapon);
 				break;
 
 			case "Cruiser":
-				finalPosition = Cruiser(g, x+15, y+15);
+				finalPosition = Cruiser(g, x+15, y+15, currentWeapon);
 				break;
 
 			case "Battleship":
-				finalPosition = Battleship(g, x+15, y+15);
+				finalPosition = Battleship(g, x+15, y+15, currentWeapon);
 				break;
 			}
 			
@@ -327,7 +328,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
 
 						System.out.println(index);
-						currentWeapon = index-1;
+						currentWeapon = index;
 
 						/* TODO: Refactor */
 
@@ -401,7 +402,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	}
 
-	private LinkedList<Rectangle2D> Hydroplane(Graphics2D g, int x, int y) {
+	private LinkedList<Rectangle2D> Hydroplane(Graphics2D g, int x, int y, int currentIndex) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
@@ -410,7 +411,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		g.setColor(Color.BLUE);
 		
-		if (isFirst){
+		if (isFirst == true){
 			if (degrees[0] == 0){
 			
 				rect.setRect(x, y + 30, 30, 30);
@@ -433,7 +434,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		
 				rects.add(rect);
 			} else if (degrees[0] == 1){
-				
+				System.out.println("1 - first");
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
@@ -495,8 +496,9 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		
 				rects.add(rect);
 			}
+			isFirst = false;
 		} else {
-			if (degrees[weapons.size()-1] == 0){
+			if (degrees[currentIndex] == 0){
 				
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
@@ -517,7 +519,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				g.fill(rect);
 		
 				rects.add(rect);
-			} else if (degrees[weapons.size()-1] == 1){
+			} else if (degrees[currentIndex] == 1){
 				System.out.println("1");
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
@@ -538,7 +540,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				g.fill(rect);
 		
 				rects.add(rect);
-			} else if (degrees[weapons.size()-1] == 2){
+			} else if (degrees[currentIndex] == 2){
 				
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
@@ -582,14 +584,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 		
-		if (weapons.size() == currentWeapon+1){
+		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
 
 		return rects;
 	}
 
-	private LinkedList<Rectangle2D> Submarine(Graphics2D g, int x, int y) {
+	private LinkedList<Rectangle2D> Submarine(Graphics2D g, int x, int y, int currentIndex) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
@@ -601,7 +603,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 		rects.add(rect);
 		
-		if (weapons.size() == currentWeapon+1){
+		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
 
@@ -609,14 +611,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	}
 
-	private LinkedList<Rectangle2D> Destroyer(Graphics2D g, int x, int y) {
+	private LinkedList<Rectangle2D> Destroyer(Graphics2D g, int x, int y, int currentIndex) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
 
 		g.setColor(Color.YELLOW);
 
-		if (degrees[weapons.size()-1] == 0){
+		if (degrees[currentIndex] == 0){
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
@@ -644,21 +646,21 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rects.add(rect);
 		}
 		
-		if (weapons.size() == currentWeapon+1){
+		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
 		
 		return rects;
 	}
 
-	private LinkedList<Rectangle2D> Cruiser(Graphics2D g, int x, int y) {
+	private LinkedList<Rectangle2D> Cruiser(Graphics2D g, int x, int y, int currentIndex) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
 
 		g.setColor(Color.ORANGE);
 		
-		if (degrees[weapons.size()-1] == 0){
+		if (degrees[currentIndex] == 0){
 
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
@@ -716,7 +718,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rects.add(rect);
 		}
 		
-		if (weapons.size() == currentWeapon+1){
+		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
 
@@ -724,14 +726,14 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 	}
 
-	private LinkedList<Rectangle2D> Battleship(Graphics2D g, int x, int y) {
+	private LinkedList<Rectangle2D> Battleship(Graphics2D g, int x, int y, int currentIndex) {
 
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
 
 		g.setColor(Color.GRAY);
 
-		if (degrees[weapons.size()-1] == 0){
+		if (degrees[currentIndex] == 0){
 
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
@@ -804,7 +806,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rects.add(rect);
 		}
 		
-		if (weapons.size() == currentWeapon+1){
+		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
 
