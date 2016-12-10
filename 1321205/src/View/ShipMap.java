@@ -382,27 +382,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 							break;
 						}
 
-						switch (r.getValue()) {
-						case "Hydroplane":
-							type = "Hydroplane";
-							break;
-
-						case "Submarine":
-							type = "Submarine";
-							break;
-
-						case "Destroyer":
-							type = "Destroyer";
-							break;
-
-						case "Cruiser":
-							type = "Cruiser";
-							break;
-
-						case "Battleship":
-							type = "Battleship";
-							break;
-						}
+						type = r.getValue();
 
 						initialPosition = r.getKey();
 
@@ -411,6 +391,34 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					}
 				}
 				index++;
+			}
+			
+			if (this.x > marginX && this.x < marginX + 450 && this.y > marginY && this.y < marginY + 450) {
+				int x, y;
+				boolean removeFromMap = false;
+				
+				y = (this.x - marginX)/30;
+				x = (this.y - marginY)/30;
+				
+				for (Entry<LinkedList<int[]>, String> r : position.entrySet()) {
+					for (int i = 0; i < r.getKey().size(); i++) {
+						if(r.getKey().get(i)[0] == x && r.getKey().get(i)[1] == y){
+							removeFromMap = true;
+							break;
+						}
+					}
+					
+					if(removeFromMap){
+						removeFromMap = false;
+						
+						for (int j = 0; j < r.getKey().size(); j++) {
+							this.map[r.getKey().get(j)[0]][r.getKey().get(j)[1]] = 'V';
+						}
+						
+						position.remove(r);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -871,27 +879,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 						shipPosition[0] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
 
 						weaponPosition.add(shipPosition);
-						switch (type) {
-						case "Hydroplane":
-							this.map[shipPosition[0]][shipPosition[1]] = 'H';
-							break;
-
-						case "Submarine":
-							this.map[shipPosition[0]][shipPosition[1]] = 'S';
-							break;
-
-						case "Destroyer":
-							this.map[shipPosition[0]][shipPosition[1]] = 'D';
-							break;
-
-						case "Cruiser":
-							this.map[shipPosition[0]][shipPosition[1]] = 'C';
-							break;
-
-						case "Battleship":
-							this.map[shipPosition[0]][shipPosition[1]] = 'B';
-							break;
-						}
+						
+						this.map[shipPosition[0]][shipPosition[1]] = type.charAt(0);
 					}
 					position.put(weaponPosition, type);
 				}
@@ -1015,10 +1004,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					position = false;
 				}
 			} else {
-				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y));
-				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 1));
-				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 2));
-				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 3));
 				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
 						|| !checkPosition(x, y + 3)) {
 					position = false;
