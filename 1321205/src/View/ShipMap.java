@@ -29,9 +29,9 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private String type = null;
 	private LinkedList<Rectangle2D> initialPosition;
 	private LinkedList<Rectangle2D> finalPosition;
-	
+
 	/* Posicao dos navios que foram colocados no mapa */
-	
+
 	private LinkedHashMap<LinkedList<int[]>, String> position = new LinkedHashMap<LinkedList<int[]>, String>();
 
 	/* Variaveis para desenhar mapa na posicao correta do mapa */
@@ -70,12 +70,12 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 	}
-	
+
 	public char[][] getMap() {
 		return map;
 	}
-	
-	public LinkedHashMap<LinkedList<int[]>, String> getPosition(){
+
+	public LinkedHashMap<LinkedList<int[]>, String> getPosition() {
 		return position;
 	}
 
@@ -143,7 +143,6 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		weapons = new LinkedHashMap<LinkedList<Rectangle2D>, String>();
 		g = (Graphics2D) graphics;
 		isFirst = true;
-		
 
 		if (firstDraw) {
 			initWeapons();
@@ -178,7 +177,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		/* PECAS - Quinta Secao */
 
 		weapons.put(Battleship(g, xy[8][0], xy[9][0], 14), "Battleship");
-		
+
 	}
 
 	public void paintComponent(Graphics graphics) {
@@ -227,30 +226,39 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 
 			switch (type) {
 			case "Hydroplane":
+
 				finalPosition = Hydroplane(g, x+15, y+45, currentWeapon);
+
 				xy[0][i] = x - 15;
 				xy[1][j] = y - 45;
 				break;
 
 			case "Submarine":
+
 				finalPosition = Submarine(g, x+15, y+15, currentWeapon);
+
 				xy[2][i] = x - 15;
 				xy[3][j] = y - 15;
 				break;
 
 			case "Destroyer":
+
 				finalPosition = Destroyer(g, x+15, y+15, currentWeapon);
+
 				xy[4][i] = x - 15;
 				xy[5][j] = y - 15;
 				break;
 
 			case "Cruiser":
+
 				finalPosition = Cruiser(g, x+15, y+15, currentWeapon);
+
 				xy[6][i] = x - 15;
 				xy[7][j] = y - 15;
 				break;
 
 			case "Battleship":
+
 				finalPosition = Battleship(g, x+15, y+15, currentWeapon);
 				xy[8][i] = x - 15;
 				xy[9][j] = y - 15;
@@ -277,16 +285,25 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				
 				System.out.println(degrees);
 
-			if (type == "Hydroplane"){
-				if (degrees[currentWeapon] == 0){
-					degrees[currentWeapon] = 1;
-				} else if (degrees[currentWeapon] == 1){
-					degrees[currentWeapon] = 2;
-				} else if (degrees[currentWeapon] == 2){
-					degrees[currentWeapon] = 3;
-				} else {
+
+			if (type != null) {
+
+				if (type == "Hydroplane") {
+					if (degrees[currentWeapon] == 0) {
+						degrees[currentWeapon] = 1;
+					} else if (degrees[currentWeapon] == 1) {
+						degrees[currentWeapon] = 2;
+					} else if (degrees[currentWeapon] == 2) {
+						degrees[currentWeapon] = 3;
+					} else {
+						degrees[currentWeapon] = 0;
+					}
+				} else if (degrees[currentWeapon] == 1) {
 					degrees[currentWeapon] = 0;
+				} else {
+					degrees[currentWeapon] = 1;
 				}
+
 			} else if (degrees[currentWeapon] == 1){
 				degrees[currentWeapon] = 0;
 			} else {
@@ -319,7 +336,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			System.out.println("Final - Rotated:" + finalPosition);
 
 			}
-	
+
 		} else {
 			int index = 0;
 			for (Entry<LinkedList<Rectangle2D>, String> r : weapons.entrySet()) {
@@ -327,8 +344,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				for (int cont = 0; cont < r.getKey().size(); cont++) {
 					if (r.getKey().get(cont).getBounds2D().contains(x, y)) {
 
-						System.out.println(index);
 						currentWeapon = index;
+
 
 						/* TODO: Refactor */
 
@@ -407,184 +424,187 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		Rectangle2D rect = new Rectangle2D.Float();
 		LinkedList<Rectangle2D> rects = new LinkedList<Rectangle2D>();
 
-		//System.out.println("novo: " + x + " -- " + y);
+		// System.out.println("novo: " + x + " -- " + y);
 
 		g.setColor(Color.BLUE);
 		
-		if (isFirst == true){
+		if (isFirst){
 			if (degrees[0] == 0){
 			
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
+
 			} else if (degrees[0] == 1){
-				System.out.println("1 - first");
+
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x, y+30, 30, 30);
-				g.draw(rect);
-				g.fill(rect);
-		
-				rects.add(rect);
-				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x + 30, y + 60, 30, 30);
-				g.draw(rect);
-				g.fill(rect);
-		
-				rects.add(rect);
-			} else if (degrees[0] == 2){
-				
+
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x + 30, y+60, 30, 30);
+
+				rect.setRect(x + 30, y + 60, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
+				rects.add(rect);
+			} else if (degrees[0] == 2) {
+
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+
 				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 			} else {
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x+60, y+30, 30, 30);
+
+				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 30, y + 60, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 			}
 			isFirst = false;
 		} else {
 			if (degrees[currentIndex] == 0){
-				
+		
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
+				
 			} else if (degrees[currentIndex] == 1){
 				System.out.println("1");
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x, y+30, 30, 30);
-				g.draw(rect);
-				g.fill(rect);
-		
-				rects.add(rect);
-				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x + 30, y + 60, 30, 30);
-				g.draw(rect);
-				g.fill(rect);
-		
-				rects.add(rect);
-			} else if (degrees[currentIndex] == 2){
-				
+
 				rect.setRect(x, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x + 30, y+60, 30, 30);
+
+				rect.setRect(x + 30, y + 60, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
+				rects.add(rect);
+			} else if (degrees[currentIndex] == 2){
+
+				rect.setRect(x, y + 30, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
+				rect.setRect(x + 30, y + 60, 30, 30);
+				g.draw(rect);
+				g.fill(rect);
+
+				rects.add(rect);
+				rect = new Rectangle2D.Float();
+
 				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 			} else {
 				rect.setRect(x + 30, y, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
-				rect.setRect(x+60, y+30, 30, 30);
+
+				rect.setRect(x + 60, y + 30, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 				rect = new Rectangle2D.Float();
-		
+
 				rect.setRect(x + 30, y + 60, 30, 30);
 				g.draw(rect);
 				g.fill(rect);
-		
+
 				rects.add(rect);
 			}
 		}
 		
 		if (currentIndex == currentWeapon){
+
 			finalPosition = rects;
 		}
 
@@ -619,6 +639,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		g.setColor(Color.YELLOW);
 
 		if (degrees[currentIndex] == 0){
+
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
@@ -647,9 +668,10 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		}
 		
 		if (currentIndex == currentWeapon){
+
 			finalPosition = rects;
 		}
-		
+
 		return rects;
 	}
 
@@ -665,30 +687,30 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 30, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 60, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 90, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
-		
+
 		} else {
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
@@ -717,7 +739,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			System.out.println("FINAL: " + rect.getX() + " --- " + rect.getY());
 			rects.add(rect);
 		}
-		
+
 		if (currentIndex == currentWeapon){
 			finalPosition = rects;
 		}
@@ -738,75 +760,76 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 30, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 60, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 90, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x + 120, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
-		
+
 		} else {
-			
+
 			rect.setRect(x, y, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x, y + 30, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x, y + 60, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x, y + 90, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 			rect = new Rectangle2D.Float();
-	
+
 			rect.setRect(x, y + 120, 30, 30);
 			g.draw(rect);
 			g.fill(rect);
-	
+
 			rects.add(rect);
 		}
 		
 		if (currentIndex == currentWeapon){
+
 			finalPosition = rects;
 		}
 
@@ -836,45 +859,45 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			if (type != null) {
 				shipSet = putShipInMap();
 				repaint();
-				
+
 				if (shipSet == true) {
 					weaponPosition = new LinkedList<int[]>();
 					for (int i = 0; i < finalPosition.size(); i++) {
-						
+
 						System.out.println("Final - Esc:" + finalPosition);
 						shipPosition = new int[2];
-						
+
 						shipPosition[1] = (((int) finalPosition.get(i).getX() + 15) - marginX) / 30;
 						shipPosition[0] = (((int) finalPosition.get(i).getY() + 15) - marginY) / 30;
-						
+
 						weaponPosition.add(shipPosition);
-						switch(type){
-							case "Hydroplane":
-								this.map[shipPosition[0]][shipPosition[1]] = 'H';
-								break;
-								
-							case "Submarine":
-								this.map[shipPosition[0]][shipPosition[1]] = 'S';
-								break;
-								
-							case "Destroyer":
-								this.map[shipPosition[0]][shipPosition[1]] = 'D';
-								break;
-								
-							case "Cruiser":
-								this.map[shipPosition[0]][shipPosition[1]] = 'C';
-								break;
-								
-							case "Battleship":
-								this.map[shipPosition[0]][shipPosition[1]] = 'B';
-								break;
+						switch (type) {
+						case "Hydroplane":
+							this.map[shipPosition[0]][shipPosition[1]] = 'H';
+							break;
+
+						case "Submarine":
+							this.map[shipPosition[0]][shipPosition[1]] = 'S';
+							break;
+
+						case "Destroyer":
+							this.map[shipPosition[0]][shipPosition[1]] = 'D';
+							break;
+
+						case "Cruiser":
+							this.map[shipPosition[0]][shipPosition[1]] = 'C';
+							break;
+
+						case "Battleship":
+							this.map[shipPosition[0]][shipPosition[1]] = 'B';
+							break;
 						}
 					}
 					position.put(weaponPosition, type);
 				}
-				for (Entry<LinkedList<int[]>, String> r : position.entrySet()){
+				for (Entry<LinkedList<int[]>, String> r : position.entrySet()) {
 					System.out.println("POSITION:" + r.getValue());
-					for(int i=0; i<r.getKey().size(); i++){
+					for (int i = 0; i < r.getKey().size(); i++) {
 						System.out.println(r.getKey().get(i)[0] + " --- " + r.getKey().get(i)[1]);
 					}
 				}
@@ -886,6 +909,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private boolean putShipInMap() {
 		int x = this.x;
 		int y = this.y;
+		boolean put = true;
 
 		if (this.x > marginX && this.x < marginX + 450 && this.y > marginY && this.y < marginY + 450) {
 			x -= marginX;
@@ -893,44 +917,144 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 			x /= 30;
 			y /= 30;
 
-			switch (type) {
-			case "Hydroplane":
-				if (y - 1 >= 0 && x + 2 <= 14) {
-					xy[0][i] = marginX + (30 * x);
-					xy[1][j] = marginY + (30 * (y - 1));
-				}
-				break;
+			put = checkShip(y, x);
+			if (put) {
+				switch (type) {
+				case "Hydroplane":
+					if ((degrees[currentWeapon] == 0 && y - 1 >= 0 && x + 2 <= 14)
+							|| (degrees[currentWeapon] == 1 && y - 1 >= 0 && y + 1 <= 14)
+							|| (degrees[currentWeapon] == 2 && y + 1 <= 14 && x + 2 <= 14)
+							|| (degrees[currentWeapon] == 3 && y + 1 <= 14 && y - 1 >= 0 && x + 2 <= 14)) {
+						xy[0][i] = marginX + (30 * x);
+						xy[1][j] = marginY + (30 * (y - 1));
+						put = true;
+					}
+					break;
 
-			case "Submarine":
-				xy[2][i] = marginX + (30 * x);
-				xy[3][j] = marginY + (30 * y);
-				break;
+				case "Submarine":
+					xy[2][i] = marginX + (30 * x);
+					xy[3][j] = marginY + (30 * y);
+					put = true;
+					break;
 
-			case "Destroyer":
-				if ((degrees[currentWeapon] == 0 && x + 1 <= 14) || (degrees[currentWeapon] == 1 && y + 1 <= 14)) {
-					xy[4][i] = marginX + (30 * x);
-					xy[5][j] = marginY + (30 * y);
-				}
-				break;
+				case "Destroyer":
+					if ((degrees[currentWeapon] == 0 && x + 1 <= 14) || (degrees[currentWeapon] == 1 && y + 1 <= 14)) {
+						xy[4][i] = marginX + (30 * x);
+						xy[5][j] = marginY + (30 * y);
+						put = true;
+					}
+					break;
 
-			case "Cruiser":
-				if ((degrees[currentWeapon] == 0 && x + 3 <= 14) || (degrees[currentWeapon] == 1 && y + 3 <= 14)) {
-					xy[6][i] = marginX + (30 * x);
-					xy[7][j] = marginY + (30 * y);
-				}
-				break;
+				case "Cruiser":
+					if ((degrees[currentWeapon] == 0 && x + 3 <= 14) || (degrees[currentWeapon] == 1 && y + 3 <= 14)) {
+						xy[6][i] = marginX + (30 * x);
+						xy[7][j] = marginY + (30 * y);
+						put = true;
+					}
+					break;
 
-			case "Battleship":
-				if ((degrees[currentWeapon] == 0 && x + 4 <= 14) || (degrees[currentWeapon] == 1 && y + 4 <= 14)) {
-					xy[8][i] = marginX + (30 * x);
-					xy[9][j] = marginY + (30 * y);
+				case "Battleship":
+					if ((degrees[currentWeapon] == 0 && x + 4 <= 14) || (degrees[currentWeapon] == 1 && y + 4 <= 14)) {
+						xy[8][i] = marginX + (30 * x);
+						xy[9][j] = marginY + (30 * y);
+						put = true;
+					}
+					break;
 				}
-				break;
 			}
-
-			return true;
+		} else {
+			put = false;
 		}
-		return false;
+		return put;
+	}
+
+	private boolean checkShip(int x, int y) {
+		boolean position = true;
+
+		switch (type) {
+		case "Hydroplane":
+			if (degrees[currentWeapon] == 0) {
+				if (!checkPosition(x, y) || !checkPosition(x - 1, y + 1) || !checkPosition(x, y + 2)) {
+					position = false;
+				}
+			} else if (degrees[currentWeapon] == 1) {
+				if (!checkPosition(x, y) || !checkPosition(x - 1, y + 1) || !checkPosition(x + 1, y + 1)) {
+					position = false;
+				}
+			} else if (degrees[currentWeapon] == 2) {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 2) || !checkPosition(x + 1, y + 1)) {
+					position = false;
+				}
+			} else {
+				if (!checkPosition(x, y + 2) || !checkPosition(x - 1, y + 1) || !checkPosition(x + 1, y + 1)) {
+					position = false;
+				}
+			}
+			break;
+
+		case "Submarine":
+			position = checkPosition(x, y);
+			break;
+
+		case "Destroyer":
+			if (degrees[currentWeapon] == 1) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y)) {
+					position = false;
+				}
+			} else {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1)) {
+					position = false;
+				}
+			}
+			break;
+
+		case "Cruiser":
+			if (degrees[currentWeapon] == 1) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
+						|| !checkPosition(x + 3, y)) {
+					position = false;
+				}
+			} else {
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 1));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 2));
+				System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + Integer.toString(x) + " --- " + Integer.toString(y + 3));
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
+						|| !checkPosition(x, y + 3)) {
+					position = false;
+				}
+			}
+			break;
+
+		case "Battleship":
+			position = checkPosition(x, y);
+			if (degrees[currentWeapon] == 1) {
+				if (!checkPosition(x, y) || !checkPosition(x + 1, y) || !checkPosition(x + 2, y)
+						|| !checkPosition(x + 3, y) || !checkPosition(x + 4, y)) {
+					position = false;
+				}
+			} else {
+				if (!checkPosition(x, y) || !checkPosition(x, y + 1) || !checkPosition(x, y + 2)
+						|| !checkPosition(x, y + 3) || !checkPosition(x, y + 4)) {
+					position = false;
+				}
+			}
+			break;
+		}
+
+		return position;
+	}
+
+	private boolean checkPosition(int x, int y) {
+		boolean position = true;
+
+		if (this.map[x][y] != 'V' || (x - 1 >= 0 && this.map[x - 1][y] != 'V')
+				|| (x + 1 <= 14 && this.map[x + 1][y] != 'V') || (y - 1 >= 0 && this.map[x][y - 1] != 'V')
+				|| (y + 1 <= 14 && this.map[x][y + 1] != 'V')) {
+			position = false;
+		}
+
+		return position;
 	}
 
 }
