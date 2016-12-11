@@ -15,12 +15,15 @@ import Model.Player;
 public class ChooserView {
 
 	private JFrame window;
+	private GameMenuBar menuBar;
 	private int screenX;
 	private int screenY;
 
 	private ShipMap map1Panel;
 	private ShipMap map2Panel;
 
+	// TODO: Model não pode estar na View
+	
 	private Player player1;
 	private Player player2;
 
@@ -66,6 +69,7 @@ public class ChooserView {
 
 	public void presentFirstScreen() {
 		
+		window.setJMenuBar(menuBar);
 		map1Panel.draw(player1.getMyMap(), screenX / 2 + 30, screenY / 10);
 		window.add(map1Panel);
 		map1Panel.setLayout(null);
@@ -84,7 +88,8 @@ public class ChooserView {
 		window = new JFrame();
 		
 		setDefaultWindowStyle();
-
+		
+		window.setJMenuBar(menuBar);
 		map2Panel.draw(player2.getMyMap(), screenX / 2 + 30, screenY / 10);
 		window.add(map2Panel);
 
@@ -99,6 +104,10 @@ public class ChooserView {
 		map2Panel.add(nextButton);
 		nextButton.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
 
+	}
+	
+	public void setMenuBar(GameMenuBar menuBar){
+		this.menuBar = menuBar;
 	}
 	
 	public char[][] getFirstMap(){

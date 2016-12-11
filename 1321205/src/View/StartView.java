@@ -8,6 +8,7 @@ import javax.swing.*;
 public class StartView extends JFrame {
 
 	JPanel panel = new JPanel();
+	private GameMenuBar menuBar;
 
 	private JButton startButton;
 	private JLabel player1Label;
@@ -54,12 +55,21 @@ public class StartView extends JFrame {
 		player1Label.setBounds(70, 80, 100, 20);
 		player2Label.setBounds(70, 110, 100, 20);
 
+	}
+	
+	public void presentWindow(){
+		this.setJMenuBar(menuBar);
+		
 		setTitle("Batalha Naval");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(400, 300);
 		setLocation(screenX / 2 - 200, screenY / 2 - 150);
 		setVisible(true);
 		setResizable(false);
+	}
+	
+	public void setMenuBar(GameMenuBar menuBar){
+		this.menuBar = menuBar;
 	}
 	
 	public void addStartButtonListener(ActionListener aL){

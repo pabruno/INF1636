@@ -8,23 +8,62 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import Model.Player;
+import View.AttackMap;
 import View.AttackView;
 
 public class AttackController implements ActionListener, MouseListener {
 
 	private Player p1;
 	private Player p2;
+	
+	private AttackMap map1;
+	private AttackMap map2;
 
 	private boolean attacked = false;
 	private boolean end = false;
 
 	private int player = 1;
 	private AttackView view;
+	private GameMenuBarController menuBarController;
 
-	public AttackController(AttackView view, Player p1, Player p2) {
+	public AttackController(GameMenuBarController menuBarController, AttackView view, Player p1, Player p2) {
+		this.menuBarController = menuBarController;
 		this.view = view;
 		this.p1 = p1;
 		this.p2 = p2;
+		
+		setPlayers();
+		getAttackMap();
+		view.setFirstMapPanel(map1);
+		view.setSecondMapPanel(map2);
+		setListeners(this);
+		
+		view.setMenuBar(this.menuBarController.getView());
+		this.menuBarController.setAttackEnabled();
+		view.presentFirstScreen();
+	}
+	
+	public void setPlayers(){
+		view.setPlayer1(p1);
+		view.setPlayer2(p2);
+	}
+	
+	public void setPlayer1(Player player) {
+		p1 = player;
+	}
+
+	public void setPlayer2(Player player) {
+		p2 = player;
+	}
+	
+	public void setListeners(ActionListener aL){
+		view.addFirstActionListener(aL);
+		view.addSecondActionListener(aL);
+	}
+	
+	public void getAttackMap(){
+		this.map1 = new AttackMap(this);
+		this.map2 = new AttackMap(this);
 	}
 
 	private boolean checkClickInAttackMap(int x, int y) {
@@ -42,11 +81,11 @@ public class AttackController implements ActionListener, MouseListener {
 			if (player % 2 != 0) {
 				attacked = false;
 				view.setText2(p2.getName() + ", realize seu ataque.");
-				view.player1Screen();
+				view.presentFirstScreen();
 			} else {
 				attacked = false;
 				view.setText1(p1.getName() + ", realize seu ataque.");
-				view.player2Screen();
+				view.presentSecondScreen();
 			}
 		}
 	}
@@ -114,7 +153,7 @@ public class AttackController implements ActionListener, MouseListener {
 					p1.getAttackMap()[y][x] = 'N';
 					view.setText1("            ATIROU NA AGUA");
 				}
-				view.player1Screen();
+				view.presentFirstScreen();
 			} else {
 				attacked = true;
 				if (p1.getMyMap()[y][x] != 'V') {
@@ -164,7 +203,7 @@ public class AttackController implements ActionListener, MouseListener {
 					view.setText2("            ATIROU NA AGUA");
 				}
 
-				view.player2Screen();
+				view.presentSecondScreen();
 			}
 		}
 	}
