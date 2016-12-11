@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import Controller.AttackController;
 import Model.Player;
 
-public class AttackWindow {
+public class AttackView {
 
 	Player p1;
 	Player p2;
@@ -39,7 +39,7 @@ public class AttackWindow {
 	private JLabel text1;
 	private JLabel text2;
 
-	public AttackWindow(Player p1, Player p2) {
+	public AttackView(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
 

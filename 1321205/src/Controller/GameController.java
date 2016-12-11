@@ -1,48 +1,58 @@
 package Controller;
 
 import Model.Player;
+import View.AttackView;
 import View.ChooserView;
 import View.StartView;
 
 public class GameController {
 	
+	private static GameController instance = null;
+	
 	private StartView startView;
 	private ChooserView chooserView;
+	private AttackView attackView;
 	
 	private StartController startController;
 	private ChooserController chooserController;
+	private AttackController attackController;
 	
 	private Player player1;
 	private Player player2;
 	
-	public GameController(){
+	private GameController() {
 		player1 = new Player();
 		player2 = new Player();	
-
 	}
 	
-	private void startGame(){
+	public static GameController getInstance() {
+		if (instance == null) {
+			instance = new GameController();
+	    }
+		return instance;
+	}
+	
+	private void startGame() {
+		System.out.println("Game:StartGame");
 		startView = new StartView();
 		startController = new StartController(startView, player1, player2);
-		this.setPlayers();
-	}
-	
-	private void setPlayers(){
 		startController.setPlayer1(player1);
 		startController.setPlayer2(player2);
 	}
 	
 	public void startWeaponChoose(){
-		chooserView = new ChooserView(player1, player2);
-		chooserController = new ChooserController(chooserView, player1, player2);
+		System.out.println("Game:StartWeaponChoose");
+		chooserView = new ChooserView();
+		chooserController = new ChooserController(chooserView, player1, player2);		
 	}
 	
 	public void startAttack(){
-		
+		System.out.println("Game:StartAttack");
+		attackView = new AttackView(player1, player2);
+		attackController = new AttackController(attackView, player1, player2);
 	}
 	
 	public static void main(String[] args){
-		GameController game = new GameController();
-		game.startGame();
+		GameController.getInstance().startGame();
 	}
 }

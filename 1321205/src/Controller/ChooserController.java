@@ -19,8 +19,14 @@ public class ChooserController implements ActionListener {
 		this.player2 = player2;
 		this.counter = 0;
 		
+		setPlayers();
 		view.addStartButtonListener(this);
 		view.presentFirstScreen();
+	}
+	
+	public void setPlayers(){
+		view.setPlayer1(player1);
+		view.setPlayer2(player2);
 	}
 	
 	public void setPlayer1(Player player) {
@@ -32,18 +38,19 @@ public class ChooserController implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		GameController game = new GameController();
 		
 		if (counter == 0){
 			counter++;
 			player1.setMap(view.getFirstMap());
 			player1.setPosition(view.getFirstMapPosition());
 			view.presentSecondScreen();
+			view.addStartButtonListener(this);
 		} else {
 			player2.setMap(view.getSecondMap());
 			player2.setPosition(view.getSecondMapPosition());
-			game.startAttack();
+			GameController.getInstance().startAttack();
 			view.close();
+			
 		}
 		
 	}

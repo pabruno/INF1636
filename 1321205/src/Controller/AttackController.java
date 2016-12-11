@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import Model.Player;
-import View.AttackWindow;
+import View.AttackView;
 
 public class AttackController implements ActionListener, MouseListener {
 
@@ -19,9 +19,9 @@ public class AttackController implements ActionListener, MouseListener {
 	private boolean end = false;
 
 	private int player = 1;
-	private AttackWindow view;
+	private AttackView view;
 
-	public AttackController(AttackWindow view, Player p1, Player p2) {
+	public AttackController(AttackView view, Player p1, Player p2) {
 		this.view = view;
 		this.p1 = p1;
 		this.p2 = p2;

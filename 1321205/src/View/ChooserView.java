@@ -12,23 +12,21 @@ import javax.swing.*;
 
 import Model.Player;
 
-public class ChooserView extends JFrame {
+public class ChooserView {
 
+	private JFrame window;
 	private int screenX;
 	private int screenY;
 
 	private ShipMap map1Panel;
 	private ShipMap map2Panel;
 
-	private Player p1;
-	private Player p2;
+	private Player player1;
+	private Player player2;
 
-	private JButton button;
+	private JButton nextButton;
 
-	public ChooserView(Player p1, Player p2) {
-		this.p1 = p1;
-		this.p2 = p2;
-
+	public ChooserView() {
 		responsiveWindow();
 		createWindow();
 	}
@@ -41,54 +39,66 @@ public class ChooserView extends JFrame {
 	}
 	
 	private void createWindow(){
-		button = new JButton("Próximo");
+		window = new JFrame();
+		nextButton = new JButton("Próximo");
 		map1Panel = new ShipMap();
 		map2Panel = new ShipMap();
 		
-		setTitle("Batalha Naval");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(screenX - 100, screenY - 100);
-		setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
-		setVisible(true);
-		setResizable(false);
+		setDefaultWindowStyle();
+	}
+	
+	private void setDefaultWindowStyle(){
+		window.setTitle("Batalha Naval");
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setSize(screenX - 100, screenY - 100);
+		window.setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
+		window.setVisible(true);
+		window.setResizable(false);
+	}
+	
+	public void setPlayer1(Player player) {
+		player1 = player;
+	}
+
+	public void setPlayer2(Player player) {
+		player2 = player;
 	}
 
 	public void presentFirstScreen() {
-		map1Panel.draw(p1.getMyMap(), screenX / 2 + 30, screenY / 10);
-		add(map1Panel);
+		
+		map1Panel.draw(player1.getMyMap(), screenX / 2 + 30, screenY / 10);
+		window.add(map1Panel);
 		map1Panel.setLayout(null);
 
-		JLabel text = new JLabel(p1.getName() + ", posicione os navios no tabuleiro.");
+		JLabel text = new JLabel(player1.getName() + ", posicione os navios no tabuleiro.");
 		map1Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
-		map1Panel.add(button);
-		button.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+		map1Panel.add(nextButton);
+		nextButton.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
 	}
 	
 	public void presentSecondScreen(){
-		close();
+		window.setVisible(false);
+		window.removeAll();
+		window = new JFrame();
 		
-		setTitle("Batalha Naval");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setSize(screenX - 100, screenY - 100);
-		setLocation(screenX / 2 - (screenX - 100) / 2, screenY / 2 - (screenY - 100) / 2);
-	    setVisible(true);
-		setResizable(false);
-		
-		map2Panel.draw(p2.getMyMap(), screenX / 2 + 30, screenY / 10);
-		add(map2Panel);
+		setDefaultWindowStyle();
+
+		map2Panel.draw(player2.getMyMap(), screenX / 2 + 30, screenY / 10);
+		window.add(map2Panel);
 
 		map2Panel.setLayout(null);
 		
-		button = new JButton("Proximo");
+		nextButton = new JButton("Próximo");
 
-		JLabel text = new JLabel(p2.getName() + ", posicione os navios no tabuleiro.");
+		JLabel text = new JLabel(player2.getName() + ", posicione os navios no tabuleiro.");
 		map2Panel.add(text);
 		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
 
-		map2Panel.add(button);
-		button.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+		map2Panel.add(nextButton);
+		nextButton.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+
 	}
 	
 	public char[][] getFirstMap(){
@@ -108,12 +118,12 @@ public class ChooserView extends JFrame {
 	}
 	
 	public void addStartButtonListener(ActionListener aL){
-		button.addActionListener(aL);
+		nextButton.addActionListener(aL);
 	}
 	
 	public void close() {
-		setVisible(false);
-		removeAll();
+		window.setVisible(false);
+		window.removeAll();
 	}
 
 }

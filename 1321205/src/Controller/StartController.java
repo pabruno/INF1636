@@ -29,12 +29,11 @@ public class StartController implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		GameController game = new GameController();
 		
 		player1.setName(view.getFirstName());
 		player2.setName(view.getSecondName());
 		
-		game.startWeaponChoose();
+		GameController.getInstance().startWeaponChoose();
 		view.close();
 	}
 	
