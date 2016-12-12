@@ -6,8 +6,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
@@ -20,9 +22,11 @@ public class GameMenuBarController implements ActionListener {
 	private GameMenuBar view;
 	private Player player1;
 	private Player player2;
-	private int round;
+	private int player;
 	
 	public GameMenuBarController(GameMenuBar menuBar){
+		this.player1 = new Player();
+		this.player2 = new Player();
 		this.view = menuBar;
 		setListeners();
 	}
@@ -59,10 +63,21 @@ public class GameMenuBarController implements ActionListener {
 		player2 = p;
 	}
 	
-	public void setRound(int r){
-		round = r;
+	public Player getFirstPlayerLoaded(){
+		return player1;
 	}
 	
+	public Player getSecondPlayerLoaded(){
+		return player2;
+	}
+	
+	public void setPlayer(int p){
+		player = p;
+	}
+	
+	public int getPlayer(){
+		return player;
+	}
 	private String getStringFromMatrix (char[][] c){
 		String str = "";
 		for(int i=0; i < c.length; i++){
@@ -74,39 +89,125 @@ public class GameMenuBarController implements ActionListener {
 		return str;
 	}
 	
-	private String getStringFromHashMap (LinkedHashMap<LinkedList<int[]>, String> position){
+	private char[][] getMatrixFromString(String s){
+		char[][] matrix = new char[15][15];
+		for(int i=0; i < s.length(); i++){
+			for(int j=0; j < 15; j++){
+				for (int k=0; k < 15; k++){
+					matrix[j][k] += s.charAt(i);
+				}
+			}
+		}
+		
+		return matrix;
+	}
+	
+	private String getStringFromHashMap (String name, LinkedHashMap<LinkedList<int[]>, String> position){
 		String str = "";
 		for (Entry<LinkedList<int[]>, String> entry : position.entrySet()) {
 	
 			 LinkedList<int[]> key = entry.getKey();
-			 String keyCount = Integer.toString(key.size());
 			 String value = entry.getValue();
 			 
-			 str += keyCount;
+			 str += name + position.size();
 			 str += "\n";
 			 
 			 for (int i = 0; i < key.size(); i++) {
-				 str += Integer.toString(key.get(i).length);
+				 str += name + Integer.toString(key.get(i).length);
 				 str += "\n";
 				 for (int j = 0; j < key.get(i).length; j++){
-					 str += Integer.toString(key.get(i)[j]);
+					 str += name + Integer.toString(key.get(i)[j]);
 					 str += "\n";
 				 }
 			 }
 			 
-			 str += value;
+			 str += name + "str: "+ value;
+			 str += "\n";
 			 
 		}
 		System.out.println(str);
 		return str;
 	}
 	
-	private Player createPlayer(String name, String map, String attackMap, String position){
-		return new Player();
+	private LinkedHashMap<LinkedList<int[]>, String> getHashMapFromString(String s){
+		LinkedHashMap<LinkedList<int[]>, String> pos = new LinkedHashMap<LinkedList<int[]>, String>();
+		List<String> items = Arrays.asList(s.split("\\s*,\\s*"));
+		int j = 1;
+		int size = Integer.parseInt(items.get(0));
+
+		
+		for (int i = 0; i < size; i++){
+			String str = "";
+			LinkedList<int[]> list = new LinkedList<int[]>();
+
+			while (items.get(j).contains("str: ") == false){
+
+				int[] vector = new int[Integer.parseInt(items.get(j))];
+				int vectorSize = Integer.parseInt(items.get(j));
+				System.out.println("tamanho vetor" + vectorSize);
+				for (int k = 0; k < vectorSize; k++, j++){
+					vector[k] = Integer.parseInt(items.get(j));
+					System.out.println("valor pos: " + Integer.parseInt(items.get(j)));
+				}
+
+				list.add(vector);
+
+				j++;
+			}
+
+			str = items.get(j).substring(5);
+			pos.put(list, str);
+		}
+		
+		return pos;
 	}
+	
+	
+	
+	private void loadFirstPlayerFromFile(String name, String map, String attackMap, String position){
+		
+		System.out.println("1");
+		char[][] m = getMatrixFromString(map);
+		System.out.println("2");
+		char[][] a = getMatrixFromString(attackMap);
+		System.out.println("3");
+		LinkedHashMap<LinkedList<int[]>, String> pos = getHashMapFromString(position);
+		System.out.println("4");
+		
+		player1.setName(name);
+		player1.setMap(m);
+		player1.setAttackMap(a);
+		player1.setPosition(pos);
+		
+		String teste = getStringFromHashMap("position1: ", pos);
+		System.out.println("Teste: " + teste);
+		
+		System.out.println(name);
+		
+	}
+	
+	private void loadSecondPlayerFromFile(String name, String map, String attackMap, String position){
+		
+		System.out.println("1");
+		char[][] m = getMatrixFromString(map);
+		System.out.println("2");
+		char[][] a = getMatrixFromString(attackMap);
+		System.out.println("3");
+		LinkedHashMap<LinkedList<int[]>, String> pos = getHashMapFromString(position);
+		System.out.println("4");
+		
+		player2.setName(name);
+		player2.setMap(m);
+		player2.setAttackMap(a);
+		player2.setPosition(pos);
+		
+		System.out.println(name);
+		
+	}
+	
 	public void openFile(){
 		
-		String player = "";
+		String count = "";
 		
 		String name1 = "";
 		String map1 = "";
@@ -128,53 +229,64 @@ public class GameMenuBarController implements ActionListener {
 			
 			try {
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getPath()));
-				int lineCount = 0;
 				String line = "";
 				
 				while((line = bufferedReader.readLine()) != null) {
-					switch (lineCount){
-						case 0:
-							player = line;
-							break;
-						case 1:
-							map1 = line;
-							break;
-						case 2: 
-							attack1 = line;
-							break;
-						case 3:
-							map2 = line;
-							break;
-						case 4:
-							attack2 = line;
-							break;
-					}
 					
-					lineCount++;
+					if (line.contains("count: ")){
+						count = line.substring(7);
+					} else if (line.contains("name1: ")){
+						name1 = line.substring(7);
+					} else if (line.contains("map1: ")){
+						map1 = line.substring(6);
+					} else if (line.contains("attack1: ")){
+						attack1 = line.substring(9);
+					} else if (line.contains("position1: ")){
+						position1 += line.substring(11) + ",";
+					} else if (line.contains("name2: ")){
+						name2 = line.substring(7);
+					} else if (line.contains("map2: ")){
+						map2 = line.substring(6);
+					} else if (line.contains("attack2: ")){
+						attack2 = line.substring(9);
+					} else if (line.contains("position2: ")){
+						position2 += line.substring(11) + ",";
+					}
+
 				}
 				
-				System.out.println(player + "\n" + map1 + "\n" + attack1 + "\n" + map2 + "\n" + attack2);
-				bufferedReader.close();
+				System.out.println("LoadFile - Count");
+				int c = Integer.parseInt(count);
 				
-			}catch (Exception e){
-				System.out.println("Error: " + e.getMessage());
+				this.setPlayer(c);
+				System.out.println("LoadFile - SetPlayer");
+				loadFirstPlayerFromFile(name1, map1, attack1, position1);
+				System.out.println("LoadFile - Player 1");
+				loadSecondPlayerFromFile(name2, map2, attack2, position2);
+				System.out.println("LoadFile - Player 2");
+				
+				bufferedReader.close();
+				//GameController.getInstance().loadGame();
+			} catch (Exception e){
+				System.out.println("Error: " + e.toString());
 			}
 		}
+	
 	}
 	
 	public void saveFile(){
 		
-		String player = AttackController.getPlayer();
+		String player = "count: " + AttackController.getPlayer();
 		
-		String name1 = player1.getName();
-		String map1 = getStringFromMatrix(player1.getMyMap());
-		String attack1 = getStringFromMatrix(player1.getAttackMap());
-		String position1 = getStringFromHashMap(player1.getPosition());
+		String name1 = "name1: " + player1.getName();
+		String map1 = "map1: " + getStringFromMatrix(player1.getMyMap());
+		String attack1 = "attack1: " + getStringFromMatrix(player1.getAttackMap());
+		String position1 = getStringFromHashMap("position1: ", player1.getPosition());
 		
-		String name2 = player2.getName();
-		String map2 = getStringFromMatrix(player2.getMyMap());
-		String attack2 = getStringFromMatrix(player2.getAttackMap());
-		String position2 = getStringFromHashMap(player2.getPosition());
+		String name2 = "name2: " +  player2.getName();
+		String map2 = "map2: " + getStringFromMatrix(player2.getMyMap());
+		String attack2 = "attack2: " + getStringFromMatrix(player2.getAttackMap());
+		String position2 = getStringFromHashMap("position2: ", player2.getPosition());
 		
 		JFileChooser fileChooser = new JFileChooser(new File("Documents"));
 		fileChooser.setDialogTitle("Salvar Jogo");
@@ -186,7 +298,7 @@ public class GameMenuBarController implements ActionListener {
 			
 			try {
 				FileWriter fileWriter = new FileWriter(file.getPath());
-				fileWriter.write(player + "\n" + name1 + "\n" + map1 + "\n" + attack1 + "\n" + position1 + "\n" + name2 + "\n" + map2 + "\n" + attack2 + "\n" + position2);
+				fileWriter.write(player + "\n" + name1 + "\n" + map1 + "\n" + attack1 + "\n" + position1 + "\n" + name2 + "\n" + map2 + "\n" + attack2 + "\n" + position2 + "\n");
 				fileWriter.flush();
 				fileWriter.close();
 			} catch (Exception e){

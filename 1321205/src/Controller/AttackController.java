@@ -42,24 +42,20 @@ public class AttackController implements ActionListener, MouseListener {
 		this.menuBarController.setAttackEnabled();
 		this.menuBarController.setFirstPlayerToSave(p1);
 		this.menuBarController.setSecondPlayerToSave(p2);
-		view.presentFirstScreen();
+		
 	}
 	
 	public static String getPlayer(){
 		return Integer.toString(player);
 	}
 	
+	public void setPlayer(int p){
+		player = p;
+	}
+	
 	public void setPlayers(){
 		view.setPlayer1(p1);
 		view.setPlayer2(p2);
-	}
-	
-	public void setPlayer1(Player player) {
-		p1 = player;
-	}
-
-	public void setPlayer2(Player player) {
-		p2 = player;
 	}
 	
 	public void setListeners(ActionListener aL){
@@ -70,6 +66,21 @@ public class AttackController implements ActionListener, MouseListener {
 	public void getAttackMap(){
 		this.map1 = new AttackMap(this);
 		this.map2 = new AttackMap(this);
+	}
+	
+	public void presentCorrectScreen(){
+		view.presentFirstScreen();
+		view.presentSecondScreen();
+		
+		if (player % 2 != 0) {
+			attacked = false;
+			view.setText2(p2.getName() + ", realize seu ataque.");
+			view.presentFirstScreen();
+		} else {
+			attacked = false;
+			view.setText1(p1.getName() + ", realize seu ataque.");
+			view.presentSecondScreen();
+		}
 	}
 
 	private boolean checkClickInAttackMap(int x, int y) {

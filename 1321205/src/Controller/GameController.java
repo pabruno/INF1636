@@ -59,6 +59,15 @@ public class GameController {
 		System.out.println("Game:StartAttack");
 		attackView = new AttackView();
 		attackController = new AttackController(menuBarController, attackView, player1, player2);
+		attackController.presentCorrectScreen();
+	}
+	
+	public void loadGame(){
+		System.out.println("Game:StartAttack - From Loading");
+		attackView = new AttackView();
+		attackController = new AttackController(menuBarController, attackView, menuBarController.getFirstPlayerLoaded(), menuBarController.getSecondPlayerLoaded());
+		attackController.setPlayer(menuBarController.getPlayer());
+		attackController.presentCorrectScreen();
 	}
 	
 	public void closeGame(){
