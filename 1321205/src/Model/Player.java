@@ -75,6 +75,6 @@ public class Player {
 	}
 	
 	public LinkedHashMap<LinkedList<int[]>, String> getPosition(){
-		return this.position;
+		return position;
 	}
 }

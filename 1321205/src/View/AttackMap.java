@@ -40,6 +40,14 @@ public class AttackMap extends JPanel {
 
 		this.marginXship = marginXShip;
 	}
+	
+	public char[][] getShipMap(){
+		return shipMap;
+	}
+	
+	public char[][] getAttackMap(){
+		return attackMap;
+	}
 
 	public void paintComponent(Graphics graphics) {
 		g = (Graphics2D) graphics;

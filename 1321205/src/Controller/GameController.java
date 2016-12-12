@@ -61,6 +61,10 @@ public class GameController {
 		attackController = new AttackController(menuBarController, attackView, player1, player2);
 	}
 	
+	public void closeGame(){
+		System.exit(0);
+	}
+	
 	public static void main(String[] args){
 		GameController.getInstance().startGame();
 	}

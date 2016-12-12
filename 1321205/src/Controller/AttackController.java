@@ -22,7 +22,7 @@ public class AttackController implements ActionListener, MouseListener {
 	private boolean attacked = false;
 	private boolean end = false;
 
-	private int player = 1;
+	private static int player = 1;
 	private AttackView view;
 	private GameMenuBarController menuBarController;
 
@@ -40,7 +40,13 @@ public class AttackController implements ActionListener, MouseListener {
 		
 		view.setMenuBar(this.menuBarController.getView());
 		this.menuBarController.setAttackEnabled();
+		this.menuBarController.setFirstPlayerToSave(p1);
+		this.menuBarController.setSecondPlayerToSave(p2);
 		view.presentFirstScreen();
+	}
+	
+	public static String getPlayer(){
+		return Integer.toString(player);
 	}
 	
 	public void setPlayers(){
@@ -76,6 +82,7 @@ public class AttackController implements ActionListener, MouseListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
 		player++;
 		if (!end) {
 			if (player % 2 != 0) {

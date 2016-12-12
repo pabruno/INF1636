@@ -1,5 +1,7 @@
 package View;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -28,6 +30,14 @@ public class GameMenuBar extends JMenuBar {
 	
 	public void setSaveActionEnabled(Boolean b){
 		saveAction.setEnabled(b);
+	}
+	
+	public void setLoadActionListener(ActionListener aL){
+		loadAction.addActionListener(aL);
+	}
+	
+	public void setSaveActionListener(ActionListener aL){
+		saveAction.addActionListener(aL);
 	}
 	
 }
