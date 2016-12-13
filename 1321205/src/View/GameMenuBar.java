@@ -11,10 +11,10 @@ import javax.swing.JMenuItem;
  * Classe "GameMenuBar"
  * 
  * Extende de:
- * - JFrame;
+ * - JMenuBar;
  * 
  * Descrição:
- * - Tela de início do jogo, essa classe contém os componentes gráficos a ser 
+ * - Barra de menu, essa classe contém os componentes gráficos a ser 
  * desenhados e os métodos que os desenham;
  * 
  */
@@ -22,9 +22,28 @@ import javax.swing.JMenuItem;
 @SuppressWarnings("serial")
 public class GameMenuBar extends JMenuBar {
 	
+	/** 
+	 * Variáveis de classe de "GameMenuBar":
+	 * 
+	 * - gameMenu: componente JMenu com o texto "Batalha Naval";
+	 * - saveAction: componente JMenuItem com o texto "Salvar Jogo";
+	 * - loadAction: componente JMenuItem com o texto "Carregar Jogo";
+	 * 
+	 */
+	
 	private JMenu gameMenu;
 	private JMenuItem saveAction;
     private JMenuItem loadAction;
+	
+
+	/** 
+	 * Construtor de "GameMenuBar"
+	 * 
+	 * Descrição: 
+	 * - Inicializa variáveis da classe;
+	 * - Adiciona menu a GameMenuBar e adiciona os itens ao menu;
+	 * 
+	 */
 	
 	public GameMenuBar() {
 		
@@ -38,19 +57,64 @@ public class GameMenuBar extends JMenuBar {
 
 	}
 	
+	
+	/** 
+	 * Método "setLoadActionEnabled"
+	 * 
+	 * Parâmetros:
+	 * - b: Parâmetro do tipo "Boolean";
+	 * 
+	 * Descrição: 
+	 * - Este método altera a visibilidade do item do menu "loadAction" com base no valor do parâmetro "b";
+	 * 
+	 */
+	
 	public void setLoadActionEnabled(Boolean b){
 		loadAction.setEnabled(b);
 	}
+	
+	/** 
+	 * Método "setSaveActionEnabled"
+	 * 
+	 * Parâmetros:
+	 * - b: Parâmetro do tipo "Boolean";
+	 * 
+	 * Descrição: 
+	 * - Este método altera a visibilidade do item do menu "saveAction" com base no valor do parâmetro "b";
+	 * 
+	 */
 	
 	public void setSaveActionEnabled(Boolean b){
 		saveAction.setEnabled(b);
 	}
 	
-	public void setLoadActionListener(ActionListener aL){
+	/** 
+	 * Método "addLoadActionListener"
+	 * 
+	 * Parâmetros:
+	 * - aL: Parametro do tipo "ActionListener";
+	 *
+	 * Descrição: 
+	 * - Adiciona o parâmetro aL como o "Listener" de ações do loadAction;
+	 * 
+	 */
+	
+	public void addLoadActionListener(ActionListener aL){
 		loadAction.addActionListener(aL);
 	}
 	
-	public void setSaveActionListener(ActionListener aL){
+	/** 
+	 * Método "addSaveActionListener"
+	 * 
+	 * Parâmetros:
+	 * - aL: Parametro do tipo "ActionListener";
+	 *
+	 * Descrição: 
+	 * - Adiciona o parâmetro aL como o "Listener" de ações do saveAction;
+	 * 
+	 */
+	
+	public void addSaveActionListener(ActionListener aL){
 		saveAction.addActionListener(aL);
 	}
 	

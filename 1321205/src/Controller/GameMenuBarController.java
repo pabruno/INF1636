@@ -81,13 +81,13 @@ public class GameMenuBarController implements ActionListener {
 	 * Método "setListeners"
 	 * 
 	 * Descrição: 
-	 * - Defina na view que a Classe corrente quer receber as ações do item "Salvar Jogo" e "Carregar Jogo";
+	 * - Define na view que a Classe corrente quer receber as ações do item "Salvar Jogo" e "Carregar Jogo";
 	 * 
 	 */
 	
 	public void setListeners(){
-		view.setSaveActionListener(this);
-		view.setLoadActionListener(this);
+		view.addSaveActionListener(this);
+		view.addLoadActionListener(this);
 	}
 	
 	/** 
