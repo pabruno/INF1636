@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
-import Model.Player;
-import View.AttackView;
-import View.ChooserView;
-import View.GameMenuBar;
-import View.StartView;
+import model.Player;
+import view.AttackView;
+import view.ChooserView;
+import view.GameMenuBar;
+import view.StartView;
 
 /** 
  * Classe "GameController"

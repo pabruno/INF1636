@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,9 +7,9 @@ import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import Model.Player;
-import View.AttackMap;
-import View.AttackView;
+import model.Player;
+import view.AttackMap;
+import view.AttackView;
 
 public class AttackController implements ActionListener, MouseListener {
 

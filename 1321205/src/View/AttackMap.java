@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
-import Controller.AttackController;
+import controller.AttackController;
 
 public class AttackMap extends JPanel {
 

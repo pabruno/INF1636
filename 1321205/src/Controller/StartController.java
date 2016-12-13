@@ -1,11 +1,11 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Model.Player;
-import Controller.GameController;
-import View.StartView;
+import controller.GameController;
+import model.Player;
+import view.StartView;
 
 /** 
  * Classe "StartController"

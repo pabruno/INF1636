@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -12,7 +12,7 @@ import java.util.Observer;
 
 import javax.swing.*;
 
-import Model.Player;
+import model.Player;
 
 public class ChooserView implements Observer {
 

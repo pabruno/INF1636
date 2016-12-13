@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +14,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
-import Model.Player;
-import View.GameMenuBar;
+import model.Player;
+import view.GameMenuBar;
 
 /** 
  * Classe "GameMenuBarControllerr"

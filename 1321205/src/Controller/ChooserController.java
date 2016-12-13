@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Model.Player;
-import View.ChooserView;
+import model.Player;
+import view.ChooserView;
 
 public class ChooserController implements ActionListener {
 
