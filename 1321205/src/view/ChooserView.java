@@ -33,6 +33,7 @@ public class ChooserView implements Observer {
 		responsiveWindow();
 		createWindow();
 		map1Panel.getCounter().addObserver(this);
+		map2Panel.getCounter().addObserver(this);
 	}
 	
 	private void responsiveWindow(){
@@ -103,6 +104,7 @@ public class ChooserView implements Observer {
 
 		map1Panel.add(nextButton);
 		nextButton.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
+		nextButton.setEnabled(false);
 	}
 	
 	public void presentSecondScreen(){
@@ -126,7 +128,7 @@ public class ChooserView implements Observer {
 
 		map2Panel.add(nextButton);
 		nextButton.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
-
+		nextButton.setEnabled(false);
 	}
 	
 	/** 
@@ -178,8 +180,17 @@ public class ChooserView implements Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable counter, Object arg1) {
+		Counter c = (Counter) counter;
+		
 		menuBar.setLoadActionEnabled(false);
+		
+		if(c.getCounter() == 15){
+			nextButton.setEnabled(true);
+		}
+		else {
+			nextButton.setEnabled(false);
+		}
 	}
 
 }

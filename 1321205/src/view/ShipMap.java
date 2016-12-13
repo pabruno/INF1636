@@ -406,6 +406,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 					for (int i = 0; i < r.getKey().size(); i++) {
 						if(r.getKey().get(i)[0] == x && r.getKey().get(i)[1] == y){
 							removeFromMap = true;
+							counter.subCounter();
 							break;
 						}
 					}
@@ -871,9 +872,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				repaint();
 
 				if (shipSet == true) {
-					if(counter.getCounter() == 0) {
-						counter.sumCounter();
-					}
+					counter.sumCounter();
 					
 					weaponPosition = new LinkedList<int[]>();
 					for (int i = 0; i < finalPosition.size(); i++) {

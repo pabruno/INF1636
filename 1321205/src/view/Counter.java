@@ -40,6 +40,20 @@ public class Counter extends Observable {
 	}
 	
 	/** 
+	 * Método "subCounter"
+	 * 
+	 * Descrição: 
+	 * - Decrementa o contador e notifica os observers;
+	 * 
+	 */
+	
+	public void subCounter(){
+		this.counter--;
+		setChanged();
+		notifyObservers();
+	}
+	
+	/** 
 	 * Método "getCounter"
 	 * 
 	 * Descrição: 
