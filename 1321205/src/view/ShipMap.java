@@ -19,6 +19,15 @@ import javax.swing.JPanel;
 
 import model.Counter;
 
+/** 
+ * Classe "Ship Map"
+ * 
+ * Descrição:
+ * - Interface gráfica do mapa das armas;
+ * 
+ */
+
+
 public class ShipMap extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;

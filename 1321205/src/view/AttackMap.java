@@ -9,6 +9,14 @@ import javax.swing.JPanel;
 
 import controller.AttackController;
 
+/** 
+ * Classe "AttackMap"
+ * 
+ * Descrição:
+ * - Mapa de ataques desenhado por componentes gráficos;
+ * 
+ */
+
 public class AttackMap extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -10,6 +10,14 @@ import javax.swing.JLabel;
 
 import model.Player;
 
+/** 
+ * Classe "AttackView"
+ * 
+ * Descrição:
+ * - Interface gráfica da tela de ataques;
+ * 
+ */
+
 public class AttackView {
 	
 	private Player p1;

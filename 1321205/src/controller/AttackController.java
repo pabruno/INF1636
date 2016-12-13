@@ -7,12 +7,17 @@ import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import javax.swing.JOptionPane;
-
 import model.Player;
 import view.AttackMap;
 import view.AttackView;
-import view.DialogBox;
+
+/** 
+ * Classe "AttackController"
+ * 
+ * Descrição:
+ * - Controlador da tela de fase de ataques.
+ * 
+ */
 
 public class AttackController implements ActionListener, MouseListener {
 

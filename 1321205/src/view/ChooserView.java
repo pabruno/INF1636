@@ -15,6 +15,15 @@ import javax.swing.*;
 import model.Counter;
 import model.Player;
 
+/** 
+ * Classe "ChooserView"
+ * 
+ * Descrição:
+ * - Interface gráfica da tela de posicionamento de armas;
+ * 
+ */
+
+
 public class ChooserView implements Observer {
 
 	private JFrame window;

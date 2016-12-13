@@ -6,6 +6,14 @@ import java.awt.event.ActionListener;
 import model.Player;
 import view.ChooserView;
 
+/** 
+ * Classe "ChooserController"
+ * 
+ * Descrição:
+ * - Controlador da tela de posicionamento de armas.
+ * 
+ */
+
 public class ChooserController implements ActionListener {
 
 	private GameMenuBarController menuBarController;
