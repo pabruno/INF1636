@@ -60,8 +60,8 @@ public class AttackView {
 		this.marginY = screenY / 10;
 		this.marginXAttack = screenX / 2 + 100;
 		
-		button1 = new JButton("Próximo");
-		button2 = new JButton("Próximo");
+		button1 = new JButton("Proximo");
+		button2 = new JButton("Proximo");
 		
 		window1 = new JFrame();
 		window2 = new JFrame();
@@ -101,10 +101,10 @@ public class AttackView {
 			map1Panel.setLayout(null);
 
 			map1Panel.add(text1);
-			text1.setBounds(screenX / 2 - 132, screenY - 200, 350, 40);
+			text1.setBounds(screenX / 2 - 132, screenY - 230, 350, 40);
 
 			map1Panel.add(button1);
-			button1.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+			button1.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
 
 		}
 
@@ -125,10 +125,10 @@ public class AttackView {
 			map2Panel.setLayout(null);
 
 			map2Panel.add(text2);
-			text2.setBounds(screenX / 2 - 132, screenY - 200, 350, 40);
+			text2.setBounds(screenX / 2 - 132, screenY - 230, 350, 40);
 
 			map2Panel.add(button2);
-			button2.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+			button2.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
 		}
 
 		window2.repaint();

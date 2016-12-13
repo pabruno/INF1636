@@ -43,7 +43,7 @@ public class ChooserView {
 	
 	private void createWindow(){
 		window = new JFrame();
-		nextButton = new JButton("Próximo");
+		nextButton = new JButton("Proximo");
 		map1Panel = new ShipMap();
 		map2Panel = new ShipMap();
 		
@@ -76,10 +76,10 @@ public class ChooserView {
 
 		JLabel text = new JLabel(player1.getName() + ", posicione os navios no tabuleiro.");
 		map1Panel.add(text);
-		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
+		text.setBounds(screenX / 2 - 175, screenY - 230, 350, 40);
 
 		map1Panel.add(nextButton);
-		nextButton.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+		nextButton.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
 	}
 	
 	public void presentSecondScreen(){
@@ -95,14 +95,14 @@ public class ChooserView {
 
 		map2Panel.setLayout(null);
 		
-		nextButton = new JButton("Próximo");
+		nextButton = new JButton("Proximo");
 
 		JLabel text = new JLabel(player2.getName() + ", posicione os navios no tabuleiro.");
 		map2Panel.add(text);
-		text.setBounds(screenX / 2 - 175, screenY - 200, 350, 40);
+		text.setBounds(screenX / 2 - 175, screenY - 230, 350, 40);
 
 		map2Panel.add(nextButton);
-		nextButton.setBounds(screenX / 2 - 150, screenY - 170, 200, 30);
+		nextButton.setBounds(screenX / 2 - 150, screenY - 200, 200, 30);
 
 	}
 	

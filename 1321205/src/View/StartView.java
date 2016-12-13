@@ -66,7 +66,7 @@ public class StartView extends JFrame {
 		player1TextField = new JTextField("Jogador 1");
 		player2TextField = new JTextField("Jogador 2");
 		
-		startButton = new JButton("Começar");
+		startButton = new JButton("Comecar");
 		player1Label = new JLabel("Jogador 1:");
 		player2Label = new JLabel("Jogador 2:");
 		
@@ -78,7 +78,7 @@ public class StartView extends JFrame {
 		panel.add(player1Label);
 		panel.add(player2Label);
 		
-		startButton.setBounds(150, 225, 100, 25);
+		startButton.setBounds(150, 200, 100, 25);
 		player1TextField.setBounds(150, 80, 200, 20);
 		player2TextField.setBounds(150, 110, 200, 20);
 		player1Label.setBounds(70, 80, 100, 20);
