@@ -211,4 +211,20 @@ public class AttackView {
 	public JFrame getWindow2(){
 		return this.window2;
 	}
+	
+	/** 
+	 * Método "close"
+	 *
+	 * Descrição: 
+	 * - Remove os componentes graficos da janela e a torna invisivel;
+	 * 
+	 */
+	
+	public void close() {
+		window1.setVisible(false);
+		window1.removeAll();
+		
+		window2.setVisible(false);
+		window2.removeAll();
+	}
 }

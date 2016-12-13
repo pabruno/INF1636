@@ -257,6 +257,7 @@ public class AttackController implements ActionListener, MouseListener {
 						if(fim.getClick() == 0){
 							view.getWindow1().setVisible(false);
 							view.getWindow2().setVisible(false);
+							view.close();
 							GameController.getInstance().startGame();
 						}
 						end = true;
