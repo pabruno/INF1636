@@ -10,21 +10,24 @@ import View.StartView;
 /** 
  * Classe "StartController"
  * 
- * Descrição:
- * - Controller de inicio do jogo, onde os jogadores devem digitar seus nomes e confirmar para começar 
- * um novo jogo ou carregar um jogo previamente salvo na tela de ataque.
+ * Implementa:
+ * - ActionListener;
+ * 
+ * Descricao:
+ * - Controller de inicio do jogo, onde os jogadores devem digitar seus nomes e confirmar para comecar 
+ * um novo jogo ou carregar um jogo previamente salvo;
  * 
  */
 
 public class StartController implements ActionListener {
 	
 	/** 
-	 * Variáveis de classe de "StartController":
+	 * Variaveis de classe de "StartController":
 	 * 
-	 * - view: parte gráfica da tela de inicio, onde todos os componentes gráficos são desenhados
-	 * - player1: modelo onde os dados do primeiro jogador são guardados.
-	 * - player2: modelo onde os dados do segundo jogador são guardados.
-	 * - menuBarController: controlador da barra do menu onde o jogo pode ser salvo ou carregado.
+	 * - view: parte grafica da tela de inicio, onde todos os componentes graficos são desenhados;
+	 * - player1: modelo onde os dados do primeiro jogador sao guardados;
+	 * - player2: modelo onde os dados do segundo jogador sao guardados;
+	 * - menuBarController: controlador da barra do menu onde o jogo pode ser salvo ou carregado;
 	 * 
 	 */
 	
@@ -36,13 +39,18 @@ public class StartController implements ActionListener {
 	/** 
 	 * Construtor de "StartController"
 	 * 
-	 * Descrição: 
+	 * Parametros:
+	 * - menuBarController: Parametro do tipo "GameMenuBarController";
+	 * - view: Parametro do tipo "StartView";
+	 * - player1: Parametro do tipo "Player";
+	 * - player2: Parametro do tipo "Player";
 	 * 
-	 * - Inicializa as variáveis da classe;
+	 * Descricao: 
+	 * - Inicializa as variaveis da classe;
 	 * - Define a barra do menu a ser inserida na tela;
 	 * - Define as configurações do menu.
-	 * - Adiciona o "Listener" ao botão de "StartView" definindo que a classe corrente deve receber as ações 
-	 * do botão localizado na view.
+	 * - Adiciona o "Listener" ao botao de "StartView" definindo que a classe corrente deve receber as acoes 
+	 * do botao localizado na view.
 	 * - Apresenta ao jogador a tela.
 	 * 
 	 */
@@ -61,13 +69,13 @@ public class StartController implements ActionListener {
 	
 	
 	/** 
-	 * Método "setPlayer1"
+	 * Metodo "setPlayer1"
 	 * 
-	 * Paramêtros:
-	 * - player: Paramêtro do tipo "Player";
+	 * Parametros:
+	 * - player: Parametro do tipo "Player";
 	 * 
-	 * Descrição: 
-	 * - Define a variável "player1" da classe a partir do parâmetro "player";
+	 * Descricao: 
+	 * - Define a variavel "player1" da classe a partir do parametro "player";
 	 * 
 	 */
 	
@@ -76,13 +84,13 @@ public class StartController implements ActionListener {
 	}
 	
 	/** 
-	 * Método "setPlayer2"
+	 * Metodo "setPlayer2"
 	 * 
-	 * Paramêtros:
-	 * - player: Paramêtro do tipo "Player";
+	 * Parametros:
+	 * - player: Parametro do tipo "Player";
 	 * 
-	 * Descrição: 
-	 * - Define a variável "player2" da classe a partir do parâmetro "player";
+	 * Descricao: 
+	 * - Define a variavel "player2" da classe a partir do parametro "player";
 	 * 
 	 */
 
@@ -91,13 +99,16 @@ public class StartController implements ActionListener {
 	}
 	
 	/** 
-	 * Método "actionPerformed"
+	 * Metodo "actionPerformed"
 	 * 
-	 * Paramêtros:
-	 * - e: Paramêtro do tipo "ActionEvent";
+	 * Parametros:
+	 * - e: Parametro do tipo "ActionEvent";
 	 * 
-	 * Descrição: 
-	 * - Este método é executado após o jogador efetuar uma ação no botão Define os nomes de cada jogador (player1, player2);
+	 * Descricao: 
+	 * - Este metodo e executado apos o jogador efetuar uma acao no botao "Comecar";
+	 * - Define os nomes de cada jogador (player1, player2);
+	 * - Executa o metodo "startWeaponChoose" da classe "GameController" para 
+	 * apresentar a proxima tela;
 	 * 
 	 */
 	

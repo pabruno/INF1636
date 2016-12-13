@@ -11,9 +11,9 @@ import javax.swing.*;
  * Extende de:
  * - JFrame;
  * 
- * Descrição:
- * - Tela de inicio do jogo, essa classe contém os componentes gráficos a ser 
- * desenhados e os métodos que os desenham;
+ * Descricao:
+ * - Tela de inicio do jogo, essa classe contem os componentes graficos a ser 
+ * desenhados e os metodos que os desenham;
  * 
  */
 
@@ -21,17 +21,17 @@ import javax.swing.*;
 public class StartView extends JFrame {
 	
 	/** 
-	 * Variáveis de classe de "StartView":
+	 * Variaveis de classe de "StartView":
 	 * 
-	 * - panel: componente JPanel onde os componentes são desenhados;
+	 * - panel: componente JPanel onde os componentes sao desenhados;
 	 * - gameMenuBar: componente GameMenuBar com o menu Batalha Naval;
-	 * - startButton: componente JButton com o texto "Começar ";
+	 * - startButton: componente JButton com o texto "Comecar";
 	 * - player1Label: componente JLabel com o texto "Jogador1: ";
 	 * - player2Label: componente JLabel com o texto "Jogador2: ";
 	 * - player1TextField: componente JTextField para o nome do primeiro jogador";
 	 * - player2TextField: componente JTextField para o nome do segundo jogador";
-	 * - screenX: inteiro representando a margem horizontal da interface;
-	 * - screenY: inteiro representando a margem vertical da interface;
+	 * - screenX: inteiro representando a posicao horizontal onde a interface vai ser desenhada;
+	 * - screenY: inteiro representando a posicao vertical onde a interface vai ser desenhada;
 	 * 
 	 */
 
@@ -47,10 +47,27 @@ public class StartView extends JFrame {
 	private int screenX;
 	private int screenY;
 
+	/** 
+	 * Construtor de "StartView"
+	 * 
+	 * Descricao: 
+	 * - Calcula tamanho responsivo da janela a ser desenhada;
+	 * - Cria tela de inicio se baseando no calculo do tamanho responsivo;
+	 * 
+	 */
+	
 	public StartView() {
 		responsiveWindow();
 		createWindow();
 	}
+	
+	/** 
+	 * Metodo "responsiveWindow"
+	 * 
+	 * Descricao: 
+	 * - Calcula e define o tamanho da janela de forma em reponsiva;
+	 * 
+	 */
 	
 	private void responsiveWindow(){
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -58,6 +75,14 @@ public class StartView extends JFrame {
 		screenX = size.width;
 		screenY = size.height;
 	}
+	
+	/** 
+	 * Metodo "createWindow"
+	 * 
+	 * Descricao: 
+	 * - Cria a janela e inicializa os componentes graficos a serem desenhados;
+	 * 
+	 */
 
 	private void createWindow() {
 		panel = new JPanel();
@@ -86,6 +111,14 @@ public class StartView extends JFrame {
 
 	}
 	
+	/** 
+	 * Metodo "presentWindow"
+	 * 
+	 * Descricao: 
+	 * - Apresenta a janela e define a barra de menu a ser utilizada;
+	 * 
+	 */
+	
 	public void presentWindow(){
 		this.setJMenuBar(menuBar);
 		
@@ -97,22 +130,68 @@ public class StartView extends JFrame {
 		setResizable(false);
 	}
 	
-	public void setMenuBar(GameMenuBar menuBar){
-		this.menuBar = menuBar;
-	}
+	/** 
+	 * Metodo "addStartButtonListener"
+	 * 
+	 * Parametros:
+	 * - aL: Parametro do tipo "ActionListener";
+	 *
+	 * Descricao: 
+	 * - Adiciona o parametro aL como o "Listener" de acoes do startButton;
+	 * 
+	 */
 	
 	public void addStartButtonListener(ActionListener aL){
 		startButton.addActionListener(aL);
 	}
+	
+	/** 
+	 * Metodo "setMenuBar"
+	 * 
+	 * Parametros:
+	 * - menuBar: Parametro do tipo "GameMenuBar";
+	 *
+	 * Descricao: 
+	 * - Define a barra de menu a ser utilizada na classe corrente;
+	 * 
+	 */
+	
+	public void setMenuBar(GameMenuBar menuBar){
+		this.menuBar = menuBar;
+	}
+	
+	/** 
+	 * Metodo "getFirstName"
+	 *
+	 * Descricao: 
+	 * - Retorna o nome do primeiro jogador;
+	 * 
+	 */
 	
 	public String getFirstName(){
 		return player1TextField.getText();
 		
 	}
 	
+	/** 
+	 * Metodo "getSecondName"
+	 *
+	 * Descricao: 
+	 * - Retorna o nome do segundo jogador;
+	 * 
+	 */
+	
 	public String getSecondName(){
 		return player2TextField.getText();
 	}
+	
+	/** 
+	 * Metodo "close"
+	 *
+	 * Descricao: 
+	 * - Remove os componentes graficos da janela e a torna invisivel;
+	 * 
+	 */
 	
 	public void close() {
 		setVisible(false);
