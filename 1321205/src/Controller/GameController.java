@@ -158,7 +158,7 @@ public class GameController {
 		startController.dismissView();
 		attackView = new AttackView();
 		attackController = new AttackController(menuBarController, attackView, menuBarController.getFirstPlayerLoaded(), menuBarController.getSecondPlayerLoaded());
-		attackController.setPlayer(menuBarController.getPlayer());
+		attackController.setRound(menuBarController.getRound());
 		attackController.presentCorrectScreen();
 	}
 

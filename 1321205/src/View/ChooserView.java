@@ -21,8 +21,6 @@ public class ChooserView {
 
 	private ShipMap map1Panel;
 	private ShipMap map2Panel;
-
-	// TODO: Model nÃ£o pode estar na View
 	
 	private Player player1;
 	private Player player2;
@@ -59,9 +57,31 @@ public class ChooserView {
 		window.setResizable(false);
 	}
 	
-	public void setPlayer1(Player player) {
-		player1 = player;
+	/** 
+	 * Método "setPlayer1"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player1" da classe a partir do parâmetro "p";
+	 * 
+	 */
+	
+	public void setPlayer1(Player p) {
+		player1 = p;
 	}
+	
+	/** 
+	 * Método "setPlayer2"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player2" da classe a partir do parâmetro "p";
+	 * 
+	 */
 
 	public void setPlayer2(Player player) {
 		player2 = player;
@@ -106,6 +126,17 @@ public class ChooserView {
 
 	}
 	
+	/** 
+	 * Método "setMenuBar"
+	 * 
+	 * Parametros:
+	 * - menuBar: Parametro do tipo "GameMenuBar";
+	 *
+	 * Descrição: 
+	 * - Define a barra de menu a ser utilizada na classe corrente;
+	 * 
+	 */
+	
 	public void setMenuBar(GameMenuBar menuBar){
 		this.menuBar = menuBar;
 	}
@@ -129,6 +160,14 @@ public class ChooserView {
 	public void addStartButtonListener(ActionListener aL){
 		nextButton.addActionListener(aL);
 	}
+	
+	/** 
+	 * Método "close"
+	 * 
+	 * Descrição: 
+	 * - Torna a tela invisivel e remove os componentes gráficos da tela;
+	 * 
+	 */
 	
 	public void close() {
 		window.setVisible(false);

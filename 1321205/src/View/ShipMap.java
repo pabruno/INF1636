@@ -45,6 +45,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private int xy[][];
 	private int i;
 	private int j;
+	
 	private Boolean isFirst = true;
 	private Boolean firstDraw = true;
 	private int currentWeapon;

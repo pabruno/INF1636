@@ -12,8 +12,8 @@ import Model.Player;
 
 public class AttackView {
 	
-	Player p1;
-	Player p2;
+	private Player p1;
+	private Player p2;
 
 	private GameMenuBar menuBar;
 
@@ -127,6 +127,17 @@ public class AttackView {
 		firstWindow2 = false;
 	}
 	
+	/** 
+	 * Método "setMenuBar"
+	 * 
+	 * Parametros:
+	 * - menuBar: Parametro do tipo "GameMenuBar";
+	 *
+	 * Descrição: 
+	 * - Define a barra de menu a ser utilizada na classe corrente;
+	 * 
+	 */
+	
 	public void setMenuBar(GameMenuBar menuBar){
 		this.menuBar = menuBar;
 	}
@@ -147,12 +158,34 @@ public class AttackView {
 		this.text2.setText(text);
 	}
 	
-	public void setPlayer1(Player player) {
-		p1 = player;
+	/** 
+	 * Método "setPlayer1"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "p1" da classe a partir do parâmetro "p";
+	 * 
+	 */
+	
+	public void setPlayer1(Player p) {
+		p1 = p;
 	}
+	
+	/** 
+	 * Método "setPlayer2"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "p2" da classe a partir do parâmetro "p";
+	 * 
+	 */
 
-	public void setPlayer2(Player player) {
-		p2 = player;
+	public void setPlayer2(Player p) {
+		p2 = p;
 	}
 	
 	public void setFirstMapPanel(AttackMap aM){

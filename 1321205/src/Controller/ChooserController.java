@@ -28,17 +28,47 @@ public class ChooserController implements ActionListener {
 		view.presentFirstScreen();
 	}
 	
+	/** 
+	 * Método "setPlayers"
+	 * 
+	 * Descrição: 
+	 * - Define os jogadores na view utilizando com as variáveis "player1" e "player2";
+	 * 
+	 */
+	
 	public void setPlayers(){
 		view.setPlayer1(player1);
 		view.setPlayer2(player2);
 	}
 	
-	public void setPlayer1(Player player) {
-		player1 = player;
+	/** 
+	 * Método "setPlayer1"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player1" da classe a partir do parâmetro "p";
+	 * 
+	 */
+	
+	public void setPlayer1(Player p) {
+		player1 = p;
 	}
+	
+	/** 
+	 * Método "setPlayer2"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player2" da classe a partir do parâmetro "p";
+	 * 
+	 */
 
-	public void setPlayer2(Player player) {
-		player2 = player;
+	public void setPlayer2(Player p) {
+		player2 = p;
 	}
 	
 	public void actionPerformed(ActionEvent e) {

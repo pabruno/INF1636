@@ -22,7 +22,7 @@ public class AttackController implements ActionListener, MouseListener {
 	private boolean attacked = false;
 	private boolean end = false;
 
-	private static int player = 1;
+	private static int round = 1;
 	private AttackView view;
 	private GameMenuBarController menuBarController;
 
@@ -45,13 +45,41 @@ public class AttackController implements ActionListener, MouseListener {
 		
 	}
 	
-	public static String getPlayer(){
-		return Integer.toString(player);
+	/** 
+	 * Método "getRound"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável round que contém o turno no qual o jogo parou;
+	 * 
+	 */
+	
+	
+	public static String getRound(){
+		return Integer.toString(round);
 	}
 	
-	public void setPlayer(int p){
-		player = p;
+	/** 
+	 * Método "setRound"
+	 * 
+	 * Parâmetros:
+	 * - r: Parâmetro do tipo inteiro;
+	 * 
+	 * Descrição: 
+	 * - Define a variável "round" da classe a partir do parâmetro "r";
+	 * 
+	 */
+	
+	public void setRound(int r){
+		round = r;
 	}
+	
+	/** 
+	 * Método "setPlayers"
+	 * 
+	 * Descrição: 
+	 * - Define os jogadores na view utilizando com as variáveis "p1" e "p2";
+	 * 
+	 */
 	
 	public void setPlayers(){
 		view.setPlayer1(p1);
@@ -72,7 +100,7 @@ public class AttackController implements ActionListener, MouseListener {
 		view.presentFirstScreen();
 		view.presentSecondScreen();
 		
-		if (player % 2 != 0) {
+		if (round % 2 != 0) {
 			attacked = false;
 			view.setText2(p2.getName() + ", realize seu ataque.");
 			view.presentFirstScreen();
@@ -94,9 +122,9 @@ public class AttackController implements ActionListener, MouseListener {
 
 	public void actionPerformed(ActionEvent e) {
 		
-		player++;
+		round++;
 		if (!end) {
-			if (player % 2 != 0) {
+			if (round % 2 != 0) {
 				attacked = false;
 				view.setText2(p2.getName() + ", realize seu ataque.");
 				view.presentFirstScreen();
@@ -123,7 +151,7 @@ public class AttackController implements ActionListener, MouseListener {
 			x /= 30;
 			y /= 30;
 
-			if (player % 2 != 0) {
+			if (round % 2 != 0) {
 				attacked = true;
 				if (p2.getMyMap()[y][x] != 'V') {
 					p1.getAttackMap()[y][x] = p2.getMyMap()[y][x];

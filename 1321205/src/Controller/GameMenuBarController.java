@@ -364,7 +364,7 @@ public class GameMenuBarController implements ActionListener {
 	
 	public void saveFile(){
 		
-		String player = "count: " + AttackController.getPlayer();
+		String player = "count: " + AttackController.getRound();
 		
 		String name1 = "name1: " + player1.getName();
 		String map1 = "map1: " + getStringFromMatrix(player1.getMyMap());
