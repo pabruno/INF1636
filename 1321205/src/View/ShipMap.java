@@ -17,6 +17,8 @@ import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 
+import model.Counter;
+
 public class ShipMap extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;

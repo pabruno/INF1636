@@ -3,24 +3,24 @@ package model;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+/** 
+ * Classe "Player"
+ * 
+ * Descrição:
+ * - Modelo para cada jogador da Batalha Naval.
+ * 
+ */
+
 public class Player {
 	
-	/* ------------ Player Class ------------
+	
+	/** 
+	 * Variáveis de classe de "Player":
 	 * 
-	 * Description: Model Class for the Player of the game.
-	 * 
-	 * ------------ Constructor ------------
-	 * Player(): Constructor that uses the method setMap to initialize the Player Class.
-	 * 
-	 * ------------ Variables ------------
-	 * name: Name of the player.
-	 * myMap: Map of the ships of the player.
-	 *
-	 * ------------  Methods  ------------
-	 * setMap(char [][] map): Set myMap of the instance with the value of the paremeter map.
-	 * setName(String name): Set the name of the instance with the value of the paremeter name.
-	 * getName(): Get a String from the name variable of the instance.
-	 * getMyMap(): Get a Char matrix from the myMap variable of the instance.
+	 * - name: cadeia de caracteres representando o nome de um jogador;
+	 * - myMap: matriz de caracteres representando o mapa das armas de um jogador;
+	 * - attackMap: matriz de caracteres representando o mapa de ataques de um jogador;
+	 * - position: variável que contém a posição das armas no mapa e o tipo da arma de um jogador;
 	 * 
 	 */
 	
@@ -28,6 +28,15 @@ public class Player {
 	private char[][] myMap;
 	private char[][] attackMap;
 	private LinkedHashMap<LinkedList<int[]>, String> position = null;
+	
+	
+	/** 
+	 * Construtor de "Player"
+	 * 
+	 * Descrição: 
+	 * - Inicializa os mapas utilizando os métodos "setMap", "setAttackMap" e iterando nas duas matrizes;
+	 * 
+	 */
 	
 	public Player(){
 		setMap (new char[15][15]);
@@ -46,33 +55,109 @@ public class Player {
 		}
 	}
 	
-	public void setMap(char[][] map){
-		myMap = map;
-	}
-	
-	public void setAttackMap(char[][] map){
-		attackMap = map;
-	}
+	/** 
+	 * Método "setName"
+	 * 
+	 * Parâmetros:
+	 * - name: Parâmetro do tipo "String";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "name" da classe a partir do parâmetro "name";
+	 * 
+	 */
 	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/** 
+	 * Método "setMap"
+	 * 
+	 * Parâmetros:
+	 * - map: Parâmetro do tipo matriz de caracteres;
+	 * 
+	 * Descrição: 
+	 * - Define a variável "myMap" da classe a partir do parâmetro "map";
+	 * 
+	 */
+	
+	public void setMap(char[][] map){
+		myMap = map;
+	}
+	
+	/** 
+	 * Método "setAttackMap"
+	 * 
+	 * Parâmetros:
+	 * - map: Parâmetro do tipo matriz de caracteres;
+	 * 
+	 * Descrição: 
+	 * - Define a variável "attackMap" da classe a partir do parâmetro "map";
+	 * 
+	 */
+	
+	public void setAttackMap(char[][] map){
+		attackMap = map;
+	}
+	
+	/** 
+	 * Método "setPosition"
+	 * 
+	 * Parâmetros:
+	 * - position: Parâmetro do tipo "LinkedHashMap<LinkedList<int[]>, String>";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "position" da classe a partir do parâmetro "position";
+	 * 
+	 */
+	
 	public void setPosition(LinkedHashMap<LinkedList<int[]>, String> position){
 		this.position = position;
 	}
+	
+	/** 
+	 * Método "getName"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável name que contém o nome do jogador;
+	 * 
+	 */
 	
 	public String getName(){
 		return name;
 	}
 	
+	/** 
+	 * Método "getMyMap"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável myMap que contém o mapa das armas do jogador;
+	 * 
+	 */
+	
 	public char[][] getMyMap(){
 		return myMap;
 	}
 	
+	/** 
+	 * Método "getAttackMap"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável attackMap que contém o mapa dos ataques do jogador;
+	 * 
+	 */
+	
 	public char[][] getAttackMap(){
 		return attackMap;
 	}
+	
+	/** 
+	 * Método "getPositionMap"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável position que contém a posição das armas no mapa e o tipo delas;
+	 * 
+	 */
 	
 	public LinkedHashMap<LinkedList<int[]>, String> getPosition(){
 		return position;

@@ -137,7 +137,7 @@ public class StartView extends JFrame {
 	 * - aL: Parametro do tipo "ActionListener";
 	 *
 	 * Descrição: 
-	 * - Adiciona o parametro aL como o "Listener" de acoes do startButton;
+	 * - Adiciona o parametro aL como o "Listener" de açôes do startButton;
 	 * 
 	 */
 	
