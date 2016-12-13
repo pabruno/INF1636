@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
 import Model.Player;
 
-public class ChooserView {
+public class ChooserView implements Observer {
 
 	private JFrame window;
 	private GameMenuBar menuBar;
@@ -21,8 +23,6 @@ public class ChooserView {
 
 	private ShipMap map1Panel;
 	private ShipMap map2Panel;
-
-	// TODO: Model não pode estar na View
 	
 	private Player player1;
 	private Player player2;
@@ -32,6 +32,7 @@ public class ChooserView {
 	public ChooserView() {
 		responsiveWindow();
 		createWindow();
+		map1Panel.getCont().addObserver(this);
 	}
 	
 	private void responsiveWindow(){
@@ -133,6 +134,11 @@ public class ChooserView {
 	public void close() {
 		window.setVisible(false);
 		window.removeAll();
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		menuBar.setLoadActionEnabled(false);
 	}
 
 }
