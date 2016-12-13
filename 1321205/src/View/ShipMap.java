@@ -23,7 +23,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 	private char[][] map;
 	private LinkedHashMap<LinkedList<Rectangle2D>, String> weapons;
 	private Graphics2D g;
-	private Cont cont = new Cont();
+	private Counter counter = new Counter();
 
 	/* Variaveis para movimento de peca */
 
@@ -871,8 +871,8 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 				repaint();
 
 				if (shipSet == true) {
-					if(cont.getCont() == 0) {
-						cont.sumCont();
+					if(counter.getCounter() == 0) {
+						counter.sumCounter();
 					}
 					
 					weaponPosition = new LinkedList<int[]>();
@@ -1048,7 +1048,7 @@ public class ShipMap extends JPanel implements MouseListener, MouseMotionListene
 		return position;
 	}
 
-	public Cont getCont(){
-		return this.cont;
+	public Counter getCounter(){
+		return this.counter;
 	}
 }

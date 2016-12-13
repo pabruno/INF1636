@@ -32,7 +32,7 @@ public class ChooserView implements Observer {
 	public ChooserView() {
 		responsiveWindow();
 		createWindow();
-		map1Panel.getCont().addObserver(this);
+		map1Panel.getCounter().addObserver(this);
 	}
 	
 	private void responsiveWindow(){
