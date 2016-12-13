@@ -11,9 +11,9 @@ import javax.swing.*;
  * Extende de:
  * - JFrame;
  * 
- * Descricao:
- * - Tela de inicio do jogo, essa classe contem os componentes graficos a ser 
- * desenhados e os metodos que os desenham;
+ * Descrição:
+ * - Tela de início do jogo, essa classe contém os componentes gráficos a ser 
+ * desenhados e os métodos que os desenham;
  * 
  */
 
@@ -21,17 +21,17 @@ import javax.swing.*;
 public class StartView extends JFrame {
 	
 	/** 
-	 * Variaveis de classe de "StartView":
+	 * Variáveis de classe de "StartView":
 	 * 
-	 * - panel: componente JPanel onde os componentes sao desenhados;
+	 * - panel: componente JPanel onde os componentes são desenhados;
 	 * - gameMenuBar: componente GameMenuBar com o menu Batalha Naval;
 	 * - startButton: componente JButton com o texto "Comecar";
 	 * - player1Label: componente JLabel com o texto "Jogador1: ";
 	 * - player2Label: componente JLabel com o texto "Jogador2: ";
 	 * - player1TextField: componente JTextField para o nome do primeiro jogador";
 	 * - player2TextField: componente JTextField para o nome do segundo jogador";
-	 * - screenX: inteiro representando a posicao horizontal onde a interface vai ser desenhada;
-	 * - screenY: inteiro representando a posicao vertical onde a interface vai ser desenhada;
+	 * - screenX: inteiro representando a posição horizontal onde a interface vai ser desenhada;
+	 * - screenY: inteiro representando a posição vertical onde a interface vai ser desenhada;
 	 * 
 	 */
 
@@ -50,9 +50,9 @@ public class StartView extends JFrame {
 	/** 
 	 * Construtor de "StartView"
 	 * 
-	 * Descricao: 
+	 * Descrição: 
 	 * - Calcula tamanho responsivo da janela a ser desenhada;
-	 * - Cria tela de inicio se baseando no calculo do tamanho responsivo;
+	 * - Cria tela de início se baseando no cálculo do tamanho responsivo;
 	 * 
 	 */
 	
@@ -62,9 +62,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "responsiveWindow"
+	 * Método "responsiveWindow"
 	 * 
-	 * Descricao: 
+	 * Descrição: 
 	 * - Calcula e define o tamanho da janela de forma em reponsiva;
 	 * 
 	 */
@@ -77,9 +77,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "createWindow"
+	 * Método "createWindow"
 	 * 
-	 * Descricao: 
+	 * Descrição: 
 	 * - Cria a janela e inicializa os componentes graficos a serem desenhados;
 	 * 
 	 */
@@ -112,9 +112,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "presentWindow"
+	 * Método "presentWindow"
 	 * 
-	 * Descricao: 
+	 * Descrição:  
 	 * - Apresenta a janela e define a barra de menu a ser utilizada;
 	 * 
 	 */
@@ -131,12 +131,12 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "addStartButtonListener"
+	 * Método "addStartButtonListener"
 	 * 
-	 * Parametros:
+	 * Parâmetros:
 	 * - aL: Parametro do tipo "ActionListener";
 	 *
-	 * Descricao: 
+	 * Descrição: 
 	 * - Adiciona o parametro aL como o "Listener" de acoes do startButton;
 	 * 
 	 */
@@ -146,12 +146,12 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "setMenuBar"
+	 * Método "setMenuBar"
 	 * 
 	 * Parametros:
 	 * - menuBar: Parametro do tipo "GameMenuBar";
 	 *
-	 * Descricao: 
+	 * Descrição: 
 	 * - Define a barra de menu a ser utilizada na classe corrente;
 	 * 
 	 */
@@ -161,9 +161,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "getFirstName"
+	 * Método "getFirstName"
 	 *
-	 * Descricao: 
+	 * Descrição: 
 	 * - Retorna o nome do primeiro jogador;
 	 * 
 	 */
@@ -174,9 +174,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "getSecondName"
+	 * Método "getSecondName"
 	 *
-	 * Descricao: 
+	 * Descrição: 
 	 * - Retorna o nome do segundo jogador;
 	 * 
 	 */
@@ -186,9 +186,9 @@ public class StartView extends JFrame {
 	}
 	
 	/** 
-	 * Metodo "close"
+	 * Método "close"
 	 *
-	 * Descricao: 
+	 * Descrição: 
 	 * - Remove os componentes graficos da janela e a torna invisivel;
 	 * 
 	 */

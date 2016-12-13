@@ -4,23 +4,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 
-import Controller.AttackController;
-import Controller.ChooserController;
 import Model.Player;
 
 public class AttackView {
-
-	// TODO: Model não pode estar na View
 	
 	Player p1;
 	Player p2;
