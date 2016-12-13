@@ -7,9 +7,12 @@ import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
+import javax.swing.JOptionPane;
+
 import model.Player;
 import view.AttackMap;
 import view.AttackView;
+import view.DialogBox;
 
 public class AttackController implements ActionListener, MouseListener {
 
@@ -192,7 +195,14 @@ public class AttackController implements ActionListener, MouseListener {
 					}
 
 					if (won) {
+						DialogBox fim = new DialogBox();
 						view.setText1(p1.getName() + " VENCEU.");
+						fim.showDialog();
+						if(fim.getClick() == 0){
+							view.getWindow1().setVisible(false);
+							view.getWindow2().setVisible(false);
+							GameController.getInstance().startGame();
+						}
 						end = true;
 					}
 				} else {
@@ -241,7 +251,14 @@ public class AttackController implements ActionListener, MouseListener {
 					}
 
 					if (won) {
+						DialogBox fim = new DialogBox();
 						view.setText2(p2.getName() + " VENCEU.");
+						fim.showDialog();
+						if(fim.getClick() == 0){
+							view.getWindow1().setVisible(false);
+							view.getWindow2().setVisible(false);
+							GameController.getInstance().startGame();
+						}
 						end = true;
 					}
 				} else {
