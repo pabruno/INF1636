@@ -17,12 +17,24 @@ import javax.swing.JFileChooser;
 import Model.Player;
 import View.GameMenuBar;
 
+/** 
+ * Classe "GameMenuBarControllerr"
+ * 
+ * Implementa:
+ * - ActionListener;
+ * 
+ * Descrição:
+ * - Controller da barra de menu, onde o jogador pode salvar um jogo corrente ou carregar um jogo
+ *  previamente salvo;
+ * 
+ */
+
 public class GameMenuBarController implements ActionListener {
 	
 	private GameMenuBar view;
 	private Player player1;
 	private Player player2;
-	private int player;
+	private int round;
 	
 	public GameMenuBarController(GameMenuBar menuBar){
 		this.player1 = new Player();
@@ -55,29 +67,87 @@ public class GameMenuBarController implements ActionListener {
 		view.setLoadActionEnabled(false);
 	}
 	
+	/** 
+	 * Método "setFirstPlayerToSave"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player1" da classe a partir do parâmetro "p";
+	 * 
+	 */
+	
 	public void setFirstPlayerToSave(Player p){
 		player1 = p;
 	}
 	
+	/** 
+	 * Método "setSecondPlayerToSave"
+	 * 
+	 * Parâmetros:
+	 * - p: Parâmetro do tipo "Player";
+	 * 
+	 * Descrição: 
+	 * - Define a variável "player2" da classe a partir do parâmetro "p";
+	 * 
+	 */
+	
 	public void setSecondPlayerToSave(Player p){
 		player2 = p;
 	}
+
+	/** 
+	 * Método "getFirstPlayerLoaded"
+	 * 
+	 * Descrição: 
+	 * - Retorna o primeiro jogador que foi carregado;
+	 * 
+	 */
 	
 	public Player getFirstPlayerLoaded(){
 		return player1;
 	}
 	
+	/** 
+	 * Método "getSecondPlayerLoaded"
+	 * 
+	 * Descrição: 
+	 * - Retorna o segundo jogador que foi carregado;
+	 * 
+	 */
+	
 	public Player getSecondPlayerLoaded(){
 		return player2;
 	}
 	
-	public void setPlayer(int p){
-		player = p;
+	/** 
+	 * Método "setRound"
+	 * 
+	 * Parâmetros:
+	 * - r: Parâmetro do tipo inteiro;
+	 * 
+	 * Descrição: 
+	 * - Define a variável "round" da classe a partir do parâmetro "r";
+	 * 
+	 */
+	
+	public void setRound(int r){
+		round = r;
 	}
 	
-	public int getPlayer(){
-		return player;
+	/** 
+	 * Método "getRound"
+	 * 
+	 * Descrição: 
+	 * - Retorna a variável round que contém o turno no qual o jogo parou;
+	 * 
+	 */
+	
+	public int getRound(){
+		return round;
 	}
+	
 	private String getStringFromMatrix (char[][] c){
 		String str = "";
 		for(int i=0; i < c.length; i++){
@@ -277,18 +347,14 @@ public class GameMenuBarController implements ActionListener {
 
 				}
 				
-				System.out.println("LoadFile - Count");
 				int c = Integer.parseInt(count);
 				
-				this.setPlayer(c);
-				System.out.println("LoadFile - SetPlayer");
+				this.setRound(c);
 				loadFirstPlayerFromFile(name1, map1, attack1, position1);
-				System.out.println("LoadFile - Player 1");
 				loadSecondPlayerFromFile(name2, map2, attack2, position2);
-				System.out.println("LoadFile - Player 2");
-				
 				bufferedReader.close();
 				GameController.getInstance().loadGame();
+				
 			} catch (Exception e){
 				System.out.println("Error: " + e.toString());
 			}
