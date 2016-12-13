@@ -5,9 +5,37 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class StartView extends JFrame {
+/** 
+ * Classe "StartView"
+ * 
+ * Extende de:
+ * - JFrame;
+ * 
+ * Descrição:
+ * - Tela de inicio do jogo, essa classe contém os componentes gráficos a ser 
+ * desenhados e os métodos que os desenham;
+ * 
+ */
 
-	JPanel panel = new JPanel();
+@SuppressWarnings("serial")
+public class StartView extends JFrame {
+	
+	/** 
+	 * Variáveis de classe de "StartView":
+	 * 
+	 * - panel: componente JPanel onde os componentes são desenhados;
+	 * - gameMenuBar: componente GameMenuBar com o menu Batalha Naval;
+	 * - startButton: componente JButton com o texto "Começar ";
+	 * - player1Label: componente JLabel com o texto "Jogador1: ";
+	 * - player2Label: componente JLabel com o texto "Jogador2: ";
+	 * - player1TextField: componente JTextField para o nome do primeiro jogador";
+	 * - player2TextField: componente JTextField para o nome do segundo jogador";
+	 * - screenX: inteiro representando a margem horizontal da interface;
+	 * - screenY: inteiro representando a margem vertical da interface;
+	 * 
+	 */
+
+	private JPanel panel;
 	private GameMenuBar menuBar;
 
 	private JButton startButton;
@@ -32,6 +60,7 @@ public class StartView extends JFrame {
 	}
 
 	private void createWindow() {
+		panel = new JPanel();
 		panel.setLayout(null);
 
 		player1TextField = new JTextField("Jogador 1");
