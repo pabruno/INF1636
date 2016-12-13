@@ -90,27 +90,34 @@ public class GameMenuBarController implements ActionListener {
 	}
 	
 	private char[][] getMatrixFromString(String s){
+		int i = 0;
 		char[][] matrix = new char[15][15];
-		for(int i=0; i < s.length(); i++){
-			for(int j=0; j < 15; j++){
-				for (int k=0; k < 15; k++){
-					matrix[j][k] += s.charAt(i);
-				}
+		
+		System.out.println("Size: " + s.length());	
+		
+		for(int j=0; j < 15; j++){
+			for (int k=0; k < 15; k++, i++){
+				System.out.print(s.charAt(i));					
+				matrix[j][k] = s.charAt(i);
 			}
 		}
+		
+		System.out.println("i: " + i);
+		
 		
 		return matrix;
 	}
 	
 	private String getStringFromHashMap (String name, LinkedHashMap<LinkedList<int[]>, String> position){
 		String str = "";
+		
+		str += name + position.size();
+		str += "\n";
+		 
 		for (Entry<LinkedList<int[]>, String> entry : position.entrySet()) {
 	
 			 LinkedList<int[]> key = entry.getKey();
 			 String value = entry.getValue();
-			 
-			 str += name + position.size();
-			 str += "\n";
 			 
 			 for (int i = 0; i < key.size(); i++) {
 				 str += name + Integer.toString(key.get(i).length);
@@ -135,6 +142,7 @@ public class GameMenuBarController implements ActionListener {
 		int j = 1;
 		int size = Integer.parseInt(items.get(0));
 
+		System.out.println("size = " + size);
 		
 		for (int i = 0; i < size; i++){
 			String str = "";
@@ -144,19 +152,29 @@ public class GameMenuBarController implements ActionListener {
 
 				int[] vector = new int[Integer.parseInt(items.get(j))];
 				int vectorSize = Integer.parseInt(items.get(j));
-				System.out.println("tamanho vetor" + vectorSize);
+				System.out.println("vectorSize = " + vectorSize);
+				
 				for (int k = 0; k < vectorSize; k++, j++){
-					vector[k] = Integer.parseInt(items.get(j));
-					System.out.println("valor pos: " + Integer.parseInt(items.get(j)));
+
+					System.out.println("k = " + k);
+					System.out.println("j = " + j);
+					
+					vector[k] = Integer.parseInt(items.get(j+1));
+					System.out.println("vector[k] = " + Integer.parseInt(items.get(j+1)));
 				}
 
 				list.add(vector);
 
 				j++;
 			}
-
+			
+			System.out.println("j = " + j);
+			
+			System.out.println("list = " + list.toString());
+			System.out.println("str = " + items.get(j).substring(5));
 			str = items.get(j).substring(5);
 			pos.put(list, str);
+			j++;
 		}
 		
 		return pos;
@@ -180,7 +198,11 @@ public class GameMenuBarController implements ActionListener {
 		player1.setPosition(pos);
 		
 		String teste = getStringFromHashMap("position1: ", pos);
+		String teste2 = getStringFromMatrix(m);
+		String teste22 = getStringFromMatrix(a);
 		System.out.println("Teste: " + teste);
+		System.out.println("Teste2: " + teste2);
+		System.out.println("Teste2: " + teste22);
 		
 		System.out.println(name);
 		
@@ -266,7 +288,7 @@ public class GameMenuBarController implements ActionListener {
 				System.out.println("LoadFile - Player 2");
 				
 				bufferedReader.close();
-				//GameController.getInstance().loadGame();
+				GameController.getInstance().loadGame();
 			} catch (Exception e){
 				System.out.println("Error: " + e.toString());
 			}
