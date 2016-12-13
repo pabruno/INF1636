@@ -31,10 +31,32 @@ import View.GameMenuBar;
 
 public class GameMenuBarController implements ActionListener {
 	
+	/** 
+	 * Variáveis de classe de "GameMenuBarController":
+	 * 
+	 * - view: interface gráfica da barra de menu;
+	 * - player1: modelo onde os dados do primeiro jogador são guardados;
+	 * - player2: modelo onde os dados do segundo jogador são guardados;
+	 * - round: inteiro representando o turno da fase de ataques;
+	 * 
+	 */
+	
 	private GameMenuBar view;
 	private Player player1;
 	private Player player2;
 	private int round;
+	
+	/** 
+	 * Construtor de "GameMenuBarController"
+	 * 
+	 * Parâmetros:
+	 * - menuBar: interface gráfica da barra de menu;
+	 * 
+	 * Descrição: 
+	 * - Inicializa as variáveis da classe;
+	 * - Chama o método "setListeners" para adicionar os listeners nos botões da view;
+	 * 
+	 */
 	
 	public GameMenuBarController(GameMenuBar menuBar){
 		this.player1 = new Player();
@@ -43,24 +65,52 @@ public class GameMenuBarController implements ActionListener {
 		setListeners();
 	}
 	
+	/** 
+	 * Método "getView"
+	 * 
+	 * Descrição: 
+	 * - Retorna a view da classe corrente que é do tipo "GameMenuBar";
+	 * 
+	 */
+	
 	public GameMenuBar getView(){
 		return view;
 	}
+	
+	/** 
+	 * Método "setListeners"
+	 * 
+	 * Descrição: 
+	 * - Defina na view que a Classe corrente quer receber as ações do item "Salvar Jogo" e "Carregar Jogo";
+	 * 
+	 */
 	
 	public void setListeners(){
 		view.setSaveActionListener(this);
 		view.setLoadActionListener(this);
 	}
 	
+	/** 
+	 * Método "setChooserEnabled"
+	 * 
+	 * Descrição: 
+	 * - Este método altera a visibilidade do itens do menu para o que é esperado na tela de início e de posicionamento;
+	 * 
+	 */
+	
 	public void setChooserEnabled(){
 		view.setSaveActionEnabled(false);
 		view.setLoadActionEnabled(true);
 	}
 	
-	public void setChooserDisabled(){
-		view.setSaveActionEnabled(false);
-		view.setLoadActionEnabled(false);
-	}
+	
+	/** 
+	 * Método "setAttackEnabled"
+	 * 
+	 * Descrição: 
+	 * - Este método altera a visibilidade do itens do menu para o que é esperado na tela da fase de ataques;
+	 * 
+	 */
 	
 	public void setAttackEnabled(){
 		view.setSaveActionEnabled(true);
@@ -148,6 +198,18 @@ public class GameMenuBarController implements ActionListener {
 		return round;
 	}
 	
+	
+	/** 
+	 * Método "getStringFromMatrix"
+	 * 
+	 * Parâmetros:
+	 * - c: Parâmetro do tipo matriz de caracteres representando o que deve ser convertido;
+	 *
+	 * Descrição: 
+	 * - Converte e retorna o parâmetro para o tipo "String";
+	 * 
+	 */
+	
 	private String getStringFromMatrix (char[][] c){
 		String str = "";
 		for(int i=0; i < c.length; i++){
@@ -159,24 +221,40 @@ public class GameMenuBarController implements ActionListener {
 		return str;
 	}
 	
+	/** 
+	 * Método "getMatrixFromString"
+	 * 
+	 * Parâmetros:
+	 * - s: Parâmetro do tipo "String" representando o que deve ser convertido;
+	 *
+	 * Descrição: 
+	 * - Converte e retorna o parâmetro para o tipo matriz de caracteres;
+	 * 
+	 */
+	
 	private char[][] getMatrixFromString(String s){
 		int i = 0;
 		char[][] matrix = new char[15][15];
 		
-		System.out.println("Size: " + s.length());	
-		
 		for(int j=0; j < 15; j++){
-			for (int k=0; k < 15; k++, i++){
-				System.out.print(s.charAt(i));					
+			for (int k=0; k < 15; k++, i++){			
 				matrix[j][k] = s.charAt(i);
 			}
 		}
-		
-		System.out.println("i: " + i);
-		
-		
+				
 		return matrix;
 	}
+	
+	/** 
+	 * Método "getStringFromHashMap"
+	 * 
+	 * Parâmetros:
+	 * - position: Parâmetro do tipo "LinkedHashMap<LinkedList<int[]>, String>" representando o que deve ser convertido;
+	 *
+	 * Descrição: 
+	 * - Converte e retorna o parâmetro para o tipo "String";
+	 * 
+	 */
 	
 	private String getStringFromHashMap (String name, LinkedHashMap<LinkedList<int[]>, String> position){
 		String str = "";
@@ -202,17 +280,26 @@ public class GameMenuBarController implements ActionListener {
 			 str += "\n";
 			 
 		}
-		System.out.println(str);
+		
 		return str;
 	}
+	
+	/** 
+	 * Método "getHashMapFromString"
+	 * 
+	 * Parâmetros:
+	 * - s: Parâmetro do tipo "String" representando o que deve ser convertido;
+	 *
+	 * Descrição: 
+	 * - Converte e retorna o parâmetro para o tipo "LinkedHashMap<LinkedList<int[]>, String>"
+	 * 
+	 */
 	
 	private LinkedHashMap<LinkedList<int[]>, String> getHashMapFromString(String s){
 		LinkedHashMap<LinkedList<int[]>, String> pos = new LinkedHashMap<LinkedList<int[]>, String>();
 		List<String> items = Arrays.asList(s.split("\\s*,\\s*"));
 		int j = 1;
 		int size = Integer.parseInt(items.get(0));
-
-		System.out.println("size = " + size);
 		
 		for (int i = 0; i < size; i++){
 			String str = "";
@@ -222,15 +309,9 @@ public class GameMenuBarController implements ActionListener {
 
 				int[] vector = new int[Integer.parseInt(items.get(j))];
 				int vectorSize = Integer.parseInt(items.get(j));
-				System.out.println("vectorSize = " + vectorSize);
 				
 				for (int k = 0; k < vectorSize; k++, j++){
-
-					System.out.println("k = " + k);
-					System.out.println("j = " + j);
-					
 					vector[k] = Integer.parseInt(items.get(j+1));
-					System.out.println("vector[k] = " + Integer.parseInt(items.get(j+1)));
 				}
 
 				list.add(vector);
@@ -238,10 +319,6 @@ public class GameMenuBarController implements ActionListener {
 				j++;
 			}
 			
-			System.out.println("j = " + j);
-			
-			System.out.println("list = " + list.toString());
-			System.out.println("str = " + items.get(j).substring(5));
 			str = items.get(j).substring(5);
 			pos.put(list, str);
 			j++;
@@ -250,52 +327,69 @@ public class GameMenuBarController implements ActionListener {
 		return pos;
 	}
 	
-	
+	/** 
+	 * Método "loadFirstPlayerFromFile"
+	 * 
+	 * Parâmetros:
+	 * - name: Parâmetro do tipo "String" representando o nome do jogador;
+	 * - map: Parâmetro do tipo "String" representando o mapa de armas do jogador;
+	 * - attackMap: Parâmetro do tipo "String" representando o mapa de ataque do jogador;
+	 * - position: Parâmetro do tipo "String" representando a posição de cada peça e seu tipo no mapa;
+	 *
+	 * Descrição: 
+	 * - Define em "player1" as informações necessárias para a criação jogador;
+	 * - Métodos de conversão são chamados para converter os parâmetros para os tipos corretos;
+	 * 
+	 */
 	
 	private void loadFirstPlayerFromFile(String name, String map, String attackMap, String position){
 		
-		System.out.println("1");
 		char[][] m = getMatrixFromString(map);
-		System.out.println("2");
 		char[][] a = getMatrixFromString(attackMap);
-		System.out.println("3");
 		LinkedHashMap<LinkedList<int[]>, String> pos = getHashMapFromString(position);
-		System.out.println("4");
-		
+
 		player1.setName(name);
 		player1.setMap(m);
 		player1.setAttackMap(a);
 		player1.setPosition(pos);
 		
-		String teste = getStringFromHashMap("position1: ", pos);
-		String teste2 = getStringFromMatrix(m);
-		String teste22 = getStringFromMatrix(a);
-		System.out.println("Teste: " + teste);
-		System.out.println("Teste2: " + teste2);
-		System.out.println("Teste2: " + teste22);
-		
-		System.out.println(name);
-		
 	}
+	
+	/** 
+	 * Método "loadSecondPlayerFromFile"
+	 * 
+	 * Parâmetros:
+	 * - name: Parâmetro do tipo "String" representando o nome do jogador;
+	 * - map: Parâmetro do tipo "String" representando o mapa de armas do jogador;
+	 * - attackMap: Parâmetro do tipo "String" representando o mapa de ataque do jogador;
+	 * - position: Parâmetro do tipo "String" representando a posição de cada peça e seu tipo no mapa;
+	 *
+	 * Descrição: 
+	 * - Define em "player2" as informações necessárias para a criação jogador;
+	 * - Métodos de conversão são chamados para converter os parâmetros para os tipos corretos;
+	 * 
+	 */
 	
 	private void loadSecondPlayerFromFile(String name, String map, String attackMap, String position){
 		
-		System.out.println("1");
 		char[][] m = getMatrixFromString(map);
-		System.out.println("2");
 		char[][] a = getMatrixFromString(attackMap);
-		System.out.println("3");
 		LinkedHashMap<LinkedList<int[]>, String> pos = getHashMapFromString(position);
-		System.out.println("4");
 		
 		player2.setName(name);
 		player2.setMap(m);
 		player2.setAttackMap(a);
 		player2.setPosition(pos);
 		
-		System.out.println(name);
-		
 	}
+	
+	/** 
+	 * Método "openFile"
+	 * 
+	 * Descrição: 
+	 * - Carrega o estado do jogo de um arquivo de texto;
+	 * 
+	 */
 	
 	public void openFile(){
 		
@@ -362,6 +456,14 @@ public class GameMenuBarController implements ActionListener {
 	
 	}
 	
+	/** 
+	 * Método "saveFile"
+	 * 
+	 * Descrição: 
+	 * - Salva o estado do jogo em arquivo de texto;
+	 * 
+	 */
+	
 	public void saveFile(){
 		
 		String player = "count: " + AttackController.getRound();
@@ -394,15 +496,25 @@ public class GameMenuBarController implements ActionListener {
 			}
 		}
 	}
+	
+	/** 
+	 * Método "actionPerformed"
+	 * 
+	 * Parâmetros:
+	 * - e: Parâmetro do tipo "ActionEvent";
+	 * 
+	 * Descrição: 
+	 * - Este método e executado após o jogador clicar em algum item do menu;
+	 * - Caso o item "Salvar Jogo" é clicado o método "saveFile" é chamado;
+	 * - Caso o item "Carregar Jogo" é clicado o método "loadFile" é chamado;
+	 * 
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Salvar Jogo")){
-			System.out.println("actionPerformed:Save Game");
 			saveFile();
-			
 		} else {
-			System.out.println("actionPerformed:Load Game");
 			openFile();
 		}
 	}
