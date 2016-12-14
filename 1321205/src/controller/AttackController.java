@@ -254,7 +254,6 @@ public class AttackController implements ActionListener, MouseListener {
 						DialogBox fim = new DialogBox();
 						view.setText2(p2.getName() + " VENCEU.");
 						fim.showDialog();
-						System.out.println("AAAAAAAAAAAa");
 						if(fim.getClick() == 0){
 							view.getWindow1().setVisible(false);
 							view.getWindow2().setVisible(false);
