@@ -200,14 +200,7 @@ public class AttackController implements ActionListener, MouseListener {
 					}
 
 					if (won) {
-						DialogBox fim = new DialogBox();
 						view.setText1(p1.getName() + " VENCEU.");
-						fim.showDialog();
-						if(fim.getClick() == 0){
-							view.getWindow1().setVisible(false);
-							view.getWindow2().setVisible(false);
-							GameController.getInstance().startGame();
-						}
 						end = true;
 					}
 				} else {
@@ -256,15 +249,7 @@ public class AttackController implements ActionListener, MouseListener {
 					}
 
 					if (won) {
-						DialogBox fim = new DialogBox();
 						view.setText2(p2.getName() + " VENCEU.");
-						fim.showDialog();
-						if(fim.getClick() == 0){
-							view.getWindow1().setVisible(false);
-							view.getWindow2().setVisible(false);
-							view.close();
-							GameController.getInstance().startGame();
-						}
 						end = true;
 					}
 				} else {
