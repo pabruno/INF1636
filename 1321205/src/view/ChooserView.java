@@ -184,13 +184,13 @@ public class ChooserView implements Observer {
 		Counter c = (Counter) counter;
 		
 		menuBar.setLoadActionEnabled(false);
-		
-		if(c.getCounter() == 15){
-			nextButton.setEnabled(true);
-		}
-		else {
-			nextButton.setEnabled(false);
-		}
+		nextButton.setEnabled(true);
+//		if(c.getCounter() == 15){
+//			nextButton.setEnabled(true);
+//		}
+//		else {
+//			nextButton.setEnabled(false);
+//		}
 	}
 
 }

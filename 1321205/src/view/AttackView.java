@@ -203,4 +203,12 @@ public class AttackView {
 	public void addSecondActionListener(ActionListener aL){
 		button2.addActionListener(aL);
 	}
+	
+	public JFrame getWindow1(){
+		return this.window1;
+	}
+	
+	public JFrame getWindow2(){
+		return this.window2;
+	}
 }

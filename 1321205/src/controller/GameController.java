@@ -66,7 +66,6 @@ public class GameController {
 	private GameController() {
 		player1 = new Player();
 		player2 = new Player();	
-		initBar();
 	}
 	
 	/** 
@@ -108,6 +107,7 @@ public class GameController {
 	 */
 	
 	public void startGame() {
+		initBar();
 		startView = new StartView();
 		startController = new StartController(menuBarController, startView, player1, player2);
 		startController.setPlayer1(player1);
@@ -162,4 +162,7 @@ public class GameController {
 		attackController.presentCorrectScreen();
 	}
 
+	public AttackView getAttack() {
+		return this.attackView;
+	}
 }
